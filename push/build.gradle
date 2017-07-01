@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion LIBRARY_COMPILE_SDK_VERSION
+    buildToolsVersion LIBRARY_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion LIBRARY_MIN_SDK_VERSION
+        targetSdkVersion LIBRARY_TARGET_SDK_VERSION
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    testCompile 'junit:junit:4.12'
+    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+}

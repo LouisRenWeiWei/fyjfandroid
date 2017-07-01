@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/top">
+        <com.rey.material.widget.ImageView
+            android:id="@+id/back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@mipmap/back"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="信证报告"
+            android:textSize="18sp"
+            android:textColor="@color/app_text_color"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_bg" />
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <RadioButton
+            android:id="@+id/btn_bank"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:text="银行信证报告"
+            android:gravity="center"
+            android:background="@drawable/rbtn_bg"
+            android:textColor="@color/white"
+            android:button="@null"
+            android:checked="true"
+            />
+
+        <RadioButton
+            android:id="@+id/btn_social"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:text="社会信证报告"
+            android:gravity="center"
+            android:background="@drawable/rbtn_bg"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:button="@null"/>
+    </RadioGroup>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_bg" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfView_bank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfView_social"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            />
+    </FrameLayout>
+</LinearLayout>

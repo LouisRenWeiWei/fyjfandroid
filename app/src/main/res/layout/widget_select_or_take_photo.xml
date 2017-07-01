@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_select_take"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#6f000000"
+    android:orientation="vertical"
+    android:gravity="bottom">
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:textColor="#cc000000"
+        android:paddingLeft="12dp"
+        android:text="请选择"
+        android:gravity="center_vertical"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_take_photos"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:textColor="#cc000000"
+        android:textSize="14sp"
+        android:text="拍照"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider" />
+    <TextView
+        android:id="@+id/tv_select_photos"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:textColor="#cc000000"
+        android:textSize="14sp"
+        android:text="从图库中选择"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider" />
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:textColor="#cc000000"
+        android:textSize="14sp"
+        android:text="取消"
+        android:gravity="center"/>
+</LinearLayout>

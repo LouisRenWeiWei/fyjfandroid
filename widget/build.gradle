@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion LIBRARY_COMPILE_SDK_VERSION
+    buildToolsVersion LIBRARY_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion LIBRARY_MIN_SDK_VERSION
+        targetSdkVersion LIBRARY_TARGET_SDK_VERSION
+    }
+    buildToolsVersion '25.0.0'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //依赖下面的库
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:support-v4:25.0.1'
+
+    compile 'com.github.rey5137:material:1.2.4'
+    //compile 'com.github.florent37:materialtextfield:1.0.7'
+    compile 'com.github.barteksc:android-pdf-viewer:2.5.1'
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
+}
