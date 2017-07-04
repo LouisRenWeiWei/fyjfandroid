@@ -1,0 +1,291 @@
+{
+    "project_type": "gradle",
+    "android_gradle_plugin_version": "2.3.3",
+    "freeline_gradle_plugin_version": "0.8.7",
+    "java_home": "C:\\user_program\\android\\Android Studio\\jre",
+    "freeline_cache_dir": "E:\\work\\other\\fyjf\\fyjfandroid",
+    "auto_dependency": true,
+    "product_flavor": "",
+    "build_script": "gradlew.bat :app:assembleDebug",
+    "build_script_work_directory": "",
+    "root_dir": "E:\\work\\other\\fyjf\\fyjfandroid",
+    "main_project_name": "app",
+    "main_project_dir": "app",
+    "build_directory": "E:\\work\\other\\fyjf\\fyjfandroid\\app\\build",
+    "build_cache_dir": "E:\\work\\other\\fyjf\\fyjfandroid\\app\\build\\freeline",
+    "build_tools_version": "25.0.0",
+    "sdk_directory": "C:\\user_program\\android\\sdk",
+    "build_tools_directory": "C:\\user_program\\android\\sdk\\build-tools\\25.0.0",
+    "compile_sdk_version": "android-23",
+    "compile_sdk_directory": "C:\\user_program\\android\\sdk\\platforms\\android-23",
+    "package": "com.fyjf.all",
+    "debug_package": "com.wwren.all",
+    "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\AndroidManifest.xml",
+    "launcher": "com.fyjf.all.activity.LoginActivity",
+    "apk_path": "E:\\work\\other\\fyjf\\fyjfandroid\\app\\build\\outputs\\apk\\app-debug.apk",
+    "extra_dep_res_paths": [
+        
+    ],
+    "exclude_dep_res_paths": [
+        
+    ],
+    "main_r_path": "E:\\work\\other\\fyjf\\fyjfandroid\\app\\build\\generated\\source\\r\\debug\\R.java",
+    "use_jdk8": true,
+    "ignore_resource_ids": [
+        "avd_hide_password_1",
+        "avd_hide_password_2",
+        "avd_hide_password_3",
+        "avd_show_password_1",
+        "avd_show_password_2",
+        "avd_show_password_3"
+    ],
+    "use_system_gradle": false,
+    "check_sources_md5": [
+        
+    ],
+    "main_src_directory": [
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\java",
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\java"
+    ],
+    "main_res_directory": [
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\res",
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\res"
+    ],
+    "main_assets_directory": [
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\assets",
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\assets"
+    ],
+    "main_jni_directory": [
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\jni",
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\jni"
+    ],
+    "main_jniLibs_directory": [
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\jniLibs",
+        "E:\\work\\other\\fyjf\\fyjfandroid\\app\\libs"
+    ],
+    "project_source_sets": {
+        "app": {
+            "main_src_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\java",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\java"
+            ],
+            "main_res_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\res",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\res"
+            ],
+            "main_assets_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\assets",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\assets"
+            ],
+            "main_jni_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\jni",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\jni"
+            ],
+            "main_jniLibs_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\debug\\jniLibs",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\app\\libs"
+            ],
+            "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\app\\src\\main\\AndroidManifest.xml"
+        },
+        "vo": {
+            "main_src_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\release\\java",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\main\\java"
+            ],
+            "main_res_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\release\\res",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\main\\res"
+            ],
+            "main_assets_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\release\\assets",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\main\\assets"
+            ],
+            "main_jni_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\release\\jni",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\main\\jni"
+            ],
+            "main_jniLibs_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\release\\jniLibs",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\main\\jniLibs"
+            ],
+            "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\vo\\src\\main\\AndroidManifest.xml"
+        },
+        "blservice": {
+            "main_src_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\release\\java",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\main\\java"
+            ],
+            "main_res_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\release\\res",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\main\\res"
+            ],
+            "main_assets_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\release\\assets",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\main\\assets"
+            ],
+            "main_jni_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\release\\jni",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\main\\jni"
+            ],
+            "main_jniLibs_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\release\\jniLibs",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\main\\jniLibs"
+            ],
+            "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\blservice\\src\\main\\AndroidManifest.xml"
+        },
+        "utils": {
+            "main_src_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\release\\java",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\main\\java"
+            ],
+            "main_res_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\release\\res",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\main\\res"
+            ],
+            "main_assets_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\release\\assets",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\main\\assets"
+            ],
+            "main_jni_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\release\\jni",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\main\\jni"
+            ],
+            "main_jniLibs_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\release\\jniLibs",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\main\\jniLibs"
+            ],
+            "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\utils\\src\\main\\AndroidManifest.xml"
+        },
+        "widget": {
+            "main_src_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\release\\java",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\main\\java"
+            ],
+            "main_res_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\release\\res",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\main\\res"
+            ],
+            "main_assets_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\release\\assets",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\main\\assets"
+            ],
+            "main_jni_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\release\\jni",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\main\\jni"
+            ],
+            "main_jniLibs_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\release\\jniLibs",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\main\\jniLibs"
+            ],
+            "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\widget\\src\\main\\AndroidManifest.xml"
+        },
+        "network": {
+            "main_src_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\release\\java",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\main\\java"
+            ],
+            "main_res_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\release\\res",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\main\\res"
+            ],
+            "main_assets_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\release\\assets",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\main\\assets"
+            ],
+            "main_jni_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\release\\jni",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\main\\jni"
+            ],
+            "main_jniLibs_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\release\\jniLibs",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\main\\jniLibs"
+            ],
+            "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\network\\src\\main\\AndroidManifest.xml"
+        },
+        "dao": {
+            "main_src_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\release\\java",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\main\\java"
+            ],
+            "main_res_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\release\\res",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\main\\res"
+            ],
+            "main_assets_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\release\\assets",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\main\\assets"
+            ],
+            "main_jni_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\release\\jni",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\main\\jni"
+            ],
+            "main_jniLibs_directory": [
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\release\\jniLibs",
+                "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\main\\jniLibs"
+            ],
+            "main_manifest_path": "E:\\work\\other\\fyjf\\fyjfandroid\\dao\\src\\main\\AndroidManifest.xml"
+        }
+    },
+    "modules": [
+        {
+            "name": "app",
+            "path": "E:\\work\\other\\fyjf\\fyjfandroid\\app"
+        },
+        {
+            "name": "vo",
+            "path": "E:\\work\\other\\fyjf\\fyjfandroid\\vo"
+        },
+        {
+            "name": "blservice",
+            "path": "E:\\work\\other\\fyjf\\fyjfandroid\\blservice"
+        },
+        {
+            "name": "utils",
+            "path": "E:\\work\\other\\fyjf\\fyjfandroid\\utils"
+        },
+        {
+            "name": "widget",
+            "path": "E:\\work\\other\\fyjf\\fyjfandroid\\widget"
+        },
+        {
+            "name": "network",
+            "path": "E:\\work\\other\\fyjf\\fyjfandroid\\network"
+        },
+        {
+            "name": "dao",
+            "path": "E:\\work\\other\\fyjf\\fyjfandroid\\dao"
+        }
+    ],
+    "module_dependencies": {
+        "app": [
+            "vo",
+            "blservice",
+            "utils",
+            "widget"
+        ],
+        "vo": [
+            "network"
+        ],
+        "network": [
+            
+        ],
+        "blservice": [
+            "dao"
+        ],
+        "dao": [
+            
+        ],
+        "utils": [
+            
+        ],
+        "widget": [
+            
+        ]
+    },
+    "databinding": [
+        
+    ],
+    "databinding_modules": [
+        
+    ]
+}

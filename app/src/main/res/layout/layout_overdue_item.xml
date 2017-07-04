@@ -7,7 +7,7 @@
     android:paddingLeft="15dp"
     android:paddingRight="15dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:orientation="horizontal"
@@ -21,17 +21,20 @@
             android:gravity="center_vertical"
             android:textColor="@color/color_47"
             android:ellipsize="end"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/tv_check_date"/>
 
         <TextView
             android:id="@+id/tv_check_date"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="2017-01-01"
             android:textColor="@color/color_47"
             android:gravity="center"
-            android:layout_marginLeft="10dp"/>
-    </LinearLayout>
+            android:paddingLeft="10dp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -43,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center">
 
     </LinearLayout>
     <View
@@ -62,7 +65,7 @@
             android:id="@+id/btn_loan_check"
             android:layout_width="110dp"
             android:layout_height="45dp"
-            android:text="逾期方案"
+            android:text="催收方案"
             app:rd_enable="true"
             app:rd_rippleType="wave"
             android:background="@drawable/btn_bg"

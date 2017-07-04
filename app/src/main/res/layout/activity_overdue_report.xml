@@ -32,7 +32,7 @@
         android:layout_height="1dp"
         android:background="@color/app_bg" />
 
-    <com.github.barteksc.pdfviewer.PDFView
+    <com.joanzapata.pdfview.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

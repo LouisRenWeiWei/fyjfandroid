@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 
+import com.fyjf.all.R;
 import com.fyjf.utils.StatisticsUtils;
 
 import butterknife.ButterKnife;
+
 
 /**
  * Created by 任伟伟
@@ -28,16 +30,16 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         this.getWindow().setFormat(2);
         setContentView(getContentLayout());
-        mContext = BaseFragmentActivity.this;
-        fragmentManager = getSupportFragmentManager();
         ButterKnife.bind(this);
+        mContext = BaseFragmentActivity.this;
+//        PushAgent.getInstance(mContext).onAppStart();
+        fragmentManager = getSupportFragmentManager();
         preInitData();
     }
 
     protected abstract int getContentLayout();
 
     protected abstract void preInitData();
-
 
     @Override
     protected void onResume() {
@@ -57,7 +59,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
     protected abstract void showFragment(String tag);
 
-    protected void switchContent(Fragment to, String tag) {
+    protected void switchContent(Fragment to,String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (mContent!=null&&to != mContent) {
             if (!to.isAdded()) {
@@ -77,6 +79,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         mContent = to;
         transaction = null;
     }
-    //content id eg: R.id.content
+
     protected abstract int getContentId();
 }

@@ -66,14 +66,16 @@ public class LoginActivity extends BaseFragmentActivity {
     }
 
     @Override
+    protected void showFragment(String tag) {
+
+    }
+
+    @Override
     protected int getContentId() {
         return 0;
     }
 
-    @Override
-    protected void showFragment(String tag) {
 
-    }
     //ViewPager.OnPageChangeListener
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
         public void onPageSelected(int arg0) {

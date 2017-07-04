@@ -2,15 +2,20 @@ package com.fyjf.all.activity;
 
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.fyjf.all.R;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
 import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+//import com.joanzapata.pdfview.PDFView;
+//import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
+//import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -63,12 +68,20 @@ public class ReportActivity extends BaseActivity implements OnPageChangeListener
 
             @Override
             protected void completed(BaseDownloadTask task) {
-                pdfView.fromFile(new File(task.getPath())) .defaultPage(0)
-                        .onPageChange(ReportActivity.this)
-                        .enableAnnotationRendering(true)
-                        .onLoad(ReportActivity.this)
-                        .scrollHandle(new DefaultScrollHandle(ReportActivity.this))
-                        .load();
+                try {
+                    pdfView.fromFile(new File(task.getPath())) .defaultPage(0)
+                            .onPageChange(ReportActivity.this)
+                            .onLoad(ReportActivity.this)
+                            .onError(new OnErrorListener() {
+                                @Override
+                                public void onError(Throwable t) {
+                                    Log.e("tag---pdf error----",t.getMessage());
+                                }
+                            })
+                            .load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override

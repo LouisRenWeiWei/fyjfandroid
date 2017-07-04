@@ -65,12 +65,12 @@ public class CheckLoanCustomerAdapter extends BaseRecyclerAdapter<CheckLoanCusto
                 if(itemOperationListener!=null)itemOperationListener.openAnalysisReport(position);
             }
         });
-        holder.btn_img_file.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openImageReport(position);
-            }
-        });
+//        holder.btn_img_file.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(itemOperationListener!=null)itemOperationListener.openImageReport(position);
+//            }
+//        });
         holder.btn_credit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +103,12 @@ public class CheckLoanCustomerAdapter extends BaseRecyclerAdapter<CheckLoanCusto
         }else{
             holder.ll_mgs.setVisibility(View.GONE);
         }
+        holder.ll_mgs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openImageReport(position);
+            }
+        });
     }
 
     @Override
@@ -116,7 +122,7 @@ public class CheckLoanCustomerAdapter extends BaseRecyclerAdapter<CheckLoanCusto
         public TextView tv_check_date;
         public Button btn_loan_check;
         public Button btn_analysis;
-        public Button btn_img_file;
+//        public Button btn_img_file;
         public Button btn_credit;
         public LinearLayout ll_mgs;
 
@@ -127,7 +133,7 @@ public class CheckLoanCustomerAdapter extends BaseRecyclerAdapter<CheckLoanCusto
                 tv_check_date = (TextView) itemView.findViewById(R.id.tv_check_date);
                 btn_loan_check = (Button) itemView.findViewById(R.id.btn_loan_check);
                 btn_analysis = (Button) itemView.findViewById(R.id.btn_analysis);
-                btn_img_file = (Button) itemView.findViewById(R.id.btn_img_file);
+//                btn_img_file = (Button) itemView.findViewById(R.id.btn_img_file);
                 btn_credit = (Button) itemView.findViewById(R.id.btn_credit);
                 ll_mgs = (LinearLayout) itemView.findViewById(R.id.ll_mgs);
             }

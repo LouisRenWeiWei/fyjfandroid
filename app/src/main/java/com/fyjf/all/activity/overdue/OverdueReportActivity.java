@@ -20,10 +20,13 @@ import com.fyjf.utils.JSONUtil;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.vo.overdue.OverduesVO;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+//import com.github.barteksc.pdfviewer.PDFView;
+//import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
+//import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
+//import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+import com.joanzapata.pdfview.PDFView;
+import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
+import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -89,12 +92,14 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
             @Override
             protected void completed(BaseDownloadTask task) {
                // String tag = (String) task.getTag();
-                pdfView.fromFile(new File(task.getPath())) .defaultPage(0)
-                        .onPageChange(OverdueReportActivity.this)
-                        .enableAnnotationRendering(true)
-                        .onLoad(OverdueReportActivity.this)
-                        .scrollHandle(new DefaultScrollHandle(OverdueReportActivity.this))
-                        .load();
+                try {
+                    pdfView.fromFile(new File(task.getPath())) .defaultPage(0)
+                            .onPageChange(OverdueReportActivity.this)
+                            .onLoad(OverdueReportActivity.this)
+                            .load();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
 

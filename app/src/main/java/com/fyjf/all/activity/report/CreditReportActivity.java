@@ -1,6 +1,7 @@
 package com.fyjf.all.activity.report;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -17,9 +18,13 @@ import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.vo.loan.GetReportVO;
 import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
+//import com.joanzapata.pdfview.PDFView;
+//import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
+//import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
@@ -29,6 +34,7 @@ import com.rey.material.widget.ImageView;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 import butterknife.BindView;
 
@@ -100,6 +106,7 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
 
             @Override
             protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
+                Log.d("download_pdf","----soFarBytes: "+soFarBytes + "   totalBytes: "+totalBytes);
             }
 
             @Override
@@ -107,21 +114,37 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
                 String tag = (String) task.getTag();
                 if(report!=null&&!TextUtils.isEmpty(tag)){
                     if(tag.equalsIgnoreCase(report.getBankCreditReport())){
-                        pdfView_bank.fromFile(new File(task.getPath())) .defaultPage(0)
-                                .onPageChange(CreditReportActivity.this)
-                                .enableAnnotationRendering(true)
-                                .onLoad(CreditReportActivity.this)
-                                .scrollHandle(new DefaultScrollHandle(CreditReportActivity.this))
-                                .load();
+                        try {
+                            pdfView_bank.fromFile(new File(task.getPath())) .defaultPage(0)
+                                    .onPageChange(CreditReportActivity.this)
+                                    .onLoad(CreditReportActivity.this)
+                                    .onError(new OnErrorListener() {
+                                        @Override
+                                        public void onError(Throwable t) {
+                                            Log.e("tag---pdf error----",t.getMessage());
+                                        }
+                                    })
+                                    .load();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     }
                     if(tag.equalsIgnoreCase(report.getSocialCreditReport())){
-                        pdfView_social.fromFile(new File(task.getPath())) .defaultPage(0)
-                                .onPageChange(CreditReportActivity.this)
-                                .enableAnnotationRendering(true)
-                                .onLoad(CreditReportActivity.this)
-                                .scrollHandle(new DefaultScrollHandle(CreditReportActivity.this))
-                                .load();
+                        try {
+                            pdfView_social.fromFile(new File(task.getPath())) .defaultPage(0)
+                                    .onPageChange(CreditReportActivity.this)
+                                    .onLoad(CreditReportActivity.this)
+                                    .onError(new OnErrorListener() {
+                                        @Override
+                                        public void onError(Throwable t) {
+                                            Log.e("tag---pdf error----",t.getMessage());
+                                        }
+                                    })
+                                    .load();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
