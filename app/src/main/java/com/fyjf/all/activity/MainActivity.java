@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.fyjf.all.R;
 import com.fyjf.all.activity.overdue.OverdueActivity;
-import com.fyjf.all.activity.overdue.OverdueReportActivity;
 import com.fyjf.all.update.UpdateHelper;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.vo.RequestUrl;
@@ -55,7 +54,7 @@ public class MainActivity extends BaseActivity {
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_loan_check:
-                startActivity(LoanCheckActivity.class);
+                startActivity(ReportActivity.class);
                 break;
             case R.id.btn_waring:
                 startActivity(WaringActivity.class);

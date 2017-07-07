@@ -14,8 +14,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.SimpleAdapter;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -26,7 +24,7 @@ import com.fyjf.all.activity.report.CreditReportActivity;
 import com.fyjf.all.activity.report.ReportAnalysisActivity;
 import com.fyjf.all.activity.report.ReportImagesActivity;
 import com.fyjf.all.adapter.CustomerStateAdapter;
-import com.fyjf.all.adapter.checkloan.CheckLoanCustomerAdapter;
+import com.fyjf.all.adapter.checkloan.ReportAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.CustomerInfo;
@@ -36,13 +34,11 @@ import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.loan.LoanCheckVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
-import com.fyjf.widget.spinner.NiceSpinner;
 import com.rey.material.widget.ImageView;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,7 +51,7 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,CheckLoanCustomerAdapter.ItemOperationListener{
+public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener{
     @BindView(R.id.back)
     ImageView back;
 
@@ -75,7 +71,7 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
     RecyclerView recyclerView;
     List<CustomerInfo> customers;
     LinearLayoutManager layoutManager;
-    CheckLoanCustomerAdapter customerAdapter;
+    ReportAdapter customerAdapter;
     private Page page;
 
 
@@ -113,7 +109,7 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new CheckLoanCustomerAdapter(mContext,customers);
+        customerAdapter = new ReportAdapter(mContext,customers);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(customerAdapter);
@@ -267,7 +263,7 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
         if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
             Bundle bundle = new Bundle();
             bundle.putString("reportId",customer.getReportId());
-            startActivity(ReportActivity.class,bundle);
+            startActivity(ReportPDFActivity.class,bundle);
         }else {
             ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
         }

@@ -18,7 +18,7 @@ public class RequestUrl {
 
 //     public static String base ="http://192.168.1.104/api/api";//家里ip
     public static String base ="http://47.93.217.20:8081/fyjf/api";//线上
-    public static String login =base+"/login/v2";
+    public static String login =base+"/bank/user/login";
     public static String loan_check = base+"/customer/list/by/bank/user";
     public static String report_get = base+"/report/get";
     public static String overdue_list = base+"/overdue/list/by/bank/worker";

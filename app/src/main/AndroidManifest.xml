@@ -42,12 +42,12 @@
             android:launchMode="singleTask"/>
         <activity android:name="com.fyjf.all.activity.AtallQueryActivity"/>
         <activity android:name="com.fyjf.all.activity.ContactUsActivity"/>
-        <activity android:name="com.fyjf.all.activity.LoanCheckActivity"/>
+        <activity android:name="com.fyjf.all.activity.ReportActivity"/>
         <activity android:name="com.fyjf.all.activity.overdue.OverdueReportActivity"/>
         <activity android:name="com.fyjf.all.activity.overdue.OverdueActivity"/>
         <activity android:name="com.fyjf.all.activity.overdue.OverdueProgressActivity"/>
         <activity android:name="com.fyjf.all.activity.WaringActivity"/>
-        <activity android:name=".activity.ReportActivity"/>
+        <activity android:name=".activity.ReportPDFActivity"/>
         <activity android:name=".activity.report.ReportImagesActivity"/>
         <activity android:name=".activity.report.CreditReportActivity"/>
         <activity android:name=".activity.report.ReportAnalysisActivity"/>

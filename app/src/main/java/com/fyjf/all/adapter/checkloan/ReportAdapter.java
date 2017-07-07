@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
-import com.fyjf.dao.entity.Customer;
 import com.fyjf.dao.entity.CustomerInfo;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
@@ -27,12 +26,12 @@ import java.util.List;
 * author: renweiwei
 * datetime: 
 */
-public class CheckLoanCustomerAdapter extends BaseRecyclerAdapter<CheckLoanCustomerAdapter.SimpleAdapterViewHolder> {
+public class ReportAdapter extends BaseRecyclerAdapter<ReportAdapter.SimpleAdapterViewHolder> {
 
     private List<CustomerInfo> list;
     private Context mContext;
 
-    public CheckLoanCustomerAdapter(Context context, List<CustomerInfo> list) {
+    public ReportAdapter(Context context, List<CustomerInfo> list) {
         this.list = list;
         this.mContext = context;
     }

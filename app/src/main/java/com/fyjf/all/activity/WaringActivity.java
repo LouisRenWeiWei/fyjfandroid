@@ -13,10 +13,9 @@ import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.report.CreditReportActivity;
 import com.fyjf.all.activity.report.ReportImagesActivity;
-import com.fyjf.all.adapter.checkloan.CheckLoanCustomerAdapter;
+import com.fyjf.all.adapter.checkloan.ReportAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.Customer;
 import com.fyjf.dao.entity.CustomerInfo;
 import com.fyjf.dao.entity.Page;
 import com.fyjf.utils.JSONUtil;
@@ -40,7 +39,7 @@ import butterknife.BindView;
 * datetime:
 * 同贷后检查
 */
-public class WaringActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,CheckLoanCustomerAdapter.ItemOperationListener{
+public class WaringActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener{
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.xRefreshView)
@@ -49,7 +48,7 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
     RecyclerView recyclerView;
     List<CustomerInfo> customers;
     LinearLayoutManager layoutManager;
-    CheckLoanCustomerAdapter customerAdapter;
+    ReportAdapter customerAdapter;
 
     private Page page;
 
@@ -73,7 +72,7 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new CheckLoanCustomerAdapter(mContext,customers);
+        customerAdapter = new ReportAdapter(mContext,customers);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(customerAdapter);
@@ -169,7 +168,7 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
         if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
             Bundle bundle = new Bundle();
             bundle.putString("reportId",customer.getReportId());
-            startActivity(ReportActivity.class,bundle);
+            startActivity(ReportPDFActivity.class,bundle);
         }else {
             ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
         }
