@@ -1,4 +1,4 @@
-package com.fyjf.vo.loan;
+package com.fyjf.vo.report;
 
 import com.fyjf.vo.BaseVO;
 import com.fyjf.vo.RequestUrl;
@@ -10,10 +10,10 @@ import com.fyjf.vo.RequestUrl;
 * author: renweiwei
 * datetime: 
 */
-public class LoanCheckVO extends BaseVO{
+public class ReportListVO extends BaseVO{
 
     @Override
     protected void setup() {
-        setUrl(RequestUrl.loan_check);
+        setUrl(RequestUrl.report_list);
     }
 }

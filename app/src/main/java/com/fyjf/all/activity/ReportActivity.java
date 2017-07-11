@@ -20,7 +20,7 @@ import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.CustomerInfo;
 import com.fyjf.dao.entity.Page;
 import com.fyjf.utils.JSONUtil;
-import com.fyjf.vo.loan.LoanCheckVO;
+import com.fyjf.vo.report.ReportListVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
 import com.rey.material.widget.ImageView;
@@ -123,7 +123,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     }
 
     private void getData() {
-        LoanCheckVO vo = new LoanCheckVO();
+        ReportListVO vo = new ReportListVO();
         vo.addParameter("page", JSONUtil.toJSONObject(page));
         vo.addParameter("customerState", 1);//贷后
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));

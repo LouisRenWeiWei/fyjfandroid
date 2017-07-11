@@ -31,7 +31,7 @@ import com.fyjf.dao.entity.CustomerInfo;
 import com.fyjf.dao.entity.CustomerState;
 import com.fyjf.dao.entity.Page;
 import com.fyjf.utils.JSONUtil;
-import com.fyjf.vo.loan.LoanCheckVO;
+import com.fyjf.vo.report.ReportListVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
 import com.rey.material.widget.ImageView;
@@ -213,7 +213,7 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
     }
 
     private void getData() {
-        LoanCheckVO vo = new LoanCheckVO();
+        ReportListVO vo = new ReportListVO();
         vo.addParameter("page", JSONUtil.toJSONObject(page));
         int state = 1;
         if(customerState!=null){

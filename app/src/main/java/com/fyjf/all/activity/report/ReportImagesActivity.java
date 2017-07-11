@@ -21,7 +21,7 @@ import com.fyjf.dao.entity.ReportFinance;
 import com.fyjf.dao.entity.ReportGuarantee;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.RequestUrl;
-import com.fyjf.vo.loan.GetReportVO;
+import com.fyjf.vo.report.GetReportVO;
 import com.rey.material.widget.ImageView;
 
 import org.json.JSONObject;

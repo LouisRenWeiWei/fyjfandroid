@@ -16,25 +16,22 @@ import com.fyjf.dao.entity.Report;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
-import com.fyjf.vo.loan.GetReportVO;
+import com.fyjf.vo.report.GetReportVO;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
 //import com.joanzapata.pdfview.PDFView;
 //import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
 //import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.rey.material.widget.Button;
 import com.rey.material.widget.ImageView;
 
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.logging.Logger;
 
 import butterknife.BindView;
 
