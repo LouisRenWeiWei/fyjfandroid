@@ -14,6 +14,6 @@ public class ReportListVO extends BaseVO{
 
     @Override
     protected void setup() {
-        setUrl(RequestUrl.report_list);
+        setUrl(RequestUrl.report_month);
     }
 }

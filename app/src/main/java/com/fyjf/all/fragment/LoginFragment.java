@@ -16,7 +16,6 @@ import com.fyjf.utils.NetworkUtils;
 import com.fyjf.vo.user.LoginVO;
 import com.rey.material.widget.Button;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.BindView;
@@ -106,5 +105,11 @@ public class LoginFragment extends BaseFragment {
     protected void preInitData() {
         et_account.setText(AppData.getString(AppData.ACCOUNT));
         et_password.setText(AppData.getString(AppData.PASSWORD));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startActivity(MainActivity.class);
     }
 }

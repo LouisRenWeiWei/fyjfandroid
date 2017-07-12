@@ -1,28 +1,24 @@
 package com.fyjf.all.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
-import com.fyjf.all.activity.report.CreditReportActivity;
-import com.fyjf.all.activity.report.ReportAnalysisActivity;
-import com.fyjf.all.activity.report.ReportImagesActivity;
 import com.fyjf.all.adapter.checkloan.ReportAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.CustomerInfo;
+import com.fyjf.dao.entity.LoanTime;
 import com.fyjf.dao.entity.Page;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.report.ReportListVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
+import com.fyjf.widget.refreshview.utils.LogUtils;
 import com.rey.material.widget.ImageView;
 
 import org.json.JSONObject;
@@ -46,11 +42,14 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    List<CustomerInfo> customers;
+    List<LoanTime> customers;
     LinearLayoutManager layoutManager;
     ReportAdapter customerAdapter;
 
     private Page page;
+
+    private int pageSize = 10;
+    private int pageNo = 1;
 
     @Override
     protected int getContentLayout() {
@@ -103,7 +102,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void onRefresh(boolean isPullDown) {
-        page.setPageNo(0);
+        pageNo = 1;
         getData();
     }
 
@@ -124,7 +123,9 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     private void getData() {
         ReportListVO vo = new ReportListVO();
-        vo.addParameter("page", JSONUtil.toJSONObject(page));
+//        vo.addParameter("page", JSONUtil.toJSONObject(page));
+        vo.addParameter("pageNo",pageNo);
+        vo.addParameter("pageSize",pageSize);
         vo.addParameter("customerState", 1);//贷后
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(ReportActivity.this, "resp", "error");
@@ -139,15 +140,17 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     void resp(String response) {
         try {
             JSONObject resp = new JSONObject(response);
+            LogUtils.d("resp:"+resp);
             if (resp.getInt("code") == 0) {
-                if(page.getPageNo()==0)customers.clear();
+                if(pageNo==0)customers.clear();
                 int size = customers.size();
-                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),LoanTime.class));
+                LogUtils.e("customers:"+customers.size());
                 customerAdapter.notifyDataSetChanged();
                 int addSize = customers.size()-size;
-                if(addSize>0&&addSize==page.getPageSize()){
+                if(addSize>0&&addSize==pageSize){
                     xRefreshView.setPullLoadEnable(true);
-                    page.setPageNo(page.getPageNo()+1);
+                    pageNo++;
                 }else {
                     xRefreshView.setPullLoadEnable(false);
                 }
@@ -164,50 +167,50 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void openReport(int position) {
-        CustomerInfo customer = customers.get(position );
-        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-            Bundle bundle = new Bundle();
-            bundle.putString("reportId",customer.getReportId());
-            startActivity(ReportPDFActivity.class,bundle);
-        }else {
-            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-        }
+//        CustomerInfo customer = customers.get(position );
+//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
+//            Bundle bundle = new Bundle();
+//            bundle.putString("reportId",customer.getReportId());
+//            startActivity(ReportPDFActivity.class,bundle);
+//        }else {
+//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
+//        }
 
     }
 
     @Override
     public void openCreditReport(int position) {
-        CustomerInfo customer = customers.get(position );
-        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-            Bundle bundle = new Bundle();
-            bundle.putString("reportId",customer.getReportId());
-            startActivity(CreditReportActivity.class,bundle);
-        }else {
-            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-        }
+//        CustomerInfo customer = customers.get(position );
+//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
+//            Bundle bundle = new Bundle();
+//            bundle.putString("reportId",customer.getReportId());
+//            startActivity(CreditReportActivity.class,bundle);
+//        }else {
+//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
+//        }
     }
 
     @Override
     public void openImageReport(int position) {
-        CustomerInfo customer = customers.get(position );
-        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-            Bundle bundle = new Bundle();
-            bundle.putString("reportId",customer.getReportId());
-            startActivity(ReportImagesActivity.class,bundle);
-        }else {
-            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-        }
+//        CustomerInfo customer = customers.get(position );
+//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
+//            Bundle bundle = new Bundle();
+//            bundle.putString("reportId",customer.getReportId());
+//            startActivity(ReportImagesActivity.class,bundle);
+//        }else {
+//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
+//        }
     }
 
     @Override
     public void openAnalysisReport(int position) {
-        CustomerInfo customer = customers.get(position );
-        if(customer!=null){
-            Bundle bundle = new Bundle();
-            bundle.putString("customerId",customer.getId());
-            startActivity(ReportAnalysisActivity.class,bundle);
-        }else {
-            ToastUtils.showSystemToast(mContext,"客户数据有误");
-        }
+//        CustomerInfo customer = customers.get(position );
+//        if(customer!=null){
+//            Bundle bundle = new Bundle();
+//            bundle.putString("customerId",customer.getId());
+//            startActivity(ReportAnalysisActivity.class,bundle);
+//        }else {
+//            ToastUtils.showSystemToast(mContext,"客户数据有误");
+//        }
     }
 }
