@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fyjf.all">
+          package="com.fyjf.all">
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <!-- QQ、QQ空间所需权限 -->
-    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
     <application
-        android:name="com.fyjf.all.app.BaseApplication"
+        android:name=".app.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.fyjf.all.activity.LoginActivity">
+        android:theme="@style/BaseAppTheme">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.fyjf.all.activity.MainActivity"
+        <activity
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask"/>
-        <activity android:name="com.fyjf.all.activity.AtallQueryActivity"/>
-        <activity android:name="com.fyjf.all.activity.ContactUsActivity"/>
-        <activity android:name="com.fyjf.all.activity.ReportActivity"/>
-        <activity android:name="com.fyjf.all.activity.overdue.OverdueReportActivity"/>
-        <activity android:name="com.fyjf.all.activity.overdue.OverdueActivity"/>
-        <activity android:name="com.fyjf.all.activity.overdue.OverdueProgressActivity"/>
-        <activity android:name="com.fyjf.all.activity.WaringActivity"/>
+        <activity android:name=".activity.AtallQueryActivity"/>
+        <activity android:name=".activity.ContactUsActivity"/>
+        <activity
+            android:name=".activity.ReportActivity"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".activity.overdue.OverdueReportActivity"/>
+        <activity android:name=".activity.overdue.OverdueActivity"/>
+        <activity android:name=".activity.overdue.OverdueProgressActivity"/>
+        <activity android:name=".activity.WaringActivity"/>
         <activity android:name=".activity.ReportPDFActivity"/>
         <activity android:name=".activity.report.ReportImagesActivity"/>
         <activity android:name=".activity.report.CreditReportActivity"/>
         <activity android:name=".activity.report.ReportAnalysisActivity"/>
-
+        <activity android:name=".activity.report.ReportDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

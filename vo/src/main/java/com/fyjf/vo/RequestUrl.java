@@ -27,4 +27,5 @@ public class RequestUrl {
     public static String version_check = base+"/app/version/last";
     public static String contact_us = base+"/dict/get/contact/us";
     public static String report_month = base+"/report/statistics/by/month";
+    public static String report_custom = base+"/report/list/app";
 }

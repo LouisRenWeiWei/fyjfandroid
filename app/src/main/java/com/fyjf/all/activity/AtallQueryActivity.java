@@ -266,8 +266,8 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
 
     }
 
-    @Override
-    public void openCreditReport(int position) {
+//    @Override
+//    public void openCreditReport(int position) {
 //        CustomerInfo customer = customers.get(position );
 //        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
 //            Bundle bundle = new Bundle();
@@ -276,10 +276,10 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
 //        }else {
 //            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
 //        }
-    }
-
-    @Override
-    public void openImageReport(int position) {
+//    }
+//
+//    @Override
+//    public void openImageReport(int position) {
 //        CustomerInfo customer = customers.get(position );
 //        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
 //            Bundle bundle = new Bundle();
@@ -288,10 +288,10 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
 //        }else {
 //            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
 //        }
-    }
-
-    @Override
-    public void openAnalysisReport(int position) {
+//    }
+//
+//    @Override
+//    public void openAnalysisReport(int position) {
 //        CustomerInfo customer = customers.get(position );
 //        if(customer!=null){
 //            Bundle bundle = new Bundle();
@@ -300,5 +300,5 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
 //        }else {
 //            ToastUtils.showSystemToast(mContext,"客户数据有误");
 //        }
-    }
+//    }
 }

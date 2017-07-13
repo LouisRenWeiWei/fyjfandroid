@@ -4,33 +4,36 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/loan_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp">
 
         <TextView
             android:id="@+id/month"
             android:layout_width="wrap_content"
-            android:layout_height="21dp"
-            android:textSize="13sp"
+            android:layout_height="wrap_content"
+            android:textSize="12.5sp"
             android:textColor="#666666"
             android:gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10.5dp"
             android:text="7月"/>
 
         <ImageView
             android:layout_width="7dp"
             android:layout_height="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="31dp"
+            android:layout_marginTop="21.5dp"
+            android:layout_marginLeft="41dp"
             android:background="@drawable/oval_bg"/>
 
         <View
             android:layout_width="1px"
             android:layout_height="103dp"
             android:background="#c8c8c8"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="34dp"/>
+            android:layout_marginTop="46dp"
+            android:layout_marginLeft="44dp"/>
 
         <RelativeLayout
             android:layout_width="300dp"
@@ -40,10 +43,9 @@
             android:background="#f6f6f6">
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="280dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_centerHorizontal="true">
 
                 <TextView
                     android:id="@+id/month_title"
@@ -60,8 +62,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:textSize="13sp"
+                    android:layout_marginRight="13.5dp"
+                    android:textSize="12.5sp"
                     android:text="7"
                     />
 
@@ -76,12 +78,11 @@
             </RelativeLayout>
 
             <View
-                android:layout_width="match_parent"
+                android:layout_width="280dp"
                 android:layout_height="1px"
                 android:background="#c8c8c8"
                 android:layout_marginTop="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_centerHorizontal="true"/>
 
             <ImageView
                 android:id="@+id/image_1"

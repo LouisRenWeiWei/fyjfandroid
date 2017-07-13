@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:drawableLeft="@mipmap/back"
-            android:text="贷后检查"
+            android:text="7"
             android:textColor="#ffffff"
             android:textSize="18sp"/>
 

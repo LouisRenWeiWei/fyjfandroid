@@ -1,25 +1,27 @@
-package com.fyjf.all.activity;
+package com.fyjf.all.activity.report;
 
+import android.content.Intent;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
-import com.fyjf.all.adapter.checkloan.ReportAdapter;
+import com.fyjf.all.activity.BaseActivity;
+import com.fyjf.all.activity.ReportPDFActivity;
+import com.fyjf.all.adapter.ReportDetailsAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.CustomerInfo;
-import com.fyjf.dao.entity.LoanTime;
-import com.fyjf.dao.entity.Page;
 import com.fyjf.utils.JSONUtil;
-import com.fyjf.vo.report.ReportListVO;
+import com.fyjf.vo.report.ReportDetailsVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
-import com.rey.material.widget.ImageView;
+import com.fyjf.widget.refreshview.utils.LogUtils;
 
 import org.json.JSONObject;
 
@@ -28,34 +30,32 @@ import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * Created by ASUS on 2017/6/23.
- */
-/*
-* author: renweiwei
-* datetime:
-* 同贷后检查
-*/
-public class WaringActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener{
+public class ReportDetailsActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportDetailsAdapter.ItemOperationListener {
     @BindView(R.id.back)
-    ImageView back;
+    TextView back;
     @BindView(R.id.xRefreshView)
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    List<LoanTime> customers;
+    List<CustomerInfo> customers;
     LinearLayoutManager layoutManager;
-    ReportAdapter customerAdapter;
+    ReportDetailsAdapter customerAdapter;
+    String yearTime;
 
-    private Page page;
+    private int pageSize = 10;
+    private int pageNo = 1;
 
     @Override
     protected int getContentLayout() {
-        return R.layout.activity_waring;
+        return R.layout.activity_report_details;
     }
 
     @Override
     protected void preInitData() {
+        Intent intent = getIntent();
+        if (intent!=null){
+            yearTime = intent.getStringExtra("time");
+        }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +69,7 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportAdapter(mContext,customers);
+        customerAdapter = new ReportDetailsAdapter(mContext,customers);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(customerAdapter);
@@ -84,12 +84,11 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
         xRefreshView.enableRecyclerViewPullUp(true);
         xRefreshView.enablePullUpWhenLoadCompleted(true);
         //设置静默加载时提前加载的item个数
-//        xefreshView1.setPreLoadCount(4);
+        //        xefreshView1.setPreLoadCount(4);
         //设置Recyclerview的滑动监听
 
         xRefreshView.setXRefreshViewListener(this);
 
-        page = new Page();
         getData();
     }
 
@@ -100,7 +99,7 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void onRefresh(boolean isPullDown) {
-        page.setPageNo(0);
+        pageNo = 1;
         getData();
     }
 
@@ -120,11 +119,13 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
     }
 
     private void getData() {
-        ReportListVO vo = new ReportListVO();
-        vo.addParameter("page", JSONUtil.toJSONObject(page));
-        vo.addParameter("customerState", 2);//预警
+        ReportDetailsVO vo = new ReportDetailsVO();
+        vo.addParameter("pageNo",pageNo);
+        vo.addParameter("pageSize",pageSize);
+        vo.addParameter("customerState", 1);//贷后
+        vo.addParameter("yearMonth",yearTime);
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
-        vo.request(WaringActivity.this, "resp", "error");
+        vo.request(ReportDetailsActivity.this, "resp", "error");
     }
 
     @ResponseError(name = "error")
@@ -136,15 +137,17 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
     void resp(String response) {
         try {
             JSONObject resp = new JSONObject(response);
+            LogUtils.d("resp:"+resp);
             if (resp.getInt("code") == 0) {
-                if(page.getPageNo()==0)customers.clear();
+                if(pageNo==0)customers.clear();
                 int size = customers.size();
                 customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                LogUtils.e("customers:"+customers.size());
                 customerAdapter.notifyDataSetChanged();
                 int addSize = customers.size()-size;
-                if(addSize>0&&addSize==page.getPageSize()){
+                if(addSize>0&&addSize==pageSize){
                     xRefreshView.setPullLoadEnable(true);
-                    page.setPageNo(page.getPageNo()+1);
+                    pageNo++;
                 }else {
                     xRefreshView.setPullLoadEnable(false);
                 }
@@ -160,44 +163,34 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
     }
 
     @Override
-    public void openReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(ReportPDFActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-
+    public void openMsg(int position) {
+        CustomerInfo info = customers.get(position);
     }
 
-//    @Override
-//    public void openCreditReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(CreditReportActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-//    }
-//
-//    @Override
-//    public void openImageReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(ReportImagesActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-//    }
-//
-//    @Override
-//    public void openAnalysisReport(int position) {
-//
-//    }
+    @Override
+    public void openImg(int position) {
+        CustomerInfo info = customers.get(position);
+    }
+
+    @Override
+    public void openManger(int position) {
+        CustomerInfo info = customers.get(position);
+    }
+
+    @Override
+    public void openReport(int position) {
+        CustomerInfo info = customers.get(position);
+        startActivity(ReportPDFActivity.class);
+    }
+
+    @Override
+    public void openQuantified(int position) {
+        CustomerInfo info = customers.get(position);
+        startActivity(ReportAnalysisActivity.class);
+    }
+
+    @Override
+    public void openCredit(int position) {
+        CustomerInfo info = customers.get(position);
+    }
 }

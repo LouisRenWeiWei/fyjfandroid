@@ -1,25 +1,26 @@
 package com.fyjf.all.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
+import com.fyjf.all.activity.report.ReportDetailsActivity;
 import com.fyjf.all.adapter.checkloan.ReportAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.LoanTime;
-import com.fyjf.dao.entity.Page;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.report.ReportListVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
 import com.fyjf.widget.refreshview.utils.LogUtils;
-import com.rey.material.widget.ImageView;
 
 import org.json.JSONObject;
 
@@ -37,7 +38,7 @@ import butterknife.BindView;
 */
 public class ReportActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener{
     @BindView(R.id.back)
-    ImageView back;
+    TextView back;
     @BindView(R.id.xRefreshView)
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
@@ -45,8 +46,6 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     List<LoanTime> customers;
     LinearLayoutManager layoutManager;
     ReportAdapter customerAdapter;
-
-    private Page page;
 
     private int pageSize = 10;
     private int pageNo = 1;
@@ -91,7 +90,6 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
         xRefreshView.setXRefreshViewListener(this);
 
-        page = new Page();
         getData();
     }
 
@@ -167,50 +165,11 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void openReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(ReportPDFActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-
+        LoanTime time = customers.get(position);
+        Intent intent = new Intent();
+        intent.putExtra("time",time.getYearMonth());
+        intent.setClass(ReportActivity.this, ReportDetailsActivity.class);
+        startActivity(intent);
     }
 
-    @Override
-    public void openCreditReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(CreditReportActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-    }
-
-    @Override
-    public void openImageReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(ReportImagesActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-    }
-
-    @Override
-    public void openAnalysisReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("customerId",customer.getId());
-//            startActivity(ReportAnalysisActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户数据有误");
-//        }
-    }
 }
