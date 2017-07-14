@@ -10,6 +10,18 @@ android {
         minSdkVersion LIBRARY_MIN_SDK_VERSION
         targetSdkVersion LIBRARY_TARGET_SDK_VERSION
         multiDexEnabled true
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64' , 'armeabi-v8a'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "57f2a74ca90632ee104e941e", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
 
 //    signingConfigs {
@@ -81,4 +93,6 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.6.0'
     debugCompile 'com.antfortune.freeline:runtime:0.8.7'
     releaseCompile 'com.antfortune.freeline:runtime-no-op:0.8.7'
+    compile 'cn.jiguang.sdk:jpush:3.0.3'  // 此处以JPush 3.0.3 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.1'  // 此处以JCore 1.1.1 版本为例。
 }
