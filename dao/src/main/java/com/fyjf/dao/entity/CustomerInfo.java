@@ -20,7 +20,7 @@ public class CustomerInfo {
 //    private String examinTime;
 
 
-    private String id;
+    private String id;                  //报告ID
     private String customerName;		// 客户名称
     private String customerManager;     //客户经理名称
     private String examinTime;          //检查日期

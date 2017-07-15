@@ -110,7 +110,7 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        AppData.saveString(AppData.ACCOUNT,"bj01");
+        AppData.saveString(AppData.ACCOUNT,"bj02");
         startActivity(MainActivity.class);
     }
 }

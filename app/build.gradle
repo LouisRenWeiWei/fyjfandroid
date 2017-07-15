@@ -18,9 +18,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "57f2a74ca90632ee104e941e", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
 
@@ -85,14 +85,16 @@ dependencies {
     compile project(':blservice')
     compile project(':widget')
     //annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'  这个有问题
+    // 此处以JPush 3.0.3 版本为例。
+    // 此处以JCore 1.1.1 版本为例。
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'cn.jiguang.sdk:jpush:3.0.3'
+    compile 'cn.jiguang.sdk:jcore:1.1.1'
     testCompile 'com.antfortune.freeline:runtime-no-op:0.8.7'
     apt 'com.jakewharton:butterknife-compiler:8.6.0'
     debugCompile 'com.antfortune.freeline:runtime:0.8.7'
     releaseCompile 'com.antfortune.freeline:runtime-no-op:0.8.7'
-    compile 'cn.jiguang.sdk:jpush:3.0.3'  // 此处以JPush 3.0.3 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.1.1'  // 此处以JCore 1.1.1 版本为例。
 }

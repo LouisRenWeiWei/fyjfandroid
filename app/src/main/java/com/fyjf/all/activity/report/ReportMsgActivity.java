@@ -5,20 +5,18 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
-import com.fyjf.all.activity.ReportPDFActivity;
-import com.fyjf.all.adapter.ReportDetailsAdapter;
-import com.fyjf.all.app.AppData;
+import com.fyjf.all.adapter.ReportMsgAdapter;
 import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.CustomerInfo;
+import com.fyjf.dao.entity.ReportMessageBean;
 import com.fyjf.utils.JSONUtil;
-import com.fyjf.vo.report.ReportDetailsVO;
+import com.fyjf.vo.report.ReportMsgVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
 import com.fyjf.widget.refreshview.utils.LogUtils;
@@ -30,33 +28,37 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class ReportDetailsActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportDetailsAdapter.ItemOperationListener {
+public class ReportMsgActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportMsgAdapter.ItemOperationListener{
     @BindView(R.id.back)
-    TextView back;
+    ImageView back;
     @BindView(R.id.xRefreshView)
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    List<CustomerInfo> customers;
+
+    ReportMsgAdapter reportMsgAdapter;
+    List<ReportMessageBean> customers;
     LinearLayoutManager layoutManager;
-    ReportDetailsAdapter customerAdapter;
-    String yearTime;
+    String user;
+    String reportId;
 
     private int pageSize = 10;
     private int pageNo = 1;
 
     @Override
     protected int getContentLayout() {
-        return R.layout.activity_report_details;
+        return R.layout.activity_report_msg;
     }
 
     @Override
     protected void preInitData() {
         Intent intent = getIntent();
         if (intent!=null){
-            yearTime = intent.getStringExtra("time");
-            back.setText(yearTime.substring(4,6));
+            Bundle bundle = new Bundle();
+            bundle = intent.getExtras();
+            reportId = bundle.getString("id");
         }
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,23 +66,22 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
                 finish();
             }
         });
-
         recyclerView.setHasFixedSize(true);
         customers = new ArrayList<>();
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportDetailsAdapter(mContext,customers);
-        customerAdapter.setItemOperationListener(this);
+        //        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
+        reportMsgAdapter = new ReportMsgAdapter(mContext,customers);
+        reportMsgAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
-        recyclerView.setAdapter(customerAdapter);
+        recyclerView.setAdapter(reportMsgAdapter);
 
         //设置刷新完成以后，headerview固定的时间
         xRefreshView.setPinnedTime(1000);
         xRefreshView.setMoveForHorizontal(true);
         xRefreshView.setPullLoadEnable(true);
         xRefreshView.setAutoLoadMore(false);
-        customerAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
+        reportMsgAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
         xRefreshView.enableReleaseToLoadMore(true);
         xRefreshView.enableRecyclerViewPullUp(true);
         xRefreshView.enablePullUpWhenLoadCompleted(true);
@@ -120,13 +121,11 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
     }
 
     private void getData() {
-        ReportDetailsVO vo = new ReportDetailsVO();
+        ReportMsgVO vo = new ReportMsgVO();
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("customerState", 1);//贷后
-        vo.addParameter("yearMonth",yearTime);
-        vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
-        vo.request(ReportDetailsActivity.this, "resp", "error");
+        vo.addParameter("reportId",reportId);
+        vo.request(ReportMsgActivity.this, "resp", "error");
     }
 
     @ResponseError(name = "error")
@@ -142,9 +141,9 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
             if (resp.getInt("code") == 0) {
                 if(pageNo==1)customers.clear();
                 int size = customers.size();
-                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),ReportMessageBean.class));
                 LogUtils.e("customers:"+customers.size());
-                customerAdapter.notifyDataSetChanged();
+                reportMsgAdapter.notifyDataSetChanged();
                 int addSize = customers.size()-size;
                 if(addSize>0&&addSize==pageSize){
                     xRefreshView.setPullLoadEnable(true);
@@ -163,57 +162,8 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         xRefreshView.stopLoadMore();
     }
 
-    /**
-     * 消息
-     * @param position
-     */
     @Override
     public void openMsg(int position) {
-        CustomerInfo info = customers.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("id",info.getId());
-        startActivity(ReportMsgActivity.class,bundle);
-    }
 
-    /**
-     * 图片
-     * @param position
-     */
-    @Override
-    public void openImg(int position) {
-        CustomerInfo info = customers.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("id",info.getId());
-        startActivity(ReportImagesActivity.class,bundle);
-    }
-
-    /**
-     * 检查报告
-     * @param position
-     */
-    @Override
-    public void openReport(int position) {
-        CustomerInfo info = customers.get(position);
-        startActivity(ReportPDFActivity.class);
-    }
-
-    /**
-     * 量化分析
-     * @param position
-     */
-    @Override
-    public void openQuantified(int position) {
-        CustomerInfo info = customers.get(position);
-        startActivity(ReportAnalysisActivity.class);
-    }
-
-    /**
-     * 征信报告
-     * @param position
-     */
-    @Override
-    public void openCredit(int position) {
-        CustomerInfo info = customers.get(position);
-        startActivity(CreditReportActivity.class);
     }
 }

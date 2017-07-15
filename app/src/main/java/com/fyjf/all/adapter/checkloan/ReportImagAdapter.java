@@ -5,15 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
-import com.fyjf.dao.entity.Customer;
 import com.fyjf.dao.entity.ImageFile;
+import com.fyjf.widget.photoview.PhotoView;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
-import com.rey.material.widget.Button;
 
 import java.util.List;
 
@@ -64,12 +61,12 @@ public class ReportImagAdapter extends BaseRecyclerAdapter<ReportImagAdapter.Sim
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView iv;
+        public PhotoView iv;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                iv = (ImageView) itemView.findViewById(R.id.iv);
+                iv = (PhotoView) itemView.findViewById(R.id.iv);
             }
 
         }

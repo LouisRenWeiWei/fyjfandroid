@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/loan_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_marginBottom="15dp">
 
         <TextView
@@ -24,8 +23,8 @@
         <ImageView
             android:layout_width="7dp"
             android:layout_height="7dp"
-            android:layout_marginTop="21.5dp"
-            android:layout_marginLeft="41dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="31dp"
             android:background="@drawable/oval_bg"/>
 
         <View
@@ -33,7 +32,7 @@
             android:layout_height="103dp"
             android:background="#c8c8c8"
             android:layout_marginTop="46dp"
-            android:layout_marginLeft="44dp"/>
+            android:layout_marginLeft="34dp"/>
 
         <RelativeLayout
             android:layout_width="300dp"

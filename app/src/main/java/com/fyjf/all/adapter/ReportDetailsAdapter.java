@@ -2,6 +2,7 @@ package com.fyjf.all.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,15 +54,20 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
 
         String sourceStr = time.getReportImages();
         String[] sourceStrArray = sourceStr.split(",");
-        for (int i = 0; i < 3; i++) {
-            if (i == 0) {
-                Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_1);
-            }
-            if (i == 1) {
-                Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_2);
-            }
-            if (i == 2) {
-                Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_3);
+        int imgs = 1;
+        for (int i = 0; i < sourceStrArray.length; i++) {
+            if(!TextUtils.isEmpty(sourceStrArray[i])){
+                if(imgs>3){
+                    break;
+                }
+                if(imgs==1){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_1);
+                }else if(imgs==2){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_2);
+                }else if(imgs==3){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_3);
+                }
+                imgs++;
             }
         }
         holder.customer_item.setTag(position);
@@ -93,12 +99,6 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openImg(position);
-            }
-        });
-        holder.customer_manager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openManger(position);
             }
         });
         holder.customer_report.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +170,6 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
     public interface ItemOperationListener {
         void openMsg(int position);
         void openImg(int position);
-        void openManger(int position);
         void openReport(int position);
         void openQuantified(int position);
         void openCredit(int position);

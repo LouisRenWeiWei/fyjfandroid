@@ -1,7 +1,6 @@
 package com.fyjf.all.activity;
 
 import android.content.Intent;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -69,7 +68,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         customers = new ArrayList<>();
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
+//        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
         customerAdapter = new ReportAdapter(mContext,customers);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
@@ -140,7 +139,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
             JSONObject resp = new JSONObject(response);
             LogUtils.d("resp:"+resp);
             if (resp.getInt("code") == 0) {
-                if(pageNo==0)customers.clear();
+                if(pageNo==1)customers.clear();
                 int size = customers.size();
                 customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),LoanTime.class));
                 LogUtils.e("customers:"+customers.size());

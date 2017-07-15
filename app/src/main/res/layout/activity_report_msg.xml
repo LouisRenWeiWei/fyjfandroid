@@ -9,29 +9,21 @@
         android:layout_height="54dp"
         android:background="@color/app_color">
 
-        <TextView
+        <ImageView
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:drawableLeft="@mipmap/back"
-            android:text="7"
-            android:textColor="#ffffff"
-            android:textSize="18sp"/>
+            android:background="@mipmap/back"/>
 
-        <EditText
-            android:id="@+id/search_et"
-            android:layout_width="233dp"
-            android:layout_height="28dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:cursorVisible="false"
-            android:background="@drawable/search_bg"
-            android:drawableLeft="@mipmap/search"
-            android:drawablePadding="5dp"
-            android:paddingLeft="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="评论"
+            android:textSize="17.5dp"
+            android:textColor="#ffffff"/>
 
     </RelativeLayout>
 
@@ -53,4 +45,5 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical"/>
     </com.fyjf.widget.refreshview.XRefreshView>
+
 </LinearLayout>

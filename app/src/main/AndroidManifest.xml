@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.fyjf.all">
+<manifest package="com.fyjf.all"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -54,7 +54,11 @@
         <activity android:name=".activity.report.ReportImagesActivity"/>
         <activity android:name=".activity.report.CreditReportActivity"/>
         <activity android:name=".activity.report.ReportAnalysisActivity"/>
-        <activity android:name=".activity.report.ReportDetailsActivity">
+        <activity
+            android:name=".activity.report.ReportDetailsActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity android:name=".activity.report.ReportMsgActivity">
         </activity>
     </application>
 
