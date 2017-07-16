@@ -1,34 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingRight="15dp"
-    android:paddingLeft="15dp">
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
-        />
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/loan_item"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginBottom="15dp">
+
         <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="title 啊"
-            android:gravity="center_vertical"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="match_parent"
+            android:id="@+id/month"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="description 啊"
-            android:gravity="center_vertical"/>
-    </LinearLayout>
-</LinearLayout>
+            android:textSize="12.5sp"
+            android:textColor="#666666"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10.5dp"
+            android:text="7月"/>
+
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="7dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="31dp"
+            android:background="@drawable/oval_bg"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="103dp"
+            android:background="#c8c8c8"
+            android:layout_marginTop="46dp"
+            android:layout_marginLeft="34dp"/>
+
+        <RelativeLayout
+            android:id="@+id/image"
+            android:layout_width="300dp"
+            android:layout_height="130dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="#f6f6f6">
+
+            <RelativeLayout
+                android:layout_width="280dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/month_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textSize="15sp"
+                    android:text="2017年7月份贷后检查"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/month_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:drawableLeft="@mipmap/pinglun_msg"
+                    android:drawablePadding="10dp"
+                    android:textSize="12.5sp"
+                    android:text="7"
+                    />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="280dp"
+                android:layout_height="1px"
+                android:background="#c8c8c8"
+                android:layout_marginTop="50dp"
+                android:layout_centerHorizontal="true"/>
+
+            <ImageView
+                android:id="@+id/image_1"
+                android:layout_width="86.5dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp"
+                android:background="#e3e2e2"/>
+
+            <ImageView
+                android:id="@+id/image_2"
+                android:layout_width="86.5dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp"
+                android:layout_toRightOf="@id/image_1"
+                android:background="#e3e2e2"/>
+
+            <ImageView
+                android:id="@+id/image_3"
+                android:layout_width="86.5dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp"
+                android:layout_toRightOf="@id/image_2"
+                android:background="#e3e2e2"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tips"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:text="我确定潍坊威风为飞任务我服务服务  为 任务任务"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_below="@id/image"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

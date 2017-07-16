@@ -23,11 +23,13 @@ public class RequestUrl {
     public static String report_list_msg = base+"/report/msg/list";
     public static String report_msg_add = base+"/report/msg/save";
     public static String report_get = base+"/report/get";
-    public static String overdue_list = base+"/overdue/list/by/bank/worker";
+//    public static String overdue_list = base+"/overdue/list/by/bank/worker";
+    public static String overdue_list = base+"/overdue/list/app";
     public static String version_check = base+"/app/version/last";
     public static String contact_us = base+"/dict/get/contact/us";
     public static String report_month = base+"/report/statistics/by/month";
     public static String report_custom = base+"/report/list/app";
     public static String report_msgs = base+"/report/msg/list/app";
     public static String report_imags = base+"/report/get/images";
+    public static String report_progress = base+"/overdue/progress/list/app";
 }

@@ -1,26 +1,21 @@
 package com.fyjf.all.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
-import com.fyjf.all.adapter.checkloan.ReportImagAdapter;
-import com.fyjf.dao.entity.ImageFile;
 import com.fyjf.dao.entity.OverdueProgress;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
-import com.fyjf.widget.refreshview.recyclerview.GridVerticalHorizonSpace;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,49 +49,70 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        OverdueProgress item = list.get(position);
-        holder.tv_title.setText(item.getTitle());
-        holder.tv_desc.setText(item.getDescription());
-        if (!TextUtils.isEmpty(item.getOverdueImgs())) {
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
-            holder.recyclerView.setLayoutManager(gridLayoutManager);// 布局管理器。
-            holder.recyclerView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
-            holder.recyclerView.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
-            holder.recyclerView.addItemDecoration(new GridVerticalHorizonSpace(30, 30));
-            String[] imgs = item.getOverdueImgs().split(",");
-            List<ImageFile> imageFiles = new ArrayList<>();
-            for(int i=0;i<imgs.length;i++){
-                ImageFile img = new ImageFile();
-                img.setUrl(RequestUrl.img_file_upload+imgs[i]);
-                imageFiles.add(img);
+        OverdueProgress time = list.get(position);
+        holder.month.setText(time.getCreateDate().substring(5,7)+"月");
+        holder.month_title.setText(time.getTitle());
+        holder.month_count.setText("0");
+        holder.tips.setText(time.getDescription());
+        String sourceStr = time.getOverdueImgs();
+        String[] sourceStrArray = sourceStr.split(",");
+        int imgs = 1;
+        for (int i = 0; i < sourceStrArray.length; i++) {
+            if(!TextUtils.isEmpty(sourceStrArray[i])){
+                if(imgs>3){
+                    break;
+                }
+                if(imgs==1){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.image_1);
+                }else if(imgs==2){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.image_2);
+                }else if(imgs==3){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.image_3);
+                }
+                imgs++;
             }
-            ReportImagAdapter imagAdapter = new ReportImagAdapter(mContext, imageFiles);
-            holder.recyclerView.setAdapter(imagAdapter);
         }
+
+        holder.loan_item.setTag(position);
+        holder.loan_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openReport(position);
+            }
+        });
+
     }
 
     @Override
     public int getAdapterItemCount() {
-        return list != null ? list.size() : 0;
+        return list!=null?list.size():0;
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView tv_title;
-        public RecyclerView recyclerView;
-        public TextView tv_desc;
+        private RelativeLayout loan_item;
+        private TextView month;
+        private TextView month_title;
+        private TextView month_count;
+        private ImageView image_1;
+        private ImageView image_2;
+        private ImageView image_3;
+        private TextView tips;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                tv_title = (TextView) itemView.findViewById(R.id.tv_title);
-                recyclerView = (RecyclerView) itemView.findViewById(R.id.recyclerView);
-                tv_desc = (TextView) itemView.findViewById(R.id.tv_desc);
+                loan_item = (RelativeLayout) itemView.findViewById(R.id.loan_item);
+                month = (TextView) itemView.findViewById(R.id.month);
+                month_title = (TextView) itemView.findViewById(R.id.month_title);
+                month_count = (TextView) itemView.findViewById(R.id.month_count);
+                tips = (TextView) itemView.findViewById(R.id.tips);
+                image_1 = (ImageView) itemView.findViewById(R.id.image_1);
+                image_2 = (ImageView) itemView.findViewById(R.id.image_2);
+                image_3 = (ImageView) itemView.findViewById(R.id.image_3);
             }
 
         }
     }
-
     ItemOperationListener itemOperationListener;
 
     public ItemOperationListener getItemOperationListener() {
@@ -107,6 +123,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         this.itemOperationListener = itemOperationListener;
     }
 
-    public interface ItemOperationListener {
+    public interface ItemOperationListener{
+        void openReport(int position);
     }
 }

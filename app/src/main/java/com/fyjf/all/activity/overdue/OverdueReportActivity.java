@@ -1,42 +1,22 @@
 package com.fyjf.all.activity.overdue;
 
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.RadioButton;
+import android.widget.ImageView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.ext.ResponseError;
-import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.adapter.OverdueProgressAdapter;
-import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.OverdueProgress;
-import com.fyjf.dao.entity.OverdueReport;
-import com.fyjf.utils.JSONUtil;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
-import com.fyjf.vo.overdue.OverduesVO;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-//import com.joanzapata.pdfview.PDFView;
-//import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
-//import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.rey.material.widget.ImageView;
-
-import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -51,7 +31,6 @@ import butterknife.BindView;
 public class OverdueReportActivity extends BaseActivity implements OnPageChangeListener,OnLoadCompleteListener,OverdueProgressAdapter.ItemOperationListener {
     @BindView(R.id.back)
     ImageView back;
-
     @BindView(R.id.pdfView)
     PDFView pdfView;
 
@@ -134,6 +113,11 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
 
     @Override
     public void loadComplete(int nbPages) {
+
+    }
+
+    @Override
+    public void openReport(int position) {
 
     }
 }

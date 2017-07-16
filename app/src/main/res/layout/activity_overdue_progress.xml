@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/top">
+        android:layout_height="54dp"
+        android:background="@color/app_color">
 
-        <com.rey.material.widget.ImageView
+        <ImageView
             android:id="@+id/back"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@mipmap/back"
-            android:layout_centerVertical="true"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/back"/>
 
         <TextView
+            android:id="@+id/collection_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="催收进度"
-            android:textColor="@color/app_text_color"
-            android:textSize="18sp" />
+            android:textColor="#ffffff"
+            android:textSize="14dp"/>
+
     </RelativeLayout>
-
-
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_bg" />
+        android:background="@color/app_bg"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <com.fyjf.widget.refreshview.XRefreshView
+        android:id="@+id/xRefreshView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbars="vertical" />
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
+    </com.fyjf.widget.refreshview.XRefreshView>
 </LinearLayout>

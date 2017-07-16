@@ -3,6 +3,7 @@ package com.fyjf.all.activity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.fyjf.all.R;
 import com.fyjf.utils.SDUtils;
@@ -11,17 +12,17 @@ import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-//import com.joanzapata.pdfview.PDFView;
-//import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
-//import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.rey.material.widget.ImageView;
 
 import java.io.File;
 
 import butterknife.BindView;
+
+//import com.joanzapata.pdfview.PDFView;
+//import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
+//import com.joanzapata.pdfview.listener.OnPageChangeListener;
 
 /**
  * Created by ASUS on 2017/6/23.

@@ -7,21 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
-import com.fyjf.dao.entity.Customer;
-import com.fyjf.dao.entity.OverdueProgress;
 import com.fyjf.dao.entity.OverdueReport;
-import com.fyjf.utils.TimeUtils;
+import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
-import com.rey.material.widget.Button;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,57 +50,73 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
         OverdueReport overdueReport = list.get(position);
-        holder.tv_customer_name.setText(overdueReport.getCustomer().getName());
-        if(TextUtils.isEmpty(overdueReport.getOverdueDays())){
-            overdueReport.setOverdueDays("0");
-        }
-        int overdueDays = Integer.parseInt(overdueReport.getOverdueDays());
-        holder.tv_check_date.setText("逾期："+(overdueDays+ TimeUtils.getBetweenDay(TimeUtils.parse(overdueReport.getCreateDate(),"yyyy-MM-dd HH:mm:ss"),new Date()))+"天");
+        holder.overdue_name.setText(overdueReport.getCustomerName());
+        holder.overdue_msg.setText(overdueReport.getMsgCount()+"");
+        holder.overdue_time.setText("逾期"+overdueReport.getOverdueDays()+"天 | ");
+        holder.overdue_price.setText("¥"+overdueReport.getMoney()+"万");
+        holder.overdue_manger.setText(overdueReport.getManagerName());
+        holder.overdue_date.setText(TimeUtil.timeHao2Date(overdueReport.getOverdueStart(),"yyyy-MM-dd"));
 
-        holder.btn_loan_check.setOnClickListener(new View.OnClickListener() {
+        String sourceStr = overdueReport.getOverdueImgs();
+        String[] sourceStrArray = sourceStr.split(",");
+        int imgs = 1;
+        for (int i = 0; i < sourceStrArray.length; i++) {
+            if(!TextUtils.isEmpty(sourceStrArray[i])){
+                if(imgs>3){
+                    break;
+                }
+                if(imgs==1){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.overdue_img_1);
+                }else if(imgs==2){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.overdue_img_2);
+                }else if(imgs==3){
+                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.overdue_img_3);
+                }
+                imgs++;
+            }
+        }
+
+        onClick(holder, position);
+
+    }
+
+    private void onClick(SimpleAdapterViewHolder holder, final int position) {
+        holder.overdue_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openReport(position);
+                if(itemOperationListener!=null)itemOperationListener.openMsg(position);
             }
         });
-        holder.btn_analysis.setOnClickListener(new View.OnClickListener() {
+        holder.overdue_img_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openProgress(position);
             }
         });
-        List imgs = new ArrayList<String>();
-        if(overdueReport.getOverdueProgress()!=null){
-            for(int i=0;i<overdueReport.getOverdueProgress().size();i++){
-                OverdueProgress progress = overdueReport.getOverdueProgress().get(i);
-                if(imgs.size()<3&&!TextUtils.isEmpty(progress.getOverdueImgs())){
-                    String[] tmps = progress.getOverdueImgs().split(",");
-                    for(int j=0;j<tmps.length;j++){
-                        if(imgs.size()<3){
-                            imgs.add(tmps[j]);
-                        }else{
-                            break;
-                        }
-                    }
-                }
-                if(imgs.size()==3){
-                    break;
-                }
+        holder.overdue_img_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openProgress(position);
             }
-        }
-
-        holder.ll_mgs.removeAllViews();
-        for(int i=0;i<imgs.size();i++){
-            View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item,null);
-            ImageView iv = (ImageView) view.findViewById(R.id.iv);
-            String path = RequestUrl.img_file_upload+imgs.get(i);
-            Glide.with(mContext).load(path).into(iv);
-            holder.ll_mgs.addView(view);
-
-        }
-
-
-
+        });
+        holder.overdue_img_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openProgress(position);
+            }
+        });
+        holder.overdue_quantified.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openProgress(position);
+            }
+        });
+        holder.overdue_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openReport(position);
+            }
+        });
     }
 
     @Override
@@ -114,27 +125,36 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView tv_customer_name;
-        public TextView tv_check_date;
-        public Button btn_loan_check;
-        public Button btn_analysis;
-        public LinearLayout ll_mgs;
-//        public ImageView iv_one;
-//        public ImageView iv_two;
-//        public ImageView iv_three;
+        public RelativeLayout customer_item;
+        public TextView overdue_state;
+        public TextView overdue_name;
+        public TextView overdue_msg;
+        public ImageView overdue_img_1;
+        public ImageView overdue_img_2;
+        public ImageView overdue_img_3;
+        public TextView overdue_time;
+        public TextView overdue_price;
+        public TextView overdue_manger;
+        public TextView overdue_date;
+        public TextView overdue_report;
+        public TextView overdue_quantified;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                tv_customer_name = (TextView) itemView.findViewById(R.id.tv_customer_name);
-                tv_check_date = (TextView) itemView.findViewById(R.id.tv_check_date);
-                btn_loan_check = (Button) itemView.findViewById(R.id.btn_loan_check);
-                btn_analysis = (Button) itemView.findViewById(R.id.btn_analysis);
-                ll_mgs = (LinearLayout) itemView.findViewById(R.id.ll_mgs);
-//                iv_one = (ImageView) itemView.findViewById(R.id.iv_one);
-//                iv_two = (ImageView) itemView.findViewById(R.id.iv_two);
-//                iv_three = (ImageView) itemView.findViewById(R.id.iv_three);
+                customer_item = (RelativeLayout) itemView.findViewById(R.id.customer_item);
+                overdue_state = (TextView) itemView.findViewById(R.id.overdue_state);
+                overdue_name = (TextView) itemView.findViewById(R.id.overdue_name);
+                overdue_msg = (TextView) itemView.findViewById(R.id.overdue_msg);
+                overdue_img_1 = (ImageView) itemView.findViewById(R.id.overdue_img_1);
+                overdue_img_2 = (ImageView) itemView.findViewById(R.id.overdue_img_2);
+                overdue_img_3 = (ImageView) itemView.findViewById(R.id.overdue_img_3);
+                overdue_time = (TextView) itemView.findViewById(R.id.overdue_time);
+                overdue_price = (TextView) itemView.findViewById(R.id.overdue_price);
+                overdue_manger = (TextView) itemView.findViewById(R.id.overdue_manger);
+                overdue_date = (TextView) itemView.findViewById(R.id.overdue_date);
+                overdue_report = (TextView) itemView.findViewById(R.id.overdue_report);
+                overdue_quantified = (TextView) itemView.findViewById(R.id.overdue_quantified);
             }
 
         }
@@ -150,6 +170,7 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
     }
 
     public interface ItemOperationListener{
+        void openMsg(int position);
         void openReport(int position);
         void openProgress(int position);
     }

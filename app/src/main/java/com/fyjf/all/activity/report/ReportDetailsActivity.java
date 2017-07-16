@@ -143,6 +143,14 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
                 if(pageNo==1)customers.clear();
                 int size = customers.size();
                 customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
                 LogUtils.e("customers:"+customers.size());
                 customerAdapter.notifyDataSetChanged();
                 int addSize = customers.size()-size;

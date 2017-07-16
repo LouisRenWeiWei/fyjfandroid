@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
     android:layout_marginBottom="10dp">
 
     <RelativeLayout
@@ -11,7 +11,6 @@
         android:background="#ffffff">
 
         <TextView
-            android:id="@+id/overdue_state"
             android:layout_width="30dp"
             android:layout_height="20dp"
             android:layout_marginLeft="15.5dp"
@@ -23,18 +22,17 @@
             android:textSize="12sp"/>
 
         <TextView
-            android:id="@+id/overdue_name"
+            android:id="@+id/customer_name"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginLeft="50.5dp"
             android:layout_marginTop="12.5dp"
             android:gravity="center"
-            android:text="预警"
             android:textColor="#010101"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/overdue_msg"
+            android:id="@+id/customer_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -43,13 +41,12 @@
             android:drawableLeft="@mipmap/pinglun_msg"
             android:drawablePadding="10.5dp"
             android:gravity="center"
-            android:text="30"
             android:textColor="#666666"
             android:textSize="12.5sp"
             />
 
         <ImageView
-            android:id="@+id/overdue_img_1"
+            android:id="@+id/customer_img_1"
             android:layout_width="108dp"
             android:layout_height="75dp"
             android:layout_marginLeft="15dp"
@@ -57,7 +54,7 @@
             android:background="#e3e2e2"/>
 
         <ImageView
-            android:id="@+id/overdue_img_2"
+            android:id="@+id/customer_img_2"
             android:layout_width="108dp"
             android:layout_height="75dp"
             android:layout_centerHorizontal="true"
@@ -65,7 +62,7 @@
             android:background="#e3e2e2"/>
 
         <ImageView
-            android:id="@+id/overdue_img_3"
+            android:id="@+id/customer_img_3"
             android:layout_width="108dp"
             android:layout_height="75dp"
             android:layout_alignParentRight="true"
@@ -74,50 +71,23 @@
             android:background="#e3e2e2"/>
 
         <TextView
-            android:id="@+id/overdue_time"
+            android:id="@+id/customer_manager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15.5dp"
             android:layout_marginTop="135.5dp"
             android:gravity="center"
-            android:text="逾期90天 |"
-            android:textColor="#009cff"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/overdue_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/overdue_time"
-            android:layout_marginTop="135.5dp"
-            android:gravity="center"
-            android:text=" ¥30万"
-            android:textStyle="bold"
-            android:textColor="#009cff"
+            android:textColor="#254382"
             android:textSize="13sp"/>
 
         <TextView
-            android:id="@+id/overdue_manger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="128.5dp"
-            android:layout_marginTop="136.5dp"
-            android:gravity="center"
-            android:text="客户经理"
-            android:textStyle="bold"
-            android:textColor="#254382"
-            android:textSize="12.5sp"/>
-
-        <TextView
-            android:id="@+id/overdue_date"
+            android:id="@+id/customer_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:layout_marginTop="136.5dp"
             android:gravity="center"
-            android:text="2017-08-09"
             android:textColor="#666666"
             android:textSize="13sp"/>
 
@@ -134,15 +104,15 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/overdue_report"
+                android:id="@+id/customer_report"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawableLeft="@mipmap/overdue_report"
+                android:drawableLeft="@mipmap/report_icon"
                 android:gravity="center"
-                android:paddingLeft="53.5dp"
-                android:paddingRight="53.5dp"
-                android:text="催收方案"
+                android:paddingLeft="23.5dp"
+                android:paddingRight="23.5dp"
+                android:text="检查报告"
                 android:textColor="#666666"
                 android:textSize="14sp"/>
 
@@ -155,15 +125,36 @@
                 />
 
             <TextView
-                android:id="@+id/overdue_quantified"
+                android:id="@+id/customer_quantified"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawableLeft="@mipmap/overdue_quantified"
+                android:drawableLeft="@mipmap/quantified_icon"
                 android:gravity="center"
-                android:paddingLeft="53.5dp"
-                android:paddingRight="53.5dp"
-                android:text="催收进度"
+                android:paddingLeft="23.5dp"
+                android:paddingRight="23.5dp"
+                android:text="量化分析"
+                android:textColor="#666666"
+                android:textSize="14sp"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12.5dp"
+                android:layout_marginTop="12.5dp"
+                android:background="#c8c8c8"
+                />
+
+            <TextView
+                android:id="@+id/customer_credit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableLeft="@mipmap/credit_icon"
+                android:gravity="center"
+                android:paddingLeft="23.5dp"
+                android:paddingRight="23.5dp"
+                android:text="信征报告"
                 android:textColor="#666666"
                 android:textSize="14sp"/>
 
