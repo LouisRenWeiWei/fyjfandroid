@@ -80,7 +80,30 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
                 if(itemOperationListener!=null)itemOperationListener.openReport(position);
             }
         });
-
+        holder.month_count.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openMsg(position);
+            }
+        });
+        holder.image_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openImg(position);
+            }
+        });
+        holder.image_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openImg(position);
+            }
+        });
+        holder.image_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(itemOperationListener!=null)itemOperationListener.openImg(position);
+            }
+        });
     }
 
     @Override
@@ -125,5 +148,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     public interface ItemOperationListener{
         void openReport(int position);
+        void openImg(int position);
+        void openMsg(int position);
     }
 }

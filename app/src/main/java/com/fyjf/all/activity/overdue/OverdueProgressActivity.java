@@ -1,6 +1,7 @@
 package com.fyjf.all.activity.overdue;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
+import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.all.adapter.OverdueProgressAdapter;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.OverdueProgress;
@@ -185,6 +187,25 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
 
     @Override
     public void openReport(int position) {
+        OverdueProgress item = overdueProgresses.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("id",item.getOverdueId());
+        startActivity(OverdueProgressDetailsActivity.class,bundle);
+    }
 
+    @Override
+    public void openImg(int position) {
+        OverdueProgress item = overdueProgresses.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("id",item.getOverdueId());
+        startActivity(OverdueImgActivity.class,bundle);
+    }
+
+    @Override
+    public void openMsg(int position) {
+        OverdueProgress item = overdueProgresses.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("id",item.getOverdueId());
+        startActivity(ReportMsgActivity.class,bundle);
     }
 }

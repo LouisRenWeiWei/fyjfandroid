@@ -40,22 +40,11 @@
         android:layout_weight="1"
         android:background="#fff">
 
-        <RelativeLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/month"
-                android:layout_marginLeft="10.5dp"
-                android:paddingTop="15dp"
-                android:scrollbars="vertical"/>
-
-
-        </RelativeLayout>
-
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"/>
 
     </com.fyjf.widget.refreshview.XRefreshView>
 

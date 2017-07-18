@@ -5,11 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
 import com.fyjf.dao.entity.AnalysisBean;
+import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
 
 import java.util.List;
@@ -41,6 +44,20 @@ public class AnalysisAdapter extends BaseRecyclerAdapter<AnalysisAdapter.SimpleA
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
         AnalysisBean overdueReport = list.get(position);
+        if (position!=0 && position>0){
+            if (TimeUtil.timeHao2Date(list.get(position).getCreateDate(),"yyyy").equals(TimeUtil.timeHao2Date(list.get(position-1).getCreateDate(),"yyyy"))){
+                holder.month.setVisibility(View.GONE);
+                Glide.with(mContext).load(R.mipmap.shijianzhou2).into(holder.iv_divider_1);
+            }else {
+                holder.month.setVisibility(View.VISIBLE);
+                holder.month.setText(TimeUtil.timeHao2Date(overdueReport.getCreateDate(),"yyyy")+"年");
+                Glide.with(mContext).load(R.mipmap.im_divider).into(holder.iv_divider_1);
+            }
+        }else {
+            holder.month.setVisibility(View.VISIBLE);
+            holder.month.setText(TimeUtil.timeHao2Date(overdueReport.getCreateDate(),"yyyy")+"年");
+            Glide.with(mContext).load(R.mipmap.im_divider).into(holder.iv_divider_1);
+        }
         holder.analysis_title.setText(overdueReport.getTitle());
         holder.analysis_msg.setText(overdueReport.getMsgCount());
         holder.analysis_item.setTag(position);
@@ -70,6 +87,8 @@ public class AnalysisAdapter extends BaseRecyclerAdapter<AnalysisAdapter.SimpleA
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
         public RelativeLayout analysis_item;
+        public TextView month;
+        public ImageView iv_divider_1;
         public TextView analysis_title;
         public TextView analysis_msg;
 
@@ -77,6 +96,8 @@ public class AnalysisAdapter extends BaseRecyclerAdapter<AnalysisAdapter.SimpleA
             super(itemView);
             if (isItem) {
                 analysis_item = (RelativeLayout) itemView.findViewById(R.id.analysis_item);
+                month = (TextView) itemView.findViewById(R.id.month);
+                iv_divider_1 = (ImageView) itemView.findViewById(R.id.iv_divider_1);
                 analysis_title = (TextView) itemView.findViewById(R.id.analysis_title);
                 analysis_msg = (TextView) itemView.findViewById(R.id.analysis_msg);
             }

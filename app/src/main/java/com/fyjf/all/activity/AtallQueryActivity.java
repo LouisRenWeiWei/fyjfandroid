@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -30,7 +31,6 @@ import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.report.ReportListVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
-import com.rey.material.widget.ImageView;
 
 import org.json.JSONObject;
 

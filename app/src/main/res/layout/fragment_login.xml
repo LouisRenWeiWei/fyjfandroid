@@ -1,87 +1,74 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    android:background="@color/white">
 
+    <ImageView
+        android:layout_width="128.5dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="80dp"
+        android:background="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"/>
+    
     <EditText
         android:id="@+id/et_account"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="39dp"
-        android:layout_marginRight="39dp"
-        android:layout_marginTop="68dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="53dp"
         android:background="@null"
-        android:drawableBottom="@drawable/login_et_line"
-        android:drawablePadding="15dp"
-        android:ems="13"
-        android:hint="账号"
+        android:hint="用户名"
         android:digits="@string/digits"
         android:maxLines="1"
         android:textColor="@color/app_text_color"
         android:textColorHint="#a3a3a3"
-        android:textSize="15sp"
-        android:textCursorDrawable="@drawable/cursor"/>
-
+        android:textSize="15sp"/>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="315dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="53dp"
+        android:background="#c8c8c8"/>
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="39dp"
-        android:layout_marginRight="39dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="315dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="53dp"
         android:background="@null"
-        android:drawableBottom="@drawable/login_et_line"
-        android:drawablePadding="15dp"
-        android:ems="13"
         android:hint="密码"
+        android:digits="@string/digits"
         android:inputType="textPassword"
         android:maxLength="10"
         android:maxLines="1"
         android:textColor="@color/app_text_color"
         android:textColorHint="#a3a3a3"
-        android:textSize="15sp"
-        android:textCursorDrawable="@drawable/cursor"/>
+        android:textSize="15sp"/>
 
-    <com.rey.material.widget.Button
-        android:id="@+id/tv_login"
-        android:background="@drawable/btn_bg"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="39dp"
-        android:layout_marginRight="39dp"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
+        android:layout_height="1px"
+        android:layout_marginTop="375dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="53dp"
+        android:background="#c8c8c8"/>
+    
+    <Button
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="53dp"
+        android:layout_marginTop="400dp"
+        android:background="#254382"
         android:text="登录"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:rd_enable="true"
-        app:rd_rippleType="wave"/>
-    <TextView
-        android:id="@+id/forget_password_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="13dp"
-        android:text="忘记密码？"
-        android:textColor="@color/app_text_color"
-        android:textSize="13sp"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/tv_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
-        android:text=""
-        android:textColor="@color/app_text_color"
-        android:textSize="13sp"
-        android:visibility="visible"/>
-</LinearLayout>
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        />
+
+</RelativeLayout>

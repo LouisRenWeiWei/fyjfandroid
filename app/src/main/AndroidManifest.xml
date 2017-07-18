@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.fyjf.all"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.fyjf.all">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -32,7 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -40,6 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask"
@@ -92,6 +95,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".activity.AnalysisActivity">
+        </activity>
+        <activity android:name=".activity.SettingActivity">
+        </activity>
+        <activity android:name=".activity.UpdatePwdActivity">
+        </activity>
+        <activity android:name=".activity.overdue.OverdueImgActivity">
+        </activity>
+        <activity android:name=".activity.overdue.OverdueProgressDetailsActivity">
+        </activity>
+        <activity android:name=".activity.AnalysisPDFActivity">
         </activity>
     </application>
 

@@ -2,8 +2,8 @@ package com.fyjf.all.fragment;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
@@ -14,7 +14,6 @@ import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.utils.NetworkUtils;
 import com.fyjf.vo.user.LoginVO;
-import com.rey.material.widget.Button;
 
 import org.json.JSONObject;
 
@@ -33,9 +32,6 @@ public class LoginFragment extends BaseFragment {
     EditText et_password;
     @BindView(R.id.tv_login)
     Button tv_login;
-    @BindView(R.id.tv_version)
-    TextView tv_version;
-
 
     @Override
     protected int getContentLayout() {
@@ -107,10 +103,4 @@ public class LoginFragment extends BaseFragment {
         et_password.setText(AppData.getString(AppData.PASSWORD));
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        AppData.saveString(AppData.ACCOUNT,"bj01");
-        startActivity(MainActivity.class);
-    }
 }

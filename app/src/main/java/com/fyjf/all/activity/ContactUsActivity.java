@@ -1,9 +1,9 @@
 package com.fyjf.all.activity;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import com.fyjf.all.R;
-import com.rey.material.widget.ImageView;
 
 import butterknife.BindView;
 
@@ -29,7 +29,6 @@ public class ContactUsActivity extends BaseActivity{
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });

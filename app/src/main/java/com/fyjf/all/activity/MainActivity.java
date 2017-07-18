@@ -1,36 +1,33 @@
 package com.fyjf.all.activity;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fyjf.all.R;
 import com.fyjf.all.activity.overdue.OverdueActivity;
 import com.fyjf.all.update.UpdateHelper;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.vo.RequestUrl;
-import com.rey.material.widget.Button;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.btn_loan_check)
-    Button btn_loan_check;
+    TextView btn_loan_check;
     @BindView(R.id.btn_waring)
-    Button btn_waring;
+    TextView btn_waring;
     @BindView(R.id.btn_overdue)
-    Button btn_overdue;
+    TextView btn_overdue;
     @BindView(R.id.btn_camera)
-    Button btn_camera;
+    TextView btn_camera;
     @BindView(R.id.btn_atall_analysis)
-    Button btn_atall_analysis;
+    TextView btn_atall_analysis;
     @BindView(R.id.btn_atall_query)
-    Button btn_atall_query;
-    @BindView(R.id.btn_news)
-    Button btn_news;
-    @BindView(R.id.btn_call_center)
-    Button btn_call_center;
-    @BindView(R.id.btn_contact_us)
-    Button btn_contact_us;
+    TextView btn_atall_query;
+    @BindView(R.id.setting)
+    ImageView setting;
 
     @Override
     protected int getContentLayout() {
@@ -48,8 +45,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @OnClick({R.id.btn_loan_check,R.id.btn_waring,R.id.btn_overdue,
-            R.id.btn_camera,R.id.btn_atall_analysis,R.id.btn_atall_query,
-            R.id.btn_news,R.id.btn_call_center,R.id.btn_contact_us
+            R.id.btn_camera,R.id.btn_atall_analysis,R.id.btn_atall_query,R.id.setting
     })
     void onClick(View view){
         switch (view.getId()){
@@ -66,19 +62,13 @@ public class MainActivity extends BaseActivity {
                 ToastUtils.showSystemToast(mContext,getString(R.string.feature_during_develop));
                 break;
             case R.id.btn_atall_analysis:
-                ToastUtils.showSystemToast(mContext,getString(R.string.feature_during_develop));
+                startActivity(AnalysisActivity.class);
                 break;
             case R.id.btn_atall_query:
                 startActivity(AtallQueryActivity.class);
                 break;
-            case R.id.btn_news:
-                ToastUtils.showSystemToast(mContext,getString(R.string.feature_during_develop));
-                break;
-            case R.id.btn_call_center:
-                ToastUtils.showSystemToast(mContext,getString(R.string.feature_during_develop));
-                break;
-            case R.id.btn_contact_us:
-                startActivity(ContactUsActivity.class);
+            case R.id.setting:
+                startActivity(SettingActivity.class);
                 break;
         }
     }

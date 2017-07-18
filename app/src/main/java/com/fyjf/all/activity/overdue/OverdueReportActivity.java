@@ -120,4 +120,14 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
     public void openReport(int position) {
 
     }
+
+    @Override
+    public void openImg(int position) {
+
+    }
+
+    @Override
+    public void openMsg(int position) {
+
+    }
 }
