@@ -103,4 +103,10 @@ public class LoginFragment extends BaseFragment {
         et_password.setText(AppData.getString(AppData.PASSWORD));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppData.saveString(AppData.ACCOUNT,"bj01");
+        startActivity(MainActivity.class);
+    }
 }

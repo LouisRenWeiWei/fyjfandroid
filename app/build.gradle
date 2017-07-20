@@ -97,4 +97,5 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.6.0'
     debugCompile 'com.antfortune.freeline:runtime:0.8.7'
     releaseCompile 'com.antfortune.freeline:runtime-no-op:0.8.7'
+    compile 'com.jaredrummler:material-spinner:1.1.0'
 }

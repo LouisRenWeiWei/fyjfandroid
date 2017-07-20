@@ -1,43 +1,20 @@
 package com.fyjf.all.activity;
 
-import android.graphics.drawable.Drawable;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.ext.ResponseError;
-import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
-import com.fyjf.all.adapter.CustomerStateAdapter;
-import com.fyjf.all.adapter.checkloan.ReportAdapter;
-import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.CustomerInfo;
-import com.fyjf.dao.entity.CustomerState;
-import com.fyjf.dao.entity.LoanTime;
-import com.fyjf.dao.entity.Page;
-import com.fyjf.utils.JSONUtil;
-import com.fyjf.vo.report.ReportListVO;
-import com.fyjf.widget.refreshview.XRefreshView;
-import com.fyjf.widget.refreshview.XRefreshViewFooter;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import cn.qqtheme.framework.picker.DatePicker;
+import cn.qqtheme.framework.util.ConvertUtils;
 
 /**
  * Created by ASUS on 2017/6/23.
@@ -47,30 +24,19 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener{
+public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.OnItemSelectedListener {
     @BindView(R.id.back)
     ImageView back;
-
-    @BindView(R.id.et_customer_name)
-    EditText et_customer_name;
-    @BindView(R.id.tv_date)
-    TextView tv_date;
-    @BindView(R.id.tv_state)
-    TextView tv_state;
-    List<CustomerState> customerStates;
-    CustomerStateAdapter customerStateAdapter;
-    CustomerState customerState;
-
-    @BindView(R.id.xRefreshView)
-    XRefreshView xRefreshView;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    List<LoanTime> customers;
-    LinearLayoutManager layoutManager;
-    ReportAdapter customerAdapter;
-    private Page page;
-
-
+    @BindView(R.id.spinner_type)
+    MaterialSpinner spinner_type;
+    @BindView(R.id.spinner_manger)
+    MaterialSpinner spinner_manger;
+    @BindView(R.id.spinner_up_type)
+    MaterialSpinner spinner_up_type;
+    @BindView(R.id.time_prick)
+    TextView time_prick;
+    @BindView(R.id.btn_commit)
+    Button btn_commit;
 
     @Override
     protected int getContentLayout() {
@@ -82,223 +48,78 @@ public class AtallQueryActivity extends BaseActivity implements XRefreshView.XRe
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
-//        customerStates = new ArrayList<>();
-//        customerStates.add(new CustomerState("贷后","1"));
-//        customerStates.add(new CustomerState("预警","2"));
-//        customerStates.add(new CustomerState("逾期","3"));
-//        customerStateAdapter = new CustomerStateAdapter(mContext,customerStates);
-//        spinner_state.setAdapter(customerStateAdapter);
 
-        tv_state.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupWindow(v);
-            }
-        });
-
-        recyclerView.setHasFixedSize(true);
-        customers = new ArrayList<>();
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportAdapter(mContext,customers);
-        customerAdapter.setItemOperationListener(this);
-        // 静默加载模式不能设置footerview
-        recyclerView.setAdapter(customerAdapter);
-
-        //设置刷新完成以后，headerview固定的时间
-        xRefreshView.setPinnedTime(1000);
-        xRefreshView.setMoveForHorizontal(true);
-        xRefreshView.setPullLoadEnable(true);
-        xRefreshView.setAutoLoadMore(false);
-        customerAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
-        xRefreshView.enableReleaseToLoadMore(true);
-        xRefreshView.enableRecyclerViewPullUp(true);
-        xRefreshView.enablePullUpWhenLoadCompleted(true);
-        //设置静默加载时提前加载的item个数
-//        xefreshView1.setPreLoadCount(4);
-        //设置Recyclerview的滑动监听
-
-        xRefreshView.setXRefreshViewListener(this);
-
-        page = new Page();
-    }
-
-    private void showPopupWindow(View view) {
-        Drawable up = getResources().getDrawable(R.mipmap.up);
-        up.setBounds(0, 0, up.getMinimumWidth(), up.getMinimumHeight());
-        tv_state.setCompoundDrawables(null,null,up,null);
-        // 一个自定义的布局，作为显示的内容
-        View contentView = LayoutInflater.from(mContext).inflate(R.layout.layout_select_state, null);
-        ListView listView = (ListView) contentView.findViewById(R.id.listView);
-        customerStates = new ArrayList<>();
-        customerStates.add(new CustomerState("贷后","1"));
-        customerStates.add(new CustomerState("预警","2"));
-        customerStates.add(new CustomerState("逾期","3"));
-        customerStateAdapter = new CustomerStateAdapter(mContext,customerStates);
-        listView.setAdapter(customerStateAdapter);
-
-        final PopupWindow popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-
-        popupWindow.setTouchable(true);
-
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return false;
-                // 这里如果返回true的话，touch事件将被拦截
-                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
-            }
-        });
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                customerState = customerStates.get(position);
-                tv_state.setText(customerState.getName());
-                popupWindow.dismiss();
-            }
-        });
-
-        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
-        // 我觉得这里是API的一个bug
-        popupWindow.setBackgroundDrawable(getResources().getDrawable( R.drawable.bg));
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                Drawable down = getResources().getDrawable(R.mipmap.down);
-                down.setBounds(0, 0, down.getMinimumWidth(), down.getMinimumHeight());
-                tv_state.setCompoundDrawables(null,null,down,null);
-            }
-        });
-        // 设置好参数之后再show
-        popupWindow.showAsDropDown(view);
-
+        spinner_type.setItems("客户类型1", "客户类型2", "客户类型3", "客户类型4", "客户类型5");
+        spinner_manger.setItems("客户经理1", "客户经理2", "客户经理3", "客户经理4", "客户经理5");
+        spinner_up_type.setItems("上报类型1", "上报类型2", "上报类型3", "上报类型4", "上报类型5");
+        spinner_type.setOnItemSelectedListener(this);
+        spinner_manger.setOnItemSelectedListener(this);
+        spinner_up_type.setOnItemSelectedListener(this);
     }
 
     @Override
-    public void onRefresh() {
-
-    }
-
-    @Override
-    public void onRefresh(boolean isPullDown) {
-        page.setPageNo(0);
-        getData();
-    }
-
-    @Override
-    public void onLoadMore(boolean isSilence) {
-        getData();
-    }
-
-    @Override
-    public void onRelease(float direction) {
-
-    }
-
-    @Override
-    public void onHeaderMove(double headerMovePercent, int offsetY) {
-
-    }
-
-    private void getData() {
-        ReportListVO vo = new ReportListVO();
-        vo.addParameter("page", JSONUtil.toJSONObject(page));
-        int state = 1;
-        if(customerState!=null){
-            state = Integer.parseInt(customerState.getCode());
+    public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+        if (view==spinner_type){
+            ToastUtils.showCustomerToast(mContext,position+":"+item);
+        } else if (view==spinner_manger){
+            ToastUtils.showCustomerToast(mContext,position+":"+item);
+        } else if (view==spinner_up_type){
+            ToastUtils.showCustomerToast(mContext,position+":"+item);
         }
-        vo.addParameter("customerName", et_customer_name.getText().toString().trim());
-        vo.addParameter("customerState", state);//贷后
-        vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
-        vo.request(AtallQueryActivity.this, "resp", "error");
     }
 
-    @ResponseError(name = "error")
-    void error(VolleyError error) {
-        ToastUtils.showSystemToast(mContext, "请求失败");
-    }
+    @OnClick({R.id.time_prick,R.id.btn_commit})
+    void onClick(View v){
+        switch (v.getId()){
+            case R.id.time_prick:
+                onYearMonthDayPicker(v);
+                break;
+            case R.id.btn_commit:
 
-    @ResponseSuccess(name = "resp")
-    void resp(String response) {
-        try {
-            JSONObject resp = new JSONObject(response);
-            if (resp.getInt("code") == 0) {
-                if(page.getPageNo()==0)customers.clear();
-                int size = customers.size();
-                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
-                customerAdapter.notifyDataSetChanged();
-                int addSize = customers.size()-size;
-                if(addSize>0&&addSize==page.getPageSize()){
-                    xRefreshView.setPullLoadEnable(true);
-                    page.setPageNo(page.getPageNo()+1);
-                }else {
-                    xRefreshView.setPullLoadEnable(false);
-                }
-
-            } else {
-                ToastUtils.showSystemToast(mContext, "");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+                break;
         }
-        xRefreshView.stopRefresh();
-        xRefreshView.stopLoadMore();
     }
 
-    @Override
-    public void openReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(ReportPDFActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
+    public void onYearMonthDayPicker(View view) {
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH)+1;
+        int day = c.get(Calendar.DAY_OF_MONTH);
 
+        final DatePicker picker = new DatePicker(this);
+        picker.setCanceledOnTouchOutside(true);
+        picker.setUseWeight(true);
+        picker.setTopPadding(ConvertUtils.toPx(this, 10));
+        picker.setRangeEnd(2111, 1, 11);
+        picker.setRangeStart(1970, 1, 1);
+        picker.setSelectedItem(year, month, day);
+//        picker.setResetWhileWheel(false);
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+//                showToast(year + "-" + month + "-" + day);
+                time_prick.setText(year + "-" + month + "-" + day);
+            }
+        });
+        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                picker.setTitleText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                picker.setTitleText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                picker.setTitleText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
     }
-
-//    @Override
-//    public void openCreditReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(CreditReportActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-//    }
-//
-//    @Override
-//    public void openImageReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null&&!TextUtils.isEmpty(customer.getReportId())){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("reportId",customer.getReportId());
-//            startActivity(ReportImagesActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户暂未提交检查报告");
-//        }
-//    }
-//
-//    @Override
-//    public void openAnalysisReport(int position) {
-//        CustomerInfo customer = customers.get(position );
-//        if(customer!=null){
-//            Bundle bundle = new Bundle();
-//            bundle.putString("customerId",customer.getId());
-//            startActivity(ReportAnalysisActivity.class,bundle);
-//        }else {
-//            ToastUtils.showSystemToast(mContext,"客户数据有误");
-//        }
-//    }
 }
