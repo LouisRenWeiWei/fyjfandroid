@@ -197,7 +197,7 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
                     if(!TextUtils.isEmpty(report.getBankCreditReport())){
                         if(!TextUtils.isEmpty(reportId)){
                             String sdPath = SDUtils.getPDFPath()+report.getBankCreditReport();
-                            FileDownloader.getImpl().create(RequestUrl.pdf_file_upload+report.getBankCreditReport()).setPath(sdPath)
+                            FileDownloader.getImpl().create(RequestUrl.file_base+report.getBankCreditReport()).setPath(sdPath)
                                     .setTag(report.getBankCreditReport())
                                     .setListener(fileDownloadListener)
                                     .ready();
@@ -207,7 +207,7 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
                     if(!TextUtils.isEmpty(report.getSocialCreditReport())){
                         if(!TextUtils.isEmpty(reportId)){
                             String sdPath = SDUtils.getPDFPath()+report.getSocialCreditReport();
-                            FileDownloader.getImpl().create(RequestUrl.pdf_file_upload+report.getSocialCreditReport()).setPath(sdPath)
+                            FileDownloader.getImpl().create(RequestUrl.file_base+report.getSocialCreditReport()).setPath(sdPath)
                                     .setTag(report.getSocialCreditReport())
                                     .setListener(fileDownloadListener)
                                     .ready();

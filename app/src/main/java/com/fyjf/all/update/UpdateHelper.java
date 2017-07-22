@@ -340,7 +340,7 @@ public class UpdateHelper {
         @Override
         protected Boolean doInBackground(AppVersion... params) {
             String apkUrl = params[0].getFilePath();
-            HttpRequest request = new HttpRequest(RequestUrl.file_download+apkUrl);
+            HttpRequest request = new HttpRequest(RequestUrl.file_base+apkUrl);
             try {
                 long apkTotalLength = request.getContentLength();
                 String apkName = params[0].getAppName()

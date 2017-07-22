@@ -160,7 +160,7 @@ public class ReportImagesActivity extends BaseActivity implements ReportImagAdap
                     String[] imgs = reportImage.getCustomerFinancialImgs().split(",");
                     for(int i =0;i<imgs.length;i++){
                         ImageFile imageFile = new ImageFile();
-                        imageFile.setUrl(RequestUrl.img_file_upload+imgs[i]);
+                        imageFile.setUrl(RequestUrl.file_base+imgs[i]);
                         imgs_reportCustomerFinancial.add(imageFile);
                     }
                     adapter_reportCustomerFinancial.notifyDataSetChanged();
@@ -170,7 +170,7 @@ public class ReportImagesActivity extends BaseActivity implements ReportImagAdap
                     String[] imgs = reportImage.getBusinessManageImgs().split(",");
                     for(int i =0;i<imgs.length;i++){
                         ImageFile imageFile = new ImageFile();
-                        imageFile.setUrl(RequestUrl.img_file_upload+imgs[i]);
+                        imageFile.setUrl(RequestUrl.file_base+imgs[i]);
                         imgs_reportBusinessManage.add(imageFile);
                     }
                     adapter_reportBusinessManage.notifyDataSetChanged();
@@ -180,7 +180,7 @@ public class ReportImagesActivity extends BaseActivity implements ReportImagAdap
                     String[] imgs = reportImage.getCumtomerQualityImgs().split(",");
                     for(int i =0;i<imgs.length;i++){
                         ImageFile imageFile = new ImageFile();
-                        imageFile.setUrl(RequestUrl.img_file_upload+imgs[i]);
+                        imageFile.setUrl(RequestUrl.file_base+imgs[i]);
                         imgs_reportCumtomerQuality.add(imageFile);
                     }
                     adapter_reportCumtomerQuality.notifyDataSetChanged();
@@ -190,7 +190,7 @@ public class ReportImagesActivity extends BaseActivity implements ReportImagAdap
                     String[] imgs = reportImage.getGuaranteeImgs().split(",");
                     for(int i =0;i<imgs.length;i++){
                         ImageFile imageFile = new ImageFile();
-                        imageFile.setUrl(RequestUrl.img_file_upload+imgs[i]);
+                        imageFile.setUrl(RequestUrl.file_base+imgs[i]);
                         imgs_reportGuarantee.add(imageFile);
                     }
                     adapter_reportGuarantee.notifyDataSetChanged();
@@ -200,7 +200,7 @@ public class ReportImagesActivity extends BaseActivity implements ReportImagAdap
                     String[] imgs = reportImage.getFinanceImgs().split(",");
                     for(int i =0;i<imgs.length;i++){
                         ImageFile imageFile = new ImageFile();
-                        imageFile.setUrl(RequestUrl.img_file_upload+imgs[i]);
+                        imageFile.setUrl(RequestUrl.file_base+imgs[i]);
                         imgs_reportFinance.add(imageFile);
                     }
                     adapter_reportFinance.notifyDataSetChanged();
