@@ -7,7 +7,10 @@ public class RequestUrl {
     //静态文件
     public static String file_base = server + "/storage";//
     public static String pdf_file_ext = ".pdf";
-    public static String pdf_report_file = file_base + "/pdf/";
+    public static String file_pdf_report = file_base + "/pdf/";
+    public static String file_pdf = file_base + "/";//
+    public static String file_image = file_base + "/";//
+    public static String file_apk = file_base + "/";//
 
     public static String html_base = server + "/fyjfadmin";
     public static String customer_report_analysis = html_base + "/fyjf/report/echarts.html?customerId=";
