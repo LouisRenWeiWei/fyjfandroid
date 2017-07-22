@@ -66,11 +66,11 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
                     break;
                 }
                 if(imgs==1){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.overdue_img_1);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_1);
                 }else if(imgs==2){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.overdue_img_2);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_2);
                 }else if(imgs==3){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.overdue_img_3);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_3);
                 }
                 imgs++;
             }

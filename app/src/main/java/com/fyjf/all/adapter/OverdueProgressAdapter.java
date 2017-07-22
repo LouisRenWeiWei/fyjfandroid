@@ -63,11 +63,11 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
                     break;
                 }
                 if(imgs==1){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.image_1);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_1);
                 }else if(imgs==2){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.image_2);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_2);
                 }else if(imgs==3){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.image_3);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_3);
                 }
                 imgs++;
             }

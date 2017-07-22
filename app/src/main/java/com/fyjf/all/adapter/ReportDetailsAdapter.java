@@ -61,11 +61,11 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
                     break;
                 }
                 if(imgs==1){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_1);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.customer_img_1);
                 }else if(imgs==2){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_2);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.customer_img_2);
                 }else if(imgs==3){
-                    Glide.with(mContext).load(RequestUrl.file_base + sourceStrArray[i]).into(holder.customer_img_3);
+                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.customer_img_3);
                 }
                 imgs++;
             }

@@ -97,7 +97,7 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
 
         if (!TextUtils.isEmpty(pdfPath)) {
             String sdPath = SDUtils.getPDFPath() + pdfPath;
-            FileDownloader.getImpl().create(RequestUrl.file_base + pdfPath).setPath(sdPath)
+            FileDownloader.getImpl().create(RequestUrl.file_pdf + pdfPath).setPath(sdPath)
                     .setTag(pdfPath)
                     .setListener(fileDownloadListener)
                     .ready();
