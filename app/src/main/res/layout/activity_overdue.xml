@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,9 +16,9 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:drawableLeft="@mipmap/back"
-            android:text="7月"
+            android:text="催收逾期"
             android:textColor="#ffffff"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/search_et"
@@ -27,18 +27,18 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:cursorVisible="false"
             android:background="@drawable/search_bg"
+            android:cursorVisible="false"
             android:drawableLeft="@mipmap/search"
             android:drawablePadding="5dp"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp" />
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/app_bg"/>
+        android:background="@color/app_bg" />
 
     <com.fyjf.widget.refreshview.XRefreshView
         android:id="@+id/xRefreshView"
@@ -50,6 +50,6 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical" />
     </com.fyjf.widget.refreshview.XRefreshView>
 </LinearLayout>

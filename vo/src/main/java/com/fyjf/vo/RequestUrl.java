@@ -22,7 +22,7 @@ public class RequestUrl {
     public static String report_list_msg = api_base + "/report/msg/list";
     public static String report_msg_add = api_base + "/report/msg/save";
     public static String report_get = api_base + "/report/get";
-    public static String overdue_list = api_base + "/overdue/list/app";
+    public static String overdue_list = api_base + "/overdue/list/app";//逾期催收列表
     public static String version_check = api_base + "/app/version/last";
     public static String contact_us = api_base + "/dict/get/contact/us";
     public static String report_month = api_base + "/report/statistics/by/month";

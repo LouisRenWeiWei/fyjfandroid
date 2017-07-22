@@ -37,7 +37,7 @@ import butterknife.BindView;
 /*
 * author: renweiwei
 * datetime:
-* 同贷后检查
+* 逾期催收
 */
 public class OverdueActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,CustomerOverdueAdapter.ItemOperationListener{
     @BindView(R.id.back)
@@ -135,6 +135,8 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
     @ResponseError(name = "error")
     void error(VolleyError error) {
         ToastUtils.showSystemToast(mContext, "请求失败");
+        xRefreshView.stopRefresh();
+        xRefreshView.stopLoadMore();
     }
 
     @ResponseSuccess(name = "resp")
