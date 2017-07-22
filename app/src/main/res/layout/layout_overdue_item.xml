@@ -54,7 +54,8 @@
             android:layout_height="75dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="45dp"
-            android:background="#e3e2e2"/>
+            android:background="#e3e2e2"
+            android:scaleType="fitXY"/>
 
         <ImageView
             android:id="@+id/overdue_img_2"
@@ -62,7 +63,8 @@
             android:layout_height="75dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="45dp"
-            android:background="#e3e2e2"/>
+            android:background="#e3e2e2"
+            android:scaleType="fitXY"/>
 
         <ImageView
             android:id="@+id/overdue_img_3"
@@ -71,18 +73,21 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:layout_marginTop="45dp"
-            android:background="#e3e2e2"/>
+            android:background="#e3e2e2"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/overdue_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15.5dp"
-            android:layout_marginTop="135.5dp"
             android:gravity="center_vertical"
             android:text="逾期90天 |"
             android:textColor="#009cff"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:layout_alignBaseline="@+id/overdue_price"
+            android:layout_alignBottom="@+id/overdue_price"
+            android:layout_alignLeft="@+id/overdue_img_1"
+            android:layout_alignStart="@+id/overdue_img_1" />
 
         <TextView
             android:id="@+id/overdue_price"

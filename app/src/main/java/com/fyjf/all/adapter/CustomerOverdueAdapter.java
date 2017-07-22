@@ -53,26 +53,32 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         holder.overdue_name.setText(overdueReport.getCustomerName());
         holder.overdue_msg.setText(overdueReport.getMsgCount()+"");
         holder.overdue_time.setText("逾期"+overdueReport.getOverdueDays()+"天 | ");
-        holder.overdue_price.setText("¥"+overdueReport.getMoney()+"万");
+        holder.overdue_price.setText("¥"+overdueReport.getOverdueMoney()+"万");
         holder.overdue_manger.setText(overdueReport.getManagerName());
         holder.overdue_date.setText(TimeUtil.timeHao2Date(overdueReport.getOverdueStart(),"yyyy-MM-dd"));
 
         String sourceStr = overdueReport.getOverdueImgs();
-        String[] sourceStrArray = sourceStr.split(",");
-        int imgs = 1;
-        for (int i = 0; i < sourceStrArray.length; i++) {
-            if(!TextUtils.isEmpty(sourceStrArray[i])){
-                if(imgs>3){
-                    break;
+        if(TextUtils.isEmpty(overdueReport.getOverdueImgs())){
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.overdue_img_1);
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.overdue_img_2);
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.overdue_img_3);
+        }else{
+            String[] sourceStrArray = sourceStr.split(",");
+            int imgs = 1;
+            for (int i = 0; i < sourceStrArray.length; i++) {
+                if(!TextUtils.isEmpty(sourceStrArray[i])){
+                    if(imgs>3){
+                        break;
+                    }
+                    if(imgs==1){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_1);
+                    }else if(imgs==2){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_2);
+                    }else if(imgs==3){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_3);
+                    }
+                    imgs++;
                 }
-                if(imgs==1){
-                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_1);
-                }else if(imgs==2){
-                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_2);
-                }else if(imgs==3){
-                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.overdue_img_3);
-                }
-                imgs++;
             }
         }
 

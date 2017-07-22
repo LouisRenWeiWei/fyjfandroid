@@ -1,10 +1,14 @@
 package com.fyjf.all.activity.overdue;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -95,6 +99,18 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
 
         xRefreshView.setXRefreshViewListener(this);
 
+        search_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_UNSPECIFIED){
+                    pageNo = 1;
+                    getData();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         getData();
     }
 
@@ -128,6 +144,8 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         OverduesVO vo = new OverduesVO();
         vo.addParameter("pageSize",pageSize);
         vo.addParameter("pageNo",pageNo);
+        String customerName = search_et.getText().toString().trim();
+        if(!TextUtils.isEmpty(customerName))vo.addParameter("customerName",customerName);
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(OverdueActivity.this, "resp", "error");
     }
@@ -147,7 +165,7 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
                 if(pageNo == 1)overdueReports.clear();
                 int size = overdueReports.size();
                 overdueReports.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),OverdueReport.class));
-                back.setText(TimeUtil.timeHao2Date(overdueReports.get(0).getOverdueStart(),"MM")+"月");
+//                back.setText(TimeUtil.timeHao2Date(overdueReports.get(0).getOverdueStart(),"MM")+"月");
                 overdueAdapter.notifyDataSetChanged();
                 int addSize = overdueReports.size()-size;
                 if(addSize>0&&addSize==pageSize){
@@ -189,7 +207,6 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         Intent intent = new Intent(OverdueActivity.this,OverdueProgressActivity.class);
         intent.putExtra("id",item.getOverdueId());
         intent.putExtra("day",item.getOverdueDays());
-        intent.putExtra("money",item.getMoney());
         startActivity(intent);
     }
 

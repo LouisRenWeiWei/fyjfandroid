@@ -26,7 +26,7 @@ public class OverdueReport implements Serializable{
      */
 
     private String overdueImgs;
-    private String money;
+    private String overdueMoney;
     private String overdueStart;
     private String overduePDF;
     private String overdueId;
@@ -45,12 +45,12 @@ public class OverdueReport implements Serializable{
         this.overdueImgs = overdueImgs;
     }
 
-    public String getMoney() {
-        return money;
+    public String getOverdueMoney() {
+        return overdueMoney;
     }
 
-    public void setMoney(String money) {
-        this.money = money;
+    public void setOverdueMoney(String overdueMoney) {
+        this.overdueMoney = overdueMoney;
     }
 
     public String getOverdueStart() {

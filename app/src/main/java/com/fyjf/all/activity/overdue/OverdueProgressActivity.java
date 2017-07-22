@@ -52,11 +52,11 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
     LinearLayoutManager layoutManager;
     OverdueProgressAdapter overdueAdapter;
 
-    private int pageSize = 10;
+    private int pageSize = 100;
     private int pageNo = 1;
     private String reportId;
     private int day;
-    private String money;
+    private double money;
 
     @Override
     protected int getContentLayout() {
@@ -69,19 +69,11 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         if(intent!=null){
             reportId = intent.getStringExtra("id");
             day = intent.getIntExtra("day",0);
-            money = intent.getStringExtra("money");
-            collection_title.setText("进入催收第"+day+"天，累计收回"+money+"万元");
+            //collection_title.setText("进入催收第"+day+"天，累计收回"+money+"万元");
         }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-            }
-        });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
                 finish();
             }
         });
@@ -99,7 +91,7 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         //设置刷新完成以后，headerview固定的时间
         xRefreshView.setPinnedTime(1000);
         xRefreshView.setMoveForHorizontal(true);
-        xRefreshView.setPullLoadEnable(true);
+        xRefreshView.setPullLoadEnable(false);
         xRefreshView.setAutoLoadMore(false);
         overdueAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
         xRefreshView.enableReleaseToLoadMore(true);
@@ -153,28 +145,29 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
     @ResponseError(name = "error")
     void error(VolleyError error) {
         ToastUtils.showSystemToast(mContext, "请求失败");
+        xRefreshView.stopRefresh();
+        xRefreshView.stopLoadMore();
     }
 
     @ResponseSuccess(name = "resp")
     void resp(String response) {
         try {
             JSONObject resp = new JSONObject(response);
-            LogUtils.d("resp:"+resp);
             if (resp.getInt("code") == 0) {
                 if(pageNo==1)overdueProgresses.clear();
-                int size = overdueProgresses.size();
                 overdueProgresses.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),OverdueProgress.class));
 
-                LogUtils.e("customers:"+overdueProgresses.size());
                 overdueAdapter.notifyDataSetChanged();
-                int addSize = overdueProgresses.size()-size;
-                if(addSize>0&&addSize==pageSize){
-                    xRefreshView.setPullLoadEnable(true);
-                    pageNo++;
-                }else {
-                    xRefreshView.setPullLoadEnable(false);
-                }
 
+                money = 0;
+                for(OverdueProgress item : overdueProgresses){
+                    try {
+                        money += Double.parseDouble(item.getMoney());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                collection_title.setText("进入催收第"+day+"天，累计收回"+money+"万元");
             } else {
                 ToastUtils.showSystemToast(mContext, "");
             }

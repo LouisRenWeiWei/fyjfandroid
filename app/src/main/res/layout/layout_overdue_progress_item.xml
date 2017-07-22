@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/loan_item"
@@ -13,26 +13,26 @@
             android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12.5sp"
-            android:textColor="#666666"
-            android:gravity="center"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="10.5dp"
-            android:text="7月"/>
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="7月"
+            android:textColor="#666666"
+            android:textSize="12.5sp" />
 
         <ImageView
             android:layout_width="7dp"
             android:layout_height="7dp"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="31dp"
-            android:background="@drawable/oval_bg"/>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/oval_bg" />
 
         <View
             android:layout_width="1px"
             android:layout_height="103dp"
-            android:background="#c8c8c8"
+            android:layout_marginLeft="34dp"
             android:layout_marginTop="46dp"
-            android:layout_marginLeft="34dp"/>
+            android:background="#c8c8c8" />
 
         <RelativeLayout
             android:id="@+id/image"
@@ -52,30 +52,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textSize="15sp"
                     android:text="2017年7月份贷后检查"
-                    android:textColor="#000000"/>
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/month_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:drawableLeft="@mipmap/pinglun_msg"
                     android:drawablePadding="10dp"
-                    android:textSize="12.5sp"
                     android:text="7"
-                    />
+                    android:textSize="12.5sp" />
 
             </RelativeLayout>
 
             <View
                 android:layout_width="280dp"
                 android:layout_height="1px"
-                android:background="#c8c8c8"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:layout_centerHorizontal="true"/>
+                android:background="#c8c8c8" />
 
             <ImageView
                 android:id="@+id/image_1"
@@ -83,7 +82,7 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="60dp"
-                android:background="#e3e2e2"/>
+                android:background="#e3e2e2" />
 
             <ImageView
                 android:id="@+id/image_2"
@@ -92,7 +91,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="60dp"
                 android:layout_toRightOf="@id/image_1"
-                android:background="#e3e2e2"/>
+                android:background="#e3e2e2" />
 
             <ImageView
                 android:id="@+id/image_3"
@@ -101,7 +100,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="60dp"
                 android:layout_toRightOf="@id/image_2"
-                android:background="#e3e2e2"/>
+                android:background="#e3e2e2" />
 
         </RelativeLayout>
 
@@ -110,11 +109,11 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_below="@id/image"
             android:layout_marginRight="15dp"
             android:text="我确定潍坊威风为飞任务我服务服务  为 任务任务"
-            android:textSize="12sp"
             android:textColor="#000"
-            android:layout_below="@id/image"/>
+            android:textSize="12sp" />
 
     </RelativeLayout>
 

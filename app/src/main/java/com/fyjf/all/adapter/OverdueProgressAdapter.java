@@ -55,23 +55,30 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         holder.month_count.setText("0");
         holder.tips.setText(time.getDescription());
         String sourceStr = time.getOverdueImgs();
-        String[] sourceStrArray = sourceStr.split(",");
-        int imgs = 1;
-        for (int i = 0; i < sourceStrArray.length; i++) {
-            if(!TextUtils.isEmpty(sourceStrArray[i])){
-                if(imgs>3){
-                    break;
+        if(!TextUtils.isEmpty(sourceStr)){
+            String[] sourceStrArray = sourceStr.split(",");
+            int imgs = 1;
+            for (int i = 0; i < sourceStrArray.length; i++) {
+                if(!TextUtils.isEmpty(sourceStrArray[i])){
+                    if(imgs>3){
+                        break;
+                    }
+                    if(imgs==1){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_1);
+                    }else if(imgs==2){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_2);
+                    }else if(imgs==3){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_3);
+                    }
+                    imgs++;
                 }
-                if(imgs==1){
-                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_1);
-                }else if(imgs==2){
-                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_2);
-                }else if(imgs==3){
-                    Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_3);
-                }
-                imgs++;
             }
+        }else {
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_1);
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_2);
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_3);
         }
+
 
         holder.loan_item.setTag(position);
         holder.loan_item.setOnClickListener(new View.OnClickListener() {
