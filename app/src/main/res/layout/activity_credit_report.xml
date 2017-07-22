@@ -3,23 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/top">
-        <com.rey.material.widget.ImageView
+        android:layout_height="54dp"
+        android:background="@color/app_color">
+
+        <ImageView
             android:id="@+id/back"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@mipmap/back"
-            android:layout_centerVertical="true"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/back"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="信证报告"
-            android:textSize="18sp"
-            android:textColor="@color/app_text_color"/>
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+
     </RelativeLayout>
 
     <View
@@ -75,7 +81,6 @@
             android:id="@+id/pdfView_social"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             />
     </FrameLayout>
 </LinearLayout>

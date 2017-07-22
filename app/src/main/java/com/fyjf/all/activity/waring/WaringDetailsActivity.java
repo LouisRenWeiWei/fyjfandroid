@@ -20,7 +20,7 @@ import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.all.adapter.WaringAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.CustomerInfo;
+import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.report.ReportDetailsVO;
 import com.fyjf.widget.refreshview.XRefreshView;
@@ -41,7 +41,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    List<CustomerInfo> customers;
+    List<CustomerReportInfo> customers;
     LinearLayoutManager layoutManager;
     WaringAdapter customerAdapter;
     String yearTime;
@@ -146,7 +146,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
             if (resp.getInt("code") == 0) {
                 if(pageNo==1)customers.clear();
                 int size = customers.size();
-                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerInfo.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerReportInfo.class));
                 LogUtils.e("customers:"+customers.size());
                 customerAdapter.notifyDataSetChanged();
                 int addSize = customers.size()-size;
@@ -173,7 +173,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
      */
     @Override
     public void openMsg(int position) {
-        CustomerInfo info = customers.get(position);
+        CustomerReportInfo info = customers.get(position);
         Bundle bundle = new Bundle();
         bundle.putString("id",info.getId());
         startActivity(ReportMsgActivity.class,bundle);
@@ -185,7 +185,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
      */
     @Override
     public void openImg(int position) {
-        CustomerInfo info = customers.get(position);
+        CustomerReportInfo info = customers.get(position);
         Bundle bundle = new Bundle();
         bundle.putString("id",info.getId());
         startActivity(ReportImagesActivity.class,bundle);
@@ -197,7 +197,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
      */
     @Override
     public void openReport(int position) {
-        CustomerInfo info = customers.get(position);
+        CustomerReportInfo info = customers.get(position);
         startActivity(ReportPDFActivity.class);
     }
 
@@ -207,7 +207,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
      */
     @Override
     public void openQuantified(int position) {
-        CustomerInfo info = customers.get(position);
+        CustomerReportInfo info = customers.get(position);
         startActivity(ReportAnalysisActivity.class);
     }
 
@@ -217,7 +217,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
      */
     @Override
     public void openCredit(int position) {
-        CustomerInfo info = customers.get(position);
+        CustomerReportInfo info = customers.get(position);
         startActivity(CreditReportActivity.class);
     }
 }

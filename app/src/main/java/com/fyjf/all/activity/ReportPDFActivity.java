@@ -37,8 +37,10 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
     ImageView back;
     @BindView(R.id.pdfView)
     PDFView pdfView;
+
     private String reportId;
     private String reportPDF;
+
     FileDownloadListener fileDownloadListener;
     @Override
     protected int getContentLayout() {
@@ -54,6 +56,7 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
                 finish();
             }
         });
+
         fileDownloadListener = new FileDownloadListener() {
             private int preBytes = 0;
             @Override
@@ -106,9 +109,6 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
                     .ready();
             FileDownloader.getImpl().start(fileDownloadListener, true);
         }
-
-
-
 
     }
 

@@ -1,5 +1,7 @@
 package com.fyjf.dao.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by ASUS on 2017/6/28.
  */
@@ -7,7 +9,7 @@ package com.fyjf.dao.entity;
 * author: renweiwei
 * datetime: 
 */
-public class CustomerInfo {
+public class CustomerReportInfo implements Serializable {
 //    private String id;
 //    private String name;		// 客户名称
 //    private Integer customerState;		// 1：贷后  2：预警 3： 逾期
@@ -26,6 +28,8 @@ public class CustomerInfo {
     private String examinTime;          //检查日期
     private String msgCount;            //回复消息数
     private String reportImages;        //报告图片（以，分割的，可能为空，检查如果为空取下一个，到3个为止）
+    private String bankCreditReport;
+    private String socialCreditReport;
 
     public String getId() {
         return id;
@@ -73,5 +77,21 @@ public class CustomerInfo {
 
     public void setReportImages(String reportImages) {
         this.reportImages = reportImages;
+    }
+
+    public String getBankCreditReport() {
+        return bankCreditReport;
+    }
+
+    public void setBankCreditReport(String bankCreditReport) {
+        this.bankCreditReport = bankCreditReport;
+    }
+
+    public String getSocialCreditReport() {
+        return socialCreditReport;
+    }
+
+    public void setSocialCreditReport(String socialCreditReport) {
+        this.socialCreditReport = socialCreditReport;
     }
 }

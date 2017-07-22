@@ -1,39 +1,33 @@
 package com.fyjf.all.activity.report;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import com.android.volley.VolleyError;
-import com.android.volley.ext.ResponseError;
-import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
-import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.Report;
-import com.fyjf.utils.JSONUtil;
+import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
-import com.fyjf.vo.report.GetReportVO;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-//import com.joanzapata.pdfview.PDFView;
-//import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
-//import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
-import com.rey.material.widget.ImageView;
-
-import org.json.JSONObject;
 
 import java.io.File;
 
 import butterknife.BindView;
+
+//import com.joanzapata.pdfview.PDFView;
+//import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
+//import com.joanzapata.pdfview.listener.OnPageChangeListener;
 
 /**
  * Created by ASUS on 2017/6/23.
@@ -56,10 +50,12 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
     @BindView(R.id.btn_social)
     RadioButton btn_social;
 
+    private CustomerReportInfo report;
+
     private String reportId;
     FileDownloadListener fileDownloadListener;
 
-    Report report;
+//    Report report;
 
     @Override
     protected int getContentLayout() {
@@ -68,6 +64,10 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
 
     @Override
     protected void preInitData() {
+        Intent intent = getIntent();
+        if (intent!=null){
+            report = (CustomerReportInfo) intent.getSerializableExtra("report");
+        }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +112,7 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
                 if(report!=null&&!TextUtils.isEmpty(tag)){
                     if(tag.equalsIgnoreCase(report.getBankCreditReport())){
                         try {
-                            pdfView_bank.fromFile(new File(task.getPath())) .defaultPage(0)
+                            pdfView_bank.fromFile(new File(task.getPath())).defaultPage(0)
                                     .onPageChange(CreditReportActivity.this)
                                     .onLoad(CreditReportActivity.this)
                                     .onError(new OnErrorListener() {
@@ -126,10 +126,9 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
                             e.printStackTrace();
                         }
 
-                    }
-                    if(tag.equalsIgnoreCase(report.getSocialCreditReport())){
+                    }else if(tag.equalsIgnoreCase(report.getSocialCreditReport())){
                         try {
-                            pdfView_social.fromFile(new File(task.getPath())) .defaultPage(0)
+                            pdfView_social.fromFile(new File(task.getPath())).defaultPage(0)
                                     .onPageChange(CreditReportActivity.this)
                                     .onLoad(CreditReportActivity.this)
                                     .onError(new OnErrorListener() {
@@ -160,9 +159,25 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
             }
         };
 
-        reportId = getIntent().getStringExtra("reportId");
-        if(!TextUtils.isEmpty(reportId)){
-            getData();
+
+        pdfView_bank.setVisibility(View.GONE);
+        pdfView_social.setVisibility(View.VISIBLE);
+
+        if(!TextUtils.isEmpty(report.getBankCreditReport())){
+            String sdPath = SDUtils.getPDFPath()+report.getBankCreditReport();
+            FileDownloader.getImpl().create(RequestUrl.file_pdf+report.getBankCreditReport()).setPath(sdPath)
+                    .setTag(report.getBankCreditReport())
+                    .setListener(fileDownloadListener)
+                    .ready();
+            FileDownloader.getImpl().start(fileDownloadListener, true);
+        }
+        if(!TextUtils.isEmpty(report.getSocialCreditReport())){
+            String sdPath = SDUtils.getPDFPath()+report.getSocialCreditReport();
+            FileDownloader.getImpl().create(RequestUrl.file_pdf+report.getSocialCreditReport()).setPath(sdPath)
+                    .setTag(report.getSocialCreditReport())
+                    .setListener(fileDownloadListener)
+                    .ready();
+            FileDownloader.getImpl().start(fileDownloadListener, true);
         }
     }
 
@@ -176,50 +191,5 @@ public class CreditReportActivity extends BaseActivity implements OnPageChangeLi
 
     }
 
-    private void getData() {
-        GetReportVO vo = new GetReportVO();
-        vo.addParameter("id", reportId);
-        vo.request(CreditReportActivity.this, "resp", "error");
-    }
 
-    @ResponseError(name = "error")
-    void error(VolleyError error) {
-        ToastUtils.showSystemToast(mContext, "请求失败");
-    }
-
-    @ResponseSuccess(name = "resp")
-    void resp(String response) {
-        try {
-            JSONObject resp = new JSONObject(response);
-            if (resp.getInt("code") == 0) {
-                report = JSONUtil.toBean(resp.getJSONObject("data").getJSONObject("report"),Report.class);
-                if(report!=null){
-                    if(!TextUtils.isEmpty(report.getBankCreditReport())){
-                        if(!TextUtils.isEmpty(reportId)){
-                            String sdPath = SDUtils.getPDFPath()+report.getBankCreditReport();
-                            FileDownloader.getImpl().create(RequestUrl.file_pdf+report.getBankCreditReport()).setPath(sdPath)
-                                    .setTag(report.getBankCreditReport())
-                                    .setListener(fileDownloadListener)
-                                    .ready();
-                            FileDownloader.getImpl().start(fileDownloadListener, true);
-                        }
-                    }
-                    if(!TextUtils.isEmpty(report.getSocialCreditReport())){
-                        if(!TextUtils.isEmpty(reportId)){
-                            String sdPath = SDUtils.getPDFPath()+report.getSocialCreditReport();
-                            FileDownloader.getImpl().create(RequestUrl.file_pdf+report.getSocialCreditReport()).setPath(sdPath)
-                                    .setTag(report.getSocialCreditReport())
-                                    .setListener(fileDownloadListener)
-                                    .ready();
-                            FileDownloader.getImpl().start(fileDownloadListener, true);
-                        }
-                    }
-                }
-            } else {
-                ToastUtils.showSystemToast(mContext, "");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -2,12 +2,13 @@ package com.fyjf.all.activity.report;
 
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.widget.SimpleWebView;
 import com.fyjf.vo.RequestUrl;
-import com.rey.material.widget.ImageView;
+import com.fyjf.widget.refreshview.utils.LogUtils;
 
 import butterknife.BindView;
 
@@ -40,9 +41,10 @@ public class ReportAnalysisActivity extends BaseActivity{
                 finish();
             }
         });
-        customerId = getIntent().getStringExtra("customerId");
+        customerId = getIntent().getStringExtra("reportId");
         if(!TextUtils.isEmpty(customerId)){
             simpleWebView.loadUrl(RequestUrl.customer_report_analysis+customerId);
+            LogUtils.e("url:"+RequestUrl.customer_report_analysis+customerId);
         }
 
     }

@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/top">
-        <com.rey.material.widget.ImageView
+        android:layout_height="54dp"
+        android:background="@color/app_color">
+
+        <ImageView
             android:id="@+id/back"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@mipmap/back"
-            android:layout_centerVertical="true"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@mipmap/back"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="量化分析"
-            android:textSize="18sp"
-            android:textColor="@color/app_text_color"/>
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/app_bg" />
+
     <com.fyjf.all.widget.SimpleWebView
         android:id="@+id/simpleWebView"
         android:layout_width="match_parent"

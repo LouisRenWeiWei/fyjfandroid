@@ -16,6 +16,13 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:drawableLeft="@mipmap/back"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="贷后检查"
             android:textColor="#ffffff"
             android:textSize="18sp"/>
@@ -30,6 +37,7 @@
             android:cursorVisible="false"
             android:background="@drawable/search_bg"
             android:drawableLeft="@mipmap/search"
+            android:visibility="gone"
             android:drawablePadding="5dp"
             android:paddingLeft="5dp"/>
 

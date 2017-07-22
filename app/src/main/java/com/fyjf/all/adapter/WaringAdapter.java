@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
-import com.fyjf.dao.entity.CustomerInfo;
+import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
 
@@ -23,10 +23,10 @@ import java.util.List;
  */
 
 public class WaringAdapter extends BaseRecyclerAdapter<WaringAdapter.SimpleAdapterViewHolder> {
-    private List<CustomerInfo> list;
+    private List<CustomerReportInfo> list;
     private Context mContext;
 
-    public WaringAdapter(Context context, List<CustomerInfo> list) {
+    public WaringAdapter(Context context, List<CustomerReportInfo> list) {
         this.list = list;
         this.mContext = context;
     }
@@ -45,7 +45,7 @@ public class WaringAdapter extends BaseRecyclerAdapter<WaringAdapter.SimpleAdapt
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        CustomerInfo time = list.get(position);
+        CustomerReportInfo time = list.get(position);
         holder.customer_name.setText(time.getCustomerName());
         holder.customer_msg.setText(time.getMsgCount());
         holder.customer_manager.setText(time.getCustomerManager());

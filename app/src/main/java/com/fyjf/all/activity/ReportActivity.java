@@ -59,7 +59,6 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
@@ -131,6 +130,8 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     @ResponseError(name = "error")
     void error(VolleyError error) {
         ToastUtils.showSystemToast(mContext, "请求失败");
+        xRefreshView.stopRefresh();
+        xRefreshView.stopLoadMore();
     }
 
     @ResponseSuccess(name = "resp")
