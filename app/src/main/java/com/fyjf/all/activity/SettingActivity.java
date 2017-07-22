@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fyjf.all.R;
+import com.fyjf.all.app.AppData;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,6 +22,9 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
     @BindView(R.id.us_contact)
     TextView us_contact;
 
+    @BindView(R.id.tv_logout)
+    TextView tv_logout;
+
     @Override
     protected int getContentLayout() {
         return R.layout.activity_setting;
@@ -31,7 +35,7 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
         msg_select.setOnCheckedChangeListener(this);
     }
 
-    @OnClick({R.id.back,R.id.pwd_update,R.id.us_contact})
+    @OnClick({R.id.back,R.id.pwd_update,R.id.us_contact,R.id.tv_logout})
     void onClick(View view){
         switch (view.getId()){
             case R.id.back:
@@ -42,6 +46,11 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
                 break;
             case R.id.us_contact:
                 startActivity(ContactUsActivity.class);
+                break;
+            case R.id.tv_logout:
+                AppData.saveString(AppData.ACCOUNT,"");
+                AppData.saveString(AppData.PASSWORD,"");
+                startActivity(LoginActivity.class);
                 break;
         }
     }

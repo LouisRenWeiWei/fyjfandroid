@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
     protected void preInitData() {
         UpdateHelper updateHelper = new UpdateHelper.Builder(this)
                 .checkUrl(RequestUrl.version_check)
-                //.isHintNewVersion(false)    //没有新版本时不提示
+                .isHintNewVersion(false)    //没有新版本时不提示
                 .isAutoInstall(true)    //设置为false需在下载完手动点击安装;默认值为true，下载后自动安装。
                 .build();
         updateHelper.check();
