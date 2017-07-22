@@ -97,7 +97,7 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
         };
 
         reportId = getIntent().getStringExtra("reportId");
-        reportPDF = RequestUrl.pdf_report_file+reportId+RequestUrl.pdf_file_ext;
+        reportPDF = RequestUrl.file_pdf_report+reportId+RequestUrl.pdf_file_ext;
         if(!TextUtils.isEmpty(reportId)){
             String sdPath = SDUtils.getPDFPath()+reportId+RequestUrl.pdf_file_ext;
             FileDownloader.getImpl().create(reportPDF).setPath(sdPath)
