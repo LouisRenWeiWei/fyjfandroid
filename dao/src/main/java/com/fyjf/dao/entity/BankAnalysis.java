@@ -1,10 +1,12 @@
 package com.fyjf.dao.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by czf on 2017/7/16.
  */
 
-public class AnalysisBean {
+public class BankAnalysis implements Serializable{
 
     /**
      * bankId : 185414d99b044aaf92ae18eab52c29d2
@@ -22,6 +24,15 @@ public class AnalysisBean {
     private String content;
     private String createDate;
     private String msgCount;
+    private String bankName;
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 
     public String getBankId() {
         return bankId;

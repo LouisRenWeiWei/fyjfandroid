@@ -18,6 +18,7 @@ public class RequestUrl {
     public static String api_base = server + "/api/api";//家里ip
 
     public static String login = api_base + "/bank/user/login";
+    public static String changePasswd = api_base + "/bank/user/update/passwd";
     public static String report_list_msg = api_base + "/report/msg/list";
     public static String report_msg_add = api_base + "/report/msg/save";
     public static String report_get = api_base + "/report/get";
