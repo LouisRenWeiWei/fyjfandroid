@@ -1,4 +1,4 @@
-package com.fyjf.all.adapter;
+package com.fyjf.all.adapter.bank;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
-import com.fyjf.dao.entity.AnalysisBean;
+import com.fyjf.dao.entity.BankAnalysis;
 import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
 
@@ -21,11 +21,11 @@ import java.util.List;
  * Created by czf on 2017/7/16.
  */
 
-public class AnalysisAdapter extends BaseRecyclerAdapter<AnalysisAdapter.SimpleAdapterViewHolder> {
-    private List<AnalysisBean> list;
+public class BankAnalysisAdapter extends BaseRecyclerAdapter<BankAnalysisAdapter.SimpleAdapterViewHolder> {
+    private List<BankAnalysis> list;
     private Context mContext;
 
-    public AnalysisAdapter(Context context, List<AnalysisBean> list) {
+    public BankAnalysisAdapter(Context context, List<BankAnalysis> list) {
         this.list = list;
         this.mContext = context;
     }
@@ -43,23 +43,24 @@ public class AnalysisAdapter extends BaseRecyclerAdapter<AnalysisAdapter.SimpleA
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        AnalysisBean overdueReport = list.get(position);
+        BankAnalysis item = list.get(position);
         if (position!=0 && position>0){
-            if (TimeUtil.timeHao2Date(list.get(position).getCreateDate(),"yyyy").equals(TimeUtil.timeHao2Date(list.get(position-1).getCreateDate(),"yyyy"))){
-                holder.month.setVisibility(View.GONE);
+            if (TimeUtil.timeHao2Date(list.get(position).getCreateDate(),"yyyyMM").equals(TimeUtil.timeHao2Date(list.get(position-1).getCreateDate(),"yyyyMM"))){
+                holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"dd日"));
                 Glide.with(mContext).load(R.mipmap.shijianzhou2).into(holder.iv_divider_1);
             }else {
                 holder.month.setVisibility(View.VISIBLE);
-                holder.month.setText(TimeUtil.timeHao2Date(overdueReport.getCreateDate(),"yyyy")+"年");
+                holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"yyyy年MM月"));
                 Glide.with(mContext).load(R.mipmap.im_divider).into(holder.iv_divider_1);
             }
         }else {
             holder.month.setVisibility(View.VISIBLE);
-            holder.month.setText(TimeUtil.timeHao2Date(overdueReport.getCreateDate(),"yyyy")+"年");
+            holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"yyyy年MM月"));
             Glide.with(mContext).load(R.mipmap.im_divider).into(holder.iv_divider_1);
         }
-        holder.analysis_title.setText(overdueReport.getTitle());
-        holder.analysis_msg.setText(overdueReport.getMsgCount());
+        holder.tv_bank_name.setText(item.getBankName());
+        holder.analysis_title.setText(item.getTitle());
+        holder.analysis_msg.setText(item.getMsgCount());
         holder.analysis_item.setTag(position);
         onClick(holder, position);
 
@@ -88,6 +89,7 @@ public class AnalysisAdapter extends BaseRecyclerAdapter<AnalysisAdapter.SimpleA
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
         public RelativeLayout analysis_item;
         public TextView month;
+        public TextView tv_bank_name;
         public ImageView iv_divider_1;
         public TextView analysis_title;
         public TextView analysis_msg;
@@ -95,6 +97,7 @@ public class AnalysisAdapter extends BaseRecyclerAdapter<AnalysisAdapter.SimpleA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
+                tv_bank_name = (TextView) itemView.findViewById(R.id.tv_bank_name);
                 analysis_item = (RelativeLayout) itemView.findViewById(R.id.analysis_item);
                 month = (TextView) itemView.findViewById(R.id.month);
                 iv_divider_1 = (ImageView) itemView.findViewById(R.id.iv_divider_1);

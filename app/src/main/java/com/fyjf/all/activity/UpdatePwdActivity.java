@@ -7,8 +7,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.ext.ResponseError;
+import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
+import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
+import com.fyjf.vo.user.ChangePasswd;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -96,7 +103,35 @@ public class UpdatePwdActivity extends BaseActivity {
     }
 
     private void submitData(String oldPwd, String newPwd) {
+        ChangePasswd vo = new ChangePasswd();
+        vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
+        vo.addParameter("oldPasswd", oldPwd);
+        vo.addParameter("newPasswd", newPwd);
+        vo.request(UpdatePwdActivity.this, "resp", "error");
+    }
 
+
+
+    @ResponseError(name = "error")
+    void error(VolleyError error) {
+        ToastUtils.showSystemToast(mContext, "修改密码失败");
+    }
+
+    @ResponseSuccess(name = "resp")
+    void resp(String response) {
+        try {
+            JSONObject resp = new JSONObject(response);
+            if (resp.getInt("code") == 0) {
+                ToastUtils.showSystemToast(mContext, "修改密码成功");
+                AppData.saveString(AppData.ACCOUNT,"");
+                AppData.saveString(AppData.PASSWORD,"");
+                startActivity(LoginActivity.class);
+            } else {
+                ToastUtils.showSystemToast(mContext, "修改密码失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @OnClick({R.id.back,R.id.btn_confirm})
