@@ -45,6 +45,11 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
     </com.fyjf.widget.refreshview.XRefreshView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/app_bg" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -60,17 +65,21 @@
             android:padding="5dp"
             android:maxLength="100"
             android:text=""
+            android:textSize="14sp"
+            android:textColorHint="@color/color_a3"
             android:hint="留言"/>
         <TextView
             android:id="@+id/tv_send"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:background="#254382"
             android:layout_centerVertical="true"
             android:text="发送"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
