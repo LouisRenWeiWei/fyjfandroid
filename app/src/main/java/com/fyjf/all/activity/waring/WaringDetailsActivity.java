@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -37,6 +41,8 @@ import butterknife.BindView;
 public class WaringDetailsActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, WaringAdapter.ItemOperationListener  {
     @BindView(R.id.back)
     TextView back;
+    @BindView(R.id.search_et)
+    EditText search_et;
     @BindView(R.id.xRefreshView)
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
@@ -60,7 +66,6 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
@@ -89,6 +94,18 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
         //设置Recyclerview的滑动监听
 
         xRefreshView.setXRefreshViewListener(this);
+
+        search_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_UNSPECIFIED){
+                    pageNo = 1;
+                    getData();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         Intent intent = getIntent();
         if (intent!=null){
@@ -134,6 +151,8 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
         vo.addParameter("pageSize",pageSize);
         vo.addParameter("customerState", 2);
         vo.addParameter("yearMonth",yearTime);
+        String customerName = search_et.getText().toString().trim();
+        if(!TextUtils.isEmpty(customerName))vo.addParameter("customerName",customerName);
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(WaringDetailsActivity.this, "resp", "error");
     }

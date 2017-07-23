@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/msg_item"
@@ -14,7 +14,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="23dp"
-            android:text="用户名"
             android:textColor="#666666"
             android:textSize="14sp" />
 
@@ -25,7 +24,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="15.5dp"
             android:layout_marginTop="22.5dp"
-            android:text="2017-07-17"
             android:textColor="#b2b2b2"
             android:textSize="12sp" />
 
@@ -37,9 +35,8 @@
             android:layout_marginLeft="15.5dp"
             android:layout_marginRight="15.dp"
             android:layout_marginTop="50.5dp"
-            android:text="内容内容内容内"
             android:textColor="#010101"
-            android:textSize="17.5dp" />
+            android:textSize="15dp" />
 
         <View
             android:layout_width="match_parent"

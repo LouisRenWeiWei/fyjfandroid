@@ -194,7 +194,7 @@ public class UpdateHelper {
             if (type != 1) {
                 showNetDialog(updateInfo);
             } else {//wifi
-                ToastUtils.showCustomerToast(mContext,"发现新版本，正在下载更新");
+                ToastUtils.showSystemToast(mContext,"发现新版本，正在下载更新");
                 AsyncDownLoad asyncDownLoad = new AsyncDownLoad();
                 asyncDownLoad.execute(updateInfo);
             }

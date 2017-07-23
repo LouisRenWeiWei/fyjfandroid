@@ -92,10 +92,10 @@ public class UpdatePwdActivity extends BaseActivity {
         String newPwd = new_edit.getText().toString().trim();
         String confirmPwd = confirm_edit.getText().toString().trim();
         if(oldPwd.equals(newPwd)){
-            ToastUtils.showCustomerToast(mContext,"新密码不能与原密码相同");
+            ToastUtils.showSystemToast(mContext,"新密码不能与原密码相同");
             return;
         }else if(!newPwd.equals(confirmPwd)){
-            ToastUtils.showCustomerToast(mContext,"确认密码和新密码输入不一致");
+            ToastUtils.showSystemToast(mContext,"确认密码和新密码输入不一致");
             return;
         }else {
             submitData(oldPwd,newPwd);

@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
@@ -13,9 +16,11 @@ import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.adapter.ReportMsgAdapter;
+import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.ReportMessageBean;
 import com.fyjf.utils.JSONUtil;
+import com.fyjf.vo.report.ReportMsgSaveVO;
 import com.fyjf.vo.report.ReportMsgVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
@@ -36,10 +41,14 @@ public class ReportMsgActivity extends BaseActivity implements XRefreshView.XRef
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    @BindView(R.id.et_send_msg)
+    EditText et_send_msg;
+    @BindView(R.id.tv_send)
+    TextView tv_send;
+
     ReportMsgAdapter reportMsgAdapter;
     List<ReportMessageBean> customers;
     LinearLayoutManager layoutManager;
-    String user;
     String reportId;
 
     private int pageSize = 10;
@@ -59,6 +68,12 @@ public class ReportMsgActivity extends BaseActivity implements XRefreshView.XRef
             reportId = bundle.getString("id");
         }
 
+        tv_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMsg();
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +107,21 @@ public class ReportMsgActivity extends BaseActivity implements XRefreshView.XRef
         xRefreshView.setXRefreshViewListener(this);
 
         getData();
+    }
+
+    private void sendMsg() {
+        String msg = et_send_msg.getText().toString().trim();
+        if(TextUtils.isEmpty(msg)){
+            et_send_msg.setText("");
+            ToastUtils.showSystemToast(mContext,"评论内容不能为空");
+            return;
+        }else{
+            ReportMsgSaveVO vo = new ReportMsgSaveVO();
+            vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
+            vo.addParameter("reportId",reportId);
+            vo.addParameter("content",msg);
+            vo.request(ReportMsgActivity.this, "respSendMsg", "errorSendMsg");
+        }
     }
 
     @Override
@@ -165,5 +195,25 @@ public class ReportMsgActivity extends BaseActivity implements XRefreshView.XRef
     @Override
     public void openMsg(int position) {
 
+    }
+
+    @ResponseError(name = "errorSendMsg")
+    void errorSendMsg(VolleyError error) {
+        ToastUtils.showSystemToast(mContext, "请求失败");
+    }
+    @ResponseSuccess(name = "respSendMsg")
+    void respSendMsg(String response) {
+        try {
+            JSONObject resp = new JSONObject(response);
+            if (resp.getInt("code") == 0) {
+                et_send_msg.setText("");
+                pageNo = 1;
+                getData();
+            } else {
+                ToastUtils.showSystemToast(mContext, "");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

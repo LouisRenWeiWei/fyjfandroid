@@ -50,27 +50,27 @@ public class RegisterFragment extends BaseFragment {
         final String passwd = et_password.getText().toString().trim();
         final String passwdConfirm = et_confirm_password.getText().toString().trim();
         if (TextUtils.isEmpty(account)) {
-            ToastUtils.showCustomerToast(mContext, "请输入账号");
+            ToastUtils.showSystemToast(mContext, "请输入账号");
             return;
         }
         if (TextUtils.isEmpty(passwd)) {
-            ToastUtils.showCustomerToast(mContext, "请输入密码");
+            ToastUtils.showSystemToast(mContext, "请输入密码");
             return;
         }
         if (TextUtils.isEmpty(passwdConfirm)) {
-            ToastUtils.showCustomerToast(mContext, "请输入确认密码");
+            ToastUtils.showSystemToast(mContext, "请输入确认密码");
             return;
         }
         if (!passwdConfirm.equals(passwd)) {
-            ToastUtils.showCustomerToast(mContext, "密码输入不一致");
+            ToastUtils.showSystemToast(mContext, "密码输入不一致");
             return;
         }
         if(passwd.length()<6){
-            ToastUtils.showCustomerToast(mContext,"密码长度过短");
+            ToastUtils.showSystemToast(mContext,"密码长度过短");
             return;
         }
         if (!NetworkUtils.isNetworkAvailable(mContext)) {
-            ToastUtils.showCustomerToast(mContext, "请检查网络连接");
+            ToastUtils.showSystemToast(mContext, "请检查网络连接");
             return;
         }
         tv_register.setEnabled(false);
