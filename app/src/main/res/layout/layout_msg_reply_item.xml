@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="40dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_replier"
+        android:layout_width="60dp"
+        android:maxLines="1"
+        android:layout_height="40dp"
+        android:text="rwww33ww"
+        android:gravity="center_vertical"
+        android:layout_alignParentLeft="true"
+        />
+
+    <TextView
+        android:layout_toRightOf="@+id/tv_replier"
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:maxLines="4"
+        android:ellipsize="end"
+        android:text="TextV4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444iew"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"/>
+</RelativeLayout>

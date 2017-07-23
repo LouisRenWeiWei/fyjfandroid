@@ -50,7 +50,7 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
     TextView tv_send;
 
     OverdueMsgAdapter reportMsgAdapter;
-    List<OverdueMessageBean> customers;
+    List<OverdueMessageBean> data;
     LinearLayoutManager layoutManager;
     String user;
     String overdueId;
@@ -78,11 +78,11 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
             }
         });
         recyclerView.setHasFixedSize(true);
-        customers = new ArrayList<>();
+        data = new ArrayList<>();
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         //        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        reportMsgAdapter = new OverdueMsgAdapter(mContext,customers);
+        reportMsgAdapter = new OverdueMsgAdapter(mContext,data);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(reportMsgAdapter);
 
@@ -169,12 +169,12 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
             JSONObject resp = new JSONObject(response);
             LogUtils.d("resp:"+resp);
             if (resp.getInt("code") == 0) {
-                if(pageNo==1)customers.clear();
-                int size = customers.size();
-                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),OverdueMessageBean.class));
-                LogUtils.e("customers:"+customers.size());
+                if(pageNo==1)data.clear();
+                int size = data.size();
+                data.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),OverdueMessageBean.class));
+                LogUtils.e("customers:"+data.size());
                 reportMsgAdapter.notifyDataSetChanged();
-                int addSize = customers.size()-size;
+                int addSize = data.size()-size;
                 if(addSize>0&&addSize==pageSize){
                     xRefreshView.setPullLoadEnable(true);
                     pageNo++;
@@ -202,6 +202,7 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
         try {
             JSONObject resp = new JSONObject(response);
             if (resp.getInt("code") == 0) {
+                et_send_msg.setText("");
                 pageNo = 1;
                 getData();
             } else {
