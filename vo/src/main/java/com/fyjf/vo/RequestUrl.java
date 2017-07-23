@@ -31,10 +31,8 @@ public class RequestUrl {
     public static String report_imags = api_base + "/report/get/images";
     public static String report_progress = api_base + "/overdue/progress/list/app";
     public static String report_analysis = api_base + "/bank/analysis/list/app";
-
     public static String overdue_msgs = api_base + "/overdue/msg/list/app";
     public static String overdue_msgs_send = api_base + "/overdue/msg/save";
-
     public static String managers_list = api_base +  "/user/list/bank/managers";
-
+    public static String report_msg_save = api_base +  "/report/msg/save";
 }

@@ -138,10 +138,10 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
                         }
                         startActivity(intent);
                     }else {
-                        ToastUtils.showCustomerToast(mContext,"上报日期不能为空");
+                        ToastUtils.showSystemToast(mContext,"上报日期不能为空");
                     }
                 }else {
-                    ToastUtils.showCustomerToast(mContext,"客户名称不能为空");
+                    ToastUtils.showSystemToast(mContext,"客户名称不能为空");
                 }
 
                 break;

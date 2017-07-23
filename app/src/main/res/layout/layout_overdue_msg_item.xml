@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="23dp"
-        android:text="用户名"
         android:textColor="#666666"
         android:textSize="14sp" />
 
@@ -21,7 +20,6 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="15.5dp"
         android:layout_marginTop="22.5dp"
-        android:text="2017-07-17"
         android:textColor="#b2b2b2"
         android:textSize="12sp" />
 
@@ -34,9 +32,8 @@
         android:layout_marginRight="15.dp"
         android:layout_marginTop="10dp"
         android:paddingRight="10dp"
-        android:text="333333333333333333333333333333333333333333333333333333333333333333333"
         android:textColor="#010101"
-        android:textSize="17.5dp" />
+        android:textSize="15dp" />
 
     <LinearLayout
         android:id="@+id/ll_replies"
