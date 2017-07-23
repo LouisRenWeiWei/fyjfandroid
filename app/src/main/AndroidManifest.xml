@@ -94,7 +94,7 @@
             android:name=".activity.waring.WaringDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activity.AnalysisActivity">
+        <activity android:name=".activity.BankAnalysisActivity">
         </activity>
         <activity android:name=".activity.SettingActivity">
         </activity>

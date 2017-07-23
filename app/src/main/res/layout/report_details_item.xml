@@ -28,9 +28,13 @@
             android:layout_height="20dp"
             android:layout_marginLeft="15.5dp"
             android:layout_marginTop="12.5dp"
-            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:maxLines="2"
+            android:text="3434"
             android:textColor="#010101"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/customer_msg"/>
 
         <TextView
             android:id="@+id/customer_msg"
@@ -71,14 +75,27 @@
             android:background="#e3e2e2" />
 
         <TextView
-            android:id="@+id/customer_manager"
+            android:id="@+id/customer_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15.5dp"
             android:layout_marginTop="135.5dp"
             android:gravity="center"
             android:textColor="#254382"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:text="3434343"/>
+
+        <TextView
+            android:id="@+id/customer_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25.5dp"
+            android:layout_marginTop="135.5dp"
+            android:layout_toLeftOf="@+id/customer_time"
+            android:gravity="center"
+            android:textColor="#254382"
+            android:textSize="13sp"
+            android:text="3434343"/>
 
         <TextView
             android:id="@+id/customer_time"
@@ -89,7 +106,8 @@
             android:layout_marginTop="136.5dp"
             android:gravity="center"
             android:textColor="#666666"
-            android:textSize="13sp" />
+            android:textSize="13sp"
+            android:text="3434343"/>
 
         <View
             android:layout_width="match_parent"

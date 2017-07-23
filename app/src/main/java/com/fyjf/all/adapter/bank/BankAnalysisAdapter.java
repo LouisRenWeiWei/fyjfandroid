@@ -45,17 +45,17 @@ public class BankAnalysisAdapter extends BaseRecyclerAdapter<BankAnalysisAdapter
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
         BankAnalysis item = list.get(position);
         if (position!=0 && position>0){
-            if (TimeUtil.timeHao2Date(list.get(position).getCreateDate(),"yyyyMM").equals(TimeUtil.timeHao2Date(list.get(position-1).getCreateDate(),"yyyyMM"))){
-                holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"dd日"));
+            if (TimeUtil.timeHao2Date(list.get(position).getCreateDate(),"yyyy").equals(TimeUtil.timeHao2Date(list.get(position-1).getCreateDate(),"yyyy"))){
+                holder.month.setVisibility(View.INVISIBLE);
                 Glide.with(mContext).load(R.mipmap.shijianzhou2).into(holder.iv_divider_1);
             }else {
                 holder.month.setVisibility(View.VISIBLE);
-                holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"yyyy年MM月"));
+                holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"yyyy年"));
                 Glide.with(mContext).load(R.mipmap.im_divider).into(holder.iv_divider_1);
             }
         }else {
             holder.month.setVisibility(View.VISIBLE);
-            holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"yyyy年MM月"));
+            holder.month.setText(TimeUtil.timeHao2Date(item.getCreateDate(),"yyyy年"));
             Glide.with(mContext).load(R.mipmap.im_divider).into(holder.iv_divider_1);
         }
         holder.tv_bank_name.setText(item.getBankName());

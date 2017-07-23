@@ -17,11 +17,11 @@
             android:padding="15dp"/>
 
         <TextView
-            android:id="@+id/collection_title"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="催收进度"
+            android:text="图片详情"
             android:textColor="#ffffff"
             android:textSize="14dp"/>
 
@@ -31,11 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/app_bg"/>
-    <LinearLayout
+    <com.fyjf.widget.photoview.PhotoView
+        android:id="@+id/photoView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-
-    </LinearLayout>
+        android:layout_weight="1"/>
 </LinearLayout>

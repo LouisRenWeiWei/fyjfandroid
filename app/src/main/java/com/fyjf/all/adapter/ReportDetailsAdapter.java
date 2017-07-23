@@ -1,6 +1,7 @@
 package com.fyjf.all.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -46,13 +47,26 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        CustomerReportInfo time = list.get(position);
-        holder.customer_name.setText(time.getCustomerName());
-        holder.customer_msg.setText(time.getMsgCount());
-        holder.customer_manager.setText(time.getCustomerManager());
-        holder.customer_time.setText(time.getExaminTime());
+        CustomerReportInfo item = list.get(position);
+        holder.customer_name.setText(item.getCustomerName());
+        holder.customer_msg.setText(item.getMsgCount());
+        holder.customer_manager.setText(item.getCustomerManager());
+        holder.customer_time.setText(item.getExaminTime());
+        if("1".equals(item.getCustomerLoanType())){
+            holder.customer_type.setText("抵押贷款");
+            holder.customer_type.setTextColor(Color.parseColor("#3A558E"));
+        }else if("2".equals(item.getCustomerLoanType())){
+            holder.customer_type.setText("担保贷款");
+            holder.customer_type.setTextColor(Color.parseColor("#0BA422"));
+        }else if("3".equals(item.getCustomerLoanType())){
+            holder.customer_type.setText("信用贷款");
+            holder.customer_type.setTextColor(Color.parseColor("#FF4081"));
+        }else {
+            holder.customer_type.setText("");
+        }
 
-        String sourceStr = time.getReportImages();
+
+        String sourceStr = item.getReportImages();
         String[] sourceStrArray = sourceStr.split(",");
         int imgs = 1;
         for (int i = 0; i < sourceStrArray.length; i++) {
@@ -133,6 +147,7 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
         private ImageView customer_img_1;
         private ImageView customer_img_2;
         private ImageView customer_img_3;
+        private TextView customer_type;
         private TextView customer_manager;
         private TextView customer_time;
         private TextView customer_report;
@@ -142,6 +157,7 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
+                customer_type = (TextView) itemView.findViewById(R.id.customer_type);
                 customer_item = (RelativeLayout) itemView.findViewById(R.id.customer_item);
                 customer_name = (TextView) itemView.findViewById(R.id.customer_name);
                 customer_msg = (TextView) itemView.findViewById(R.id.customer_msg);

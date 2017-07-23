@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
                 ToastUtils.showSystemToast(mContext,getString(R.string.feature_during_develop));
                 break;
             case R.id.btn_atall_analysis:
-                startActivity(AnalysisActivity.class);
+                startActivity(BankAnalysisActivity.class);
                 break;
             case R.id.btn_atall_query:
                 startActivity(AtallQueryActivity.class);

@@ -13,6 +13,7 @@ import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
+import com.fyjf.all.activity.ImageActivity;
 import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.all.adapter.OverdueProgressAdapter;
 import com.fyjf.all.utils.ToastUtils;
@@ -186,13 +187,6 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         startActivity(OverdueProgressDetailsActivity.class,bundle);
     }
 
-    @Override
-    public void openImg(int position) {
-        OverdueProgress item = overdueProgresses.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("id",item.getOverdueId());
-        startActivity(OverdueImgActivity.class,bundle);
-    }
 
     @Override
     public void openMsg(int position) {

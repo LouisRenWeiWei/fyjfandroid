@@ -1,6 +1,7 @@
 package com.fyjf.all.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -56,6 +57,26 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         holder.overdue_price.setText("¥"+overdueReport.getOverdueMoney()+"万");
         holder.overdue_manger.setText(overdueReport.getManagerName());
         holder.overdue_date.setText(TimeUtil.timeHao2Date(overdueReport.getOverdueStart(),"yyyy-MM-dd"));
+
+        //配置
+        int overdueDay = overdueReport.getOverdueDays();
+        if(overdueDay<90){
+            holder.overdue_state.setText("正常");
+            holder.overdue_state.setBackgroundColor(Color.parseColor("#0BA422"));//绿色
+        }else if(overdueDay>=90&overdueDay<180){
+            holder.overdue_state.setText("关注");
+            holder.overdue_state.setBackgroundColor(Color.parseColor("#0000FF"));//蓝色
+        }else if(overdueDay>=180&overdueDay<360){
+            holder.overdue_state.setText("次级");
+            holder.overdue_state.setBackgroundColor(Color.parseColor("#FFFF00"));//黄色
+        }else if(overdueDay>=360&overdueDay<720){
+            holder.overdue_state.setText("可疑");
+            holder.overdue_state.setBackgroundColor(Color.parseColor("#E4C11B"));//cheng色
+        }else if(overdueDay>=720){
+            holder.overdue_state.setText("损失");
+            holder.overdue_state.setBackgroundColor(Color.parseColor("#FF0000"));//红色
+        }
+
 
         String sourceStr = overdueReport.getOverdueImgs();
         if(TextUtils.isEmpty(overdueReport.getOverdueImgs())){

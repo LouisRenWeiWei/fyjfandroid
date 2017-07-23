@@ -28,7 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class AnalysisActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, BankAnalysisAdapter.ItemOperationListener{
+public class BankAnalysisActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, BankAnalysisAdapter.ItemOperationListener{
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.xRefreshView)
@@ -122,7 +122,7 @@ public class AnalysisActivity extends BaseActivity implements XRefreshView.XRefr
     @Override
     public void openItem(int position) {
         BankAnalysis info = bankAnalysises.get(position);
-        Intent intent = new Intent(AnalysisActivity.this,AnalysisPDFActivity.class);
+        Intent intent = new Intent(BankAnalysisActivity.this,AnalysisPDFActivity.class);
         intent.putExtra("bankAnalysis",info);
         startActivity(intent);
     }
@@ -132,7 +132,7 @@ public class AnalysisActivity extends BaseActivity implements XRefreshView.XRefr
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
-        vo.request(AnalysisActivity.this, "resp", "error");
+        vo.request(BankAnalysisActivity.this, "resp", "error");
     }
 
     @ResponseError(name = "error")

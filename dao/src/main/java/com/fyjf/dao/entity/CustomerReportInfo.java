@@ -30,6 +30,15 @@ public class CustomerReportInfo implements Serializable {
     private String reportImages;        //报告图片（以，分割的，可能为空，检查如果为空取下一个，到3个为止）
     private String bankCreditReport;
     private String socialCreditReport;
+    private String customerLoanType;
+
+    public String getCustomerLoanType() {
+        return customerLoanType;
+    }
+
+    public void setCustomerLoanType(String customerLoanType) {
+        this.customerLoanType = customerLoanType;
+    }
 
     public String getId() {
         return id;

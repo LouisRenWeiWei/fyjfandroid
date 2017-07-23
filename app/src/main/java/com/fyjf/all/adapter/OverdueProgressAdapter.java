@@ -1,17 +1,19 @@
 package com.fyjf.all.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
+import com.fyjf.all.activity.ImageActivity;
 import com.fyjf.dao.entity.OverdueProgress;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
@@ -55,28 +57,34 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         holder.month_count.setText("0");
         holder.tips.setText(time.getDescription());
         String sourceStr = time.getOverdueImgs();
+        holder.ll_imgs.removeAllViews();
         if(!TextUtils.isEmpty(sourceStr)){
             String[] sourceStrArray = sourceStr.split(",");
-            int imgs = 1;
+            int addSize = 0;
             for (int i = 0; i < sourceStrArray.length; i++) {
-                if(!TextUtils.isEmpty(sourceStrArray[i])){
-                    if(imgs>3){
-                        break;
+                String url = RequestUrl.file_image + sourceStrArray[i];
+                View view = addImage(url);
+                view.setTag(url);
+                holder.ll_imgs.addView(view);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, ImageActivity.class);
+                        intent.putExtra("url",v.getTag().toString());
+                        mContext.startActivity(intent);
                     }
-                    if(imgs==1){
-                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_1);
-                    }else if(imgs==2){
-                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_2);
-                    }else if(imgs==3){
-                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_3);
-                    }
-                    imgs++;
-                }
+                });
+                addSize++;
+            }
+            while (addSize<2){
+                holder.ll_imgs.addView(addImageDefault());
+                addSize++;
             }
         }else {
-            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_1);
-            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_2);
-            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_3);
+            //添加三个默认的
+            holder.ll_imgs.addView(addImageDefault());
+            holder.ll_imgs.addView(addImageDefault());
+            holder.ll_imgs.addView(addImageDefault());
         }
 
 
@@ -93,24 +101,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
                 if(itemOperationListener!=null)itemOperationListener.openMsg(position);
             }
         });
-        holder.image_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openImg(position);
-            }
-        });
-        holder.image_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openImg(position);
-            }
-        });
-        holder.image_3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openImg(position);
-            }
-        });
+
     }
 
     @Override
@@ -119,26 +110,22 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout loan_item;
+        private LinearLayout loan_item;
         private TextView month;
         private TextView month_title;
         private TextView month_count;
-        private ImageView image_1;
-        private ImageView image_2;
-        private ImageView image_3;
         private TextView tips;
+        private LinearLayout ll_imgs;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                loan_item = (RelativeLayout) itemView.findViewById(R.id.loan_item);
+                loan_item = (LinearLayout) itemView.findViewById(R.id.loan_item);
                 month = (TextView) itemView.findViewById(R.id.month);
                 month_title = (TextView) itemView.findViewById(R.id.month_title);
                 month_count = (TextView) itemView.findViewById(R.id.month_count);
                 tips = (TextView) itemView.findViewById(R.id.tips);
-                image_1 = (ImageView) itemView.findViewById(R.id.image_1);
-                image_2 = (ImageView) itemView.findViewById(R.id.image_2);
-                image_3 = (ImageView) itemView.findViewById(R.id.image_3);
+                ll_imgs = (LinearLayout) itemView.findViewById(R.id.ll_imgs);
             }
 
         }
@@ -155,7 +142,19 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     public interface ItemOperationListener{
         void openReport(int position);
-        void openImg(int position);
         void openMsg(int position);
+    }
+
+    private View addImage(String url){
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item,null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv);
+        Glide.with(mContext).load(url).into(imageView);
+        return view;
+    }
+    private View addImageDefault(){
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item,null);
+        ImageView imageView = (ImageView) view.findViewById(R.id.iv);
+        Glide.with(mContext).load(R.drawable.img_empty).into(imageView);
+        return view;
     }
 }
