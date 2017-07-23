@@ -115,6 +115,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.ImageActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".activity.overdue.OverdueMsgActivity"/>
     </application>
 
 </manifest>

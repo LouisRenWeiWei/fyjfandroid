@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
@@ -14,11 +17,13 @@ import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.adapter.OverdueMsgAdapter;
 import com.fyjf.all.adapter.ReportMsgAdapter;
+import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.OverdueMessageBean;
 import com.fyjf.dao.entity.ReportMessageBean;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.overdue.OverdueMsgVO;
+import com.fyjf.vo.overdue.OverdueSendMsgVO;
 import com.fyjf.vo.report.ReportMsgVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
@@ -39,6 +44,11 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    @BindView(R.id.et_send_msg)
+    EditText et_send_msg;
+    @BindView(R.id.tv_send)
+    TextView tv_send;
+
     OverdueMsgAdapter reportMsgAdapter;
     List<OverdueMessageBean> customers;
     LinearLayoutManager layoutManager;
@@ -55,7 +65,12 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
 
     @Override
     protected void preInitData() {
-
+        tv_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendMsg();
+            }
+        });
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +104,21 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
         if (intent!=null){
             overdueId = intent.getStringExtra("overdueId");
             getData();
+        }
+    }
+
+    private void sendMsg() {
+        String msg = et_send_msg.getText().toString().trim();
+        if(TextUtils.isEmpty(msg)){
+            et_send_msg.setText("");
+            return;
+
+        }else{
+            OverdueSendMsgVO vo = new OverdueSendMsgVO();
+            vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
+            vo.addParameter("overdueId",overdueId);
+            vo.addParameter("content",msg);
+            vo.request(OverdueMsgActivity.this, "respSendMsg", "errorSendMsg");
         }
     }
 
@@ -160,5 +190,25 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
         }
         xRefreshView.stopRefresh();
         xRefreshView.stopLoadMore();
+    }
+
+
+    @ResponseError(name = "errorSendMsg")
+    void errorSendMsg(VolleyError error) {
+        ToastUtils.showSystemToast(mContext, "请求失败");
+    }
+    @ResponseSuccess(name = "respSendMsg")
+    void respSendMsg(String response) {
+        try {
+            JSONObject resp = new JSONObject(response);
+            if (resp.getInt("code") == 0) {
+                pageNo = 1;
+                getData();
+            } else {
+                ToastUtils.showSystemToast(mContext, "");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.fyjf.all.R;
 import com.fyjf.dao.entity.OverdueMessageBean;
-import com.fyjf.dao.entity.ReportMessageBean;
 import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
 

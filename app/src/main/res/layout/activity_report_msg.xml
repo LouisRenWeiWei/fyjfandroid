@@ -14,8 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/back"
-            android:padding="15dp"/>
+            android:padding="15dp"
+            android:src="@mipmap/back" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,5 +45,33 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
     </com.fyjf.widget.refreshview.XRefreshView>
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/et_send_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_gravity="bottom"
+            android:background="#ffffff"
+            android:imeOptions="actionDone"
+            android:layout_toLeftOf="@+id/tv_send"
+            android:padding="5dp"
+            android:maxLength="100"
+            android:text="3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333"
+            android:hint="留言"/>
+        <TextView
+            android:id="@+id/tv_send"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:background="#254382"
+            android:layout_centerVertical="true"
+            android:text="发送"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
 </LinearLayout>
