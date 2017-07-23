@@ -45,7 +45,7 @@
         android:background="#f2f2f2">
 
         <TextView
-            android:id="@+id/customer_msg"
+            android:id="@+id/tv_send_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -54,7 +54,7 @@
             android:drawableLeft="@mipmap/pinglun_msg"
             android:drawablePadding="10.5dp"
             android:gravity="center"
-            android:text="评论"
+            android:text="留言"
             android:textColor="#666666"
             android:textSize="15sp" />
 

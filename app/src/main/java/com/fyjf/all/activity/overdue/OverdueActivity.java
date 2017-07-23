@@ -220,6 +220,7 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         OverdueReport item = overdueReports.get(position);
         Bundle bundle = new Bundle();
         bundle.putString("pdfPath",item.getOverduePDF());
+        bundle.putString("overdueId",item.getOverdueId());
         startActivity(OverdueReportActivity.class,bundle);
     }
 

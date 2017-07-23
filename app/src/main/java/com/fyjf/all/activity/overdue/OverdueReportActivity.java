@@ -1,8 +1,10 @@
 package com.fyjf.all.activity.overdue;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
@@ -34,10 +36,13 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
     @BindView(R.id.pdfView)
     PDFView pdfView;
 
+    @BindView(R.id.tv_send_msg)
+    TextView  tv_send_msg;
 
     FileDownloadListener fileDownloadListener;
 
     private String pdfPath;
+    private String overdueId;
 
 
     @Override
@@ -55,7 +60,20 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
             }
         });
 
+        tv_send_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(overdueId)){
+                    Intent intent = new Intent(mContext,OverdueMsgActivity.class);
+                    intent.putExtra("overdueId",overdueId);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
         pdfPath = getIntent().getStringExtra("pdfPath");
+        overdueId = getIntent().getStringExtra("overdueId");
 
         fileDownloadListener = new FileDownloadListener() {
             private int preBytes = 0;
