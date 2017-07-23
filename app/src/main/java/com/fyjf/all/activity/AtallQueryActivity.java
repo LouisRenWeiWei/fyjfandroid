@@ -1,6 +1,7 @@
 package com.fyjf.all.activity;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -120,29 +121,33 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
                 break;
             case R.id.btn_commit:
                 String name = coustom_name.getText().toString().trim();
-                if (name!=null && !name.equals("")){
-                    if (up_time!=null && !up_time.equals("")){
-                        Intent intent = new Intent();
-                        intent.putExtra("customerName",name);
-                        intent.putExtra("loanType",custom_type);
-                        intent.putExtra("managerId",custom_manger);
-                        intent.putExtra("customerState",update_type);
-                        intent.putExtra("yearMonth",up_time.substring(0,7));
-                        intent.setFlags(100);
-                        if (update_type.equals("1")) {
-                            intent.setClass(AtallQueryActivity.this, ReportDetailsActivity.class);
-                        } else if (update_type.equals("2")) {
-                            intent.setClass(AtallQueryActivity.this, WaringDetailsActivity.class);
-                        } else if (update_type.equals("3")) {
-                            intent.setClass(AtallQueryActivity.this, OverdueActivity.class);
-                        }
-                        startActivity(intent);
-                    }else {
-                        ToastUtils.showSystemToast(mContext,"上报日期不能为空");
-                    }
-                }else {
-                    ToastUtils.showSystemToast(mContext,"客户名称不能为空");
+                //                if (name!=null && !name.equals("")){
+                //                    if (up_time!=null && !up_time.equals("")){
+                Intent intent = new Intent();
+                if (!TextUtils.isEmpty(name)) {
+                    intent.putExtra("customerName", name);
                 }
+                if (!TextUtils.isEmpty(up_time)) {
+                    intent.putExtra("yearMonth", up_time.substring(0, 7));
+                }
+                intent.putExtra("loanType", custom_type);
+                intent.putExtra("managerId", custom_manger);
+                intent.putExtra("customerState", update_type);
+                intent.setFlags(100);
+                if (update_type.equals("1")) {
+                    intent.setClass(AtallQueryActivity.this, ReportDetailsActivity.class);
+                } else if (update_type.equals("2")) {
+                    intent.setClass(AtallQueryActivity.this, WaringDetailsActivity.class);
+                } else if (update_type.equals("3")) {
+                    intent.setClass(AtallQueryActivity.this, OverdueActivity.class);
+                }
+                startActivity(intent);
+                //                    }else {
+                //                        ToastUtils.showSystemToast(mContext,"上报日期不能为空");
+                //                    }
+                //                }else {
+                //                    ToastUtils.showSystemToast(mContext,"客户名称不能为空");
+                //                }
 
                 break;
         }

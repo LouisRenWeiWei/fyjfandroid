@@ -1,11 +1,14 @@
 package com.fyjf.all.activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.fyjf.all.R;
+import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -37,6 +40,8 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
     ImageView back;
     @BindView(R.id.pdfView)
     PDFView pdfView;
+    @BindView(R.id.customer_msg)
+    TextView customer_msg;
 
     private String reportId;
     private String reportPDF;
@@ -49,11 +54,20 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
 
     @Override
     protected void preInitData() {
+        reportId = getIntent().getStringExtra("reportId");
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pdfView.recycle();
                 finish();
+            }
+        });
+        customer_msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id",reportId);
+                startActivity(ReportMsgActivity.class,bundle);
             }
         });
 
@@ -99,7 +113,6 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
             }
         };
 
-        reportId = getIntent().getStringExtra("reportId");
         reportPDF = RequestUrl.file_pdf_report+reportId+RequestUrl.pdf_file_ext;
         if(!TextUtils.isEmpty(reportId)){
             String sdPath = SDUtils.getPDFPath()+reportId+RequestUrl.pdf_file_ext;

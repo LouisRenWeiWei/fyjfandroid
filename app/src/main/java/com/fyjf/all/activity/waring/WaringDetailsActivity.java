@@ -163,9 +163,14 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
         vo.addParameter("pageSize",pageSize);
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         //下面这个参数是贷后和逾期的参数
+        //下面这个参数是贷后和逾期的参数
+        if (!TextUtils.isEmpty(intent.getStringExtra("customerName"))){
+            vo.addParameter("customerName",intent.getStringExtra("customerName"));
+        }
+        if (!TextUtils.isEmpty(intent.getStringExtra("yearMonth"))){
+            vo.addParameter("yearMonth",intent.getStringExtra("yearMonth"));
+        }
         vo.addParameter("customerState",intent.getStringExtra("customerState"));//上报类型　　 1：贷后  2：预警 3： 逾期
-        vo.addParameter("customerName",intent.getStringExtra("customerName"));
-        vo.addParameter("yearMonth",intent.getStringExtra("yearMonth"));//查询时间
         vo.addParameter("loanType",intent.getStringExtra("loanType"));//客户类型：　1:抵押贷款 2:担保贷款 3:信用贷款
         vo.addParameter("managerId",intent.getStringExtra("managerId"));//客户经理id
         vo.request(WaringDetailsActivity.this, "resp", "error");
