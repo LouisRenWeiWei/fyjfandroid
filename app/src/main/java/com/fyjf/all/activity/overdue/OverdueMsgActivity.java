@@ -171,7 +171,7 @@ public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRe
             if (resp.getInt("code") == 0) {
                 if(pageNo==1)customers.clear();
                 int size = customers.size();
-                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),ReportMessageBean.class));
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),OverdueMessageBean.class));
                 LogUtils.e("customers:"+customers.size());
                 reportMsgAdapter.notifyDataSetChanged();
                 int addSize = customers.size()-size;
