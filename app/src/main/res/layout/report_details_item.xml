@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginBottom="10dp" >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <RelativeLayout
         android:id="@+id/customer_item"
@@ -18,9 +18,9 @@
             android:background="#ff1c1c"
             android:gravity="center"
             android:text="预警"
-            android:visibility="gone"
             android:textColor="#ffffff"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/customer_name"
@@ -30,7 +30,7 @@
             android:layout_marginTop="12.5dp"
             android:gravity="center"
             android:textColor="#010101"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/customer_msg"
@@ -43,8 +43,7 @@
             android:drawablePadding="10.5dp"
             android:gravity="center"
             android:textColor="#666666"
-            android:textSize="12.5sp"
-            />
+            android:textSize="12.5sp" />
 
         <ImageView
             android:id="@+id/customer_img_1"
@@ -52,7 +51,7 @@
             android:layout_height="75dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="45dp"
-            android:background="#e3e2e2"/>
+            android:background="#e3e2e2" />
 
         <ImageView
             android:id="@+id/customer_img_2"
@@ -60,7 +59,7 @@
             android:layout_height="75dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="45dp"
-            android:background="#e3e2e2"/>
+            android:background="#e3e2e2" />
 
         <ImageView
             android:id="@+id/customer_img_3"
@@ -69,7 +68,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:layout_marginTop="45dp"
-            android:background="#e3e2e2"/>
+            android:background="#e3e2e2" />
 
         <TextView
             android:id="@+id/customer_manager"
@@ -79,7 +78,7 @@
             android:layout_marginTop="135.5dp"
             android:gravity="center"
             android:textColor="#254382"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/customer_time"
@@ -90,13 +89,13 @@
             android:layout_marginTop="136.5dp"
             android:gravity="center"
             android:textColor="#666666"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginTop="165dp"
-            android:background="#c8c8c8"/>
+            android:background="#c8c8c8" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,15 +114,14 @@
                 android:paddingRight="23.5dp"
                 android:text="检查报告"
                 android:textColor="#666666"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="12.5dp"
                 android:layout_marginTop="12.5dp"
-                android:background="#c8c8c8"
-                />
+                android:background="#c8c8c8" />
 
             <TextView
                 android:id="@+id/customer_quantified"
@@ -136,15 +134,14 @@
                 android:paddingRight="23.5dp"
                 android:text="量化分析"
                 android:textColor="#666666"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="12.5dp"
                 android:layout_marginTop="12.5dp"
-                android:background="#c8c8c8"
-                />
+                android:background="#c8c8c8" />
 
             <TextView
                 android:id="@+id/customer_credit"
@@ -157,7 +154,7 @@
                 android:paddingRight="23.5dp"
                 android:text="信征报告"
                 android:textColor="#666666"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 

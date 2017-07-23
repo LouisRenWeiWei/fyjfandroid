@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <RelativeLayout
         android:id="@+id/customer_item"
@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="预警"
             android:textColor="#ffffff"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/overdue_name"
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="预警"
             android:textColor="#010101"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/overdue_msg"
@@ -45,8 +45,7 @@
             android:gravity="center"
             android:text="30"
             android:textColor="#666666"
-            android:textSize="12.5sp"
-            />
+            android:textSize="12.5sp" />
 
         <ImageView
             android:id="@+id/overdue_img_1"
@@ -55,7 +54,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="45dp"
             android:background="#e3e2e2"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/overdue_img_2"
@@ -64,7 +63,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="45dp"
             android:background="#e3e2e2"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY" />
 
         <ImageView
             android:id="@+id/overdue_img_3"
@@ -74,20 +73,20 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="45dp"
             android:background="#e3e2e2"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/overdue_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="逾期90天 |"
-            android:textColor="#009cff"
-            android:textSize="14sp"
             android:layout_alignBaseline="@+id/overdue_price"
             android:layout_alignBottom="@+id/overdue_price"
             android:layout_alignLeft="@+id/overdue_img_1"
-            android:layout_alignStart="@+id/overdue_img_1" />
+            android:layout_alignStart="@+id/overdue_img_1"
+            android:gravity="center_vertical"
+            android:text="逾期90天 |"
+            android:textColor="#009cff"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/overdue_price"
@@ -99,7 +98,7 @@
             android:text=" ¥30万"
             android:textColor="#009cff"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/overdue_manger"
@@ -112,7 +111,7 @@
             android:text="客户经理"
             android:textColor="#254382"
             android:textSize="12.5sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/overdue_date"
@@ -124,13 +123,13 @@
             android:gravity="center"
             android:text="2017-08-09"
             android:textColor="#666666"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_marginTop="165dp"
-            android:background="#c8c8c8"/>
+            android:background="#c8c8c8" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,15 +148,14 @@
                 android:paddingRight="53.5dp"
                 android:text="催收方案"
                 android:textColor="#666666"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="1px"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="12.5dp"
                 android:layout_marginTop="12.5dp"
-                android:background="#c8c8c8"
-                />
+                android:background="#c8c8c8" />
 
             <TextView
                 android:id="@+id/overdue_quantified"
@@ -170,7 +168,7 @@
                 android:paddingRight="53.5dp"
                 android:text="催收进度"
                 android:textColor="#666666"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
