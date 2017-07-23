@@ -110,8 +110,14 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
                 return false;
             }
         });
+        Intent intent = getIntent();
+        boolean fromSearch = intent.getBooleanExtra("fromSearch",false);
+        if(fromSearch){
+            getDataFromSearch(intent);
+        }else {
+            getData();
+        }
 
-        getData();
     }
 
     @Override
@@ -146,6 +152,21 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         vo.addParameter("pageNo",pageNo);
         String customerName = search_et.getText().toString().trim();
         if(!TextUtils.isEmpty(customerName))vo.addParameter("customerName",customerName);
+        vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
+        vo.request(OverdueActivity.this, "resp", "error");
+    }
+
+    private void getDataFromSearch(Intent intent) {
+        OverduesVO vo = new OverduesVO();
+        vo.addParameter("pageSize",pageSize);
+        vo.addParameter("pageNo",pageNo);
+        vo.addParameter("account",AppData.getString(AppData.ACCOUNT));
+        //下面这个参数是贷后和逾期的参数
+        //vo.addParameter("customerState",intent.getStringExtra("customerState"));
+        vo.addParameter("customerName",intent.getStringExtra("customerName"));
+        vo.addParameter("yearMonth",intent.getStringExtra("yearMonth"));
+        vo.addParameter("loanType",intent.getStringExtra("loanType"));
+        vo.addParameter("managerId",intent.getStringExtra("managerId"));
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(OverdueActivity.this, "resp", "error");
     }
