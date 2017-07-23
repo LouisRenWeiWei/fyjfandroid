@@ -91,12 +91,12 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
 
         holder.loan_item.setTag(position);
-        holder.loan_item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openReport(position);
-            }
-        });
+//        holder.loan_item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(itemOperationListener!=null)itemOperationListener.openReport(position);
+//            }
+//        });
         holder.month_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,7 +147,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     }
 
     public interface ItemOperationListener{
-        void openReport(int position);
+//        void openReport(int position);
         void openMsg(int position);
     }
 

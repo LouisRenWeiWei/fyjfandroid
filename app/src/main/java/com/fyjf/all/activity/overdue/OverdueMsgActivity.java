@@ -6,20 +6,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
-import com.fyjf.all.activity.ImageActivity;
-import com.fyjf.all.activity.report.ReportMsgActivity;
-import com.fyjf.all.adapter.OverdueProgressAdapter;
+import com.fyjf.all.adapter.OverdueMsgAdapter;
+import com.fyjf.all.adapter.ReportMsgAdapter;
 import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.dao.entity.OverdueProgress;
+import com.fyjf.dao.entity.OverdueMessageBean;
+import com.fyjf.dao.entity.ReportMessageBean;
 import com.fyjf.utils.JSONUtil;
-import com.fyjf.vo.report.ReportProgressVO;
+import com.fyjf.vo.overdue.OverdueMsgVO;
+import com.fyjf.vo.report.ReportMsgVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
 import com.fyjf.widget.refreshview.utils.LogUtils;
@@ -31,70 +31,52 @@ import java.util.List;
 
 import butterknife.BindView;
 
-/**
- * Created by ASUS on 2017/6/23.
- */
-/*
-* author: renweiwei
-* datetime:
-* 同贷后检查
-*/
-public class OverdueProgressActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,OverdueProgressAdapter.ItemOperationListener{
+public class OverdueMsgActivity extends BaseActivity implements XRefreshView.XRefreshViewListener{
     @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.collection_title)
-    TextView collection_title;
     @BindView(R.id.xRefreshView)
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    List<OverdueProgress> overdueProgresses;
+    OverdueMsgAdapter reportMsgAdapter;
+    List<OverdueMessageBean> customers;
     LinearLayoutManager layoutManager;
-    OverdueProgressAdapter overdueAdapter;
+    String user;
+    String overdueId;
 
-    private int pageSize = 100;
+    private int pageSize = 10;
     private int pageNo = 1;
-    private String reportId;
-    private int day;
-    private double money;
 
     @Override
     protected int getContentLayout() {
-        return R.layout.activity_overdue_progress;
+        return R.layout.activity_report_msg;
     }
 
     @Override
     protected void preInitData() {
-        Intent intent = getIntent();
-        if(intent!=null){
-            reportId = intent.getStringExtra("id");
-            day = intent.getIntExtra("day",0);
-            //collection_title.setText("进入催收第"+day+"天，累计收回"+money+"万元");
-        }
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
         recyclerView.setHasFixedSize(true);
-        overdueProgresses = new ArrayList<>();
+        customers = new ArrayList<>();
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         //        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        overdueAdapter = new OverdueProgressAdapter(mContext,overdueProgresses);
-        overdueAdapter.setItemOperationListener(this);
+        reportMsgAdapter = new OverdueMsgAdapter(mContext,customers);
         // 静默加载模式不能设置footerview
-        recyclerView.setAdapter(overdueAdapter);
+        recyclerView.setAdapter(reportMsgAdapter);
 
         //设置刷新完成以后，headerview固定的时间
         xRefreshView.setPinnedTime(1000);
         xRefreshView.setMoveForHorizontal(true);
-        xRefreshView.setPullLoadEnable(false);
+        xRefreshView.setPullLoadEnable(true);
         xRefreshView.setAutoLoadMore(false);
-        overdueAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
+        reportMsgAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
         xRefreshView.enableReleaseToLoadMore(true);
         xRefreshView.enableRecyclerViewPullUp(true);
         xRefreshView.enablePullUpWhenLoadCompleted(true);
@@ -103,11 +85,12 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         //设置Recyclerview的滑动监听
 
         xRefreshView.setXRefreshViewListener(this);
-
-        getData();
-
+        Intent intent = getIntent();
+        if (intent!=null){
+            overdueId = intent.getStringExtra("overdueId");
+            getData();
+        }
     }
-
 
     @Override
     public void onRefresh() {
@@ -136,11 +119,11 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
     }
 
     private void getData() {
-        ReportProgressVO vo = new ReportProgressVO();
+        OverdueMsgVO vo = new OverdueMsgVO();
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("overdueId",reportId);
-        vo.request(OverdueProgressActivity.this, "resp", "error");
+        vo.addParameter("overdueId",overdueId);
+        vo.request(OverdueMsgActivity.this, "resp", "error");
     }
 
     @ResponseError(name = "error")
@@ -154,21 +137,21 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
     void resp(String response) {
         try {
             JSONObject resp = new JSONObject(response);
+            LogUtils.d("resp:"+resp);
             if (resp.getInt("code") == 0) {
-                if(pageNo==1)overdueProgresses.clear();
-                overdueProgresses.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),OverdueProgress.class));
-
-                overdueAdapter.notifyDataSetChanged();
-
-                money = 0;
-                for(OverdueProgress item : overdueProgresses){
-                    try {
-                        money += Double.parseDouble(item.getMoney());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                if(pageNo==1)customers.clear();
+                int size = customers.size();
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),ReportMessageBean.class));
+                LogUtils.e("customers:"+customers.size());
+                reportMsgAdapter.notifyDataSetChanged();
+                int addSize = customers.size()-size;
+                if(addSize>0&&addSize==pageSize){
+                    xRefreshView.setPullLoadEnable(true);
+                    pageNo++;
+                }else {
+                    xRefreshView.setPullLoadEnable(false);
                 }
-                collection_title.setText("进入催收第"+day+"天，累计收回"+money+"万元");
+
             } else {
                 ToastUtils.showSystemToast(mContext, "");
             }
@@ -177,22 +160,5 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         }
         xRefreshView.stopRefresh();
         xRefreshView.stopLoadMore();
-    }
-
-//    @Override
-//    public void openReport(int position) {
-//        OverdueProgress item = overdueProgresses.get(position);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("id",item.getOverdueId());
-//        startActivity(OverdueProgressDetailsActivity.class,bundle);
-//    }
-
-
-    @Override
-    public void openMsg(int position) {
-        OverdueProgress item = overdueProgresses.get(position);
-        Intent intent = new Intent(mContext,OverdueMsgActivity.class);
-        intent.putExtra("overdueId",item.getOverdueId());
-        startActivity(intent);
     }
 }

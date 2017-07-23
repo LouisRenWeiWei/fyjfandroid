@@ -31,10 +31,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
-
-        <meta-data android:value="596042ab07fe65207c0000eb" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="fyjf" android:name="UMENG_CHANNEL"/>
-
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
@@ -98,23 +94,17 @@
             android:name=".activity.waring.WaringDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
-        <activity
-            android:name=".activity.BankAnalysisActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.SettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.UpdatePwdActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.overdue.OverdueProgressDetailsActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.AnalysisPDFActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ImageActivity"
-                  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BankAnalysisActivity">
+        </activity>
+        <activity android:name=".activity.SettingActivity">
+        </activity>
+        <activity android:name=".activity.UpdatePwdActivity">
+        </activity>
+        <activity android:name=".activity.overdue.OverdueProgressDetailsActivity">
+        </activity>
+        <activity android:name=".activity.AnalysisPDFActivity">
+        </activity>
+        <activity android:name=".activity.ImageActivity"/>
     </application>
 
 </manifest>

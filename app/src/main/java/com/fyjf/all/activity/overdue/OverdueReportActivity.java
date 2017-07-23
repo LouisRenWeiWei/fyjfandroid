@@ -28,7 +28,7 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class OverdueReportActivity extends BaseActivity implements OnPageChangeListener,OnLoadCompleteListener,OverdueProgressAdapter.ItemOperationListener {
+public class OverdueReportActivity extends BaseActivity implements OnPageChangeListener,OnLoadCompleteListener{
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.pdfView)
@@ -116,14 +116,8 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
 
     }
 
-    @Override
-    public void openReport(int position) {
-
-    }
-
-
-    @Override
-    public void openMsg(int position) {
-
-    }
+//    @Override
+//    public void openReport(int position) {
+//
+//    }
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/msg_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/msg_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="23dp"
+        android:text="用户名"
+        android:textColor="#666666"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/msg_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15.5dp"
+        android:layout_marginTop="22.5dp"
+        android:text="2017-07-17"
+        android:textColor="#b2b2b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/msg_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msg_user_name"
+        android:layout_marginLeft="15.5dp"
+        android:layout_marginRight="15.dp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="10dp"
+        android:text="333333333333333333333333333333333333333333333333333333333333333333333"
+        android:textColor="#010101"
+        android:textSize="17.5dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_replies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msg_context"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/msg_context"
+        android:layout_marginTop="10dp"
+        android:background="#c8c8c8" />
+
+</RelativeLayout>

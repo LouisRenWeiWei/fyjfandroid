@@ -20,6 +20,7 @@ import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.all.adapter.CustomerOverdueAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
+import com.fyjf.dao.entity.OverdueProgress;
 import com.fyjf.dao.entity.OverdueReport;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.overdue.OverduesVO;
@@ -206,9 +207,9 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
     @Override
     public void openMsg(int position) {
         OverdueReport item = overdueReports.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("id",item.getOverdueId());
-        startActivity(ReportMsgActivity.class,bundle);
+        Intent intent = new Intent(mContext,OverdueMsgActivity.class);
+        intent.putExtra("overdueId",item.getOverdueId());
+        startActivity(intent);
     }
 
     @Override
