@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.android.volley.toolbox.Volley;
 import com.antfortune.freeline.FreelineCore;
+import com.blankj.utilcode.util.Utils;
 import com.liulishuo.filedownloader.FileDownloader;
 
 import cn.jpush.android.api.JPushInterface;
@@ -19,6 +20,7 @@ public class BaseApplication extends Application{
 		FreelineCore.init(this);
 		AppData.init(this);
 		Volley.init(this,false);
+		Utils.init(this);//工具类
 		FileDownloader.init(this);
 		JPushInterface.init(this);//极光推送
 		JPushInterface.setDebugMode(true);//极光送Log

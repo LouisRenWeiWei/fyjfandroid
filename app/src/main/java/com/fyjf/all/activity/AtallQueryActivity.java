@@ -59,9 +59,9 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
 
     String up_time;
     List<MangerModel> list;
-    String custom_type = "抵押贷款";
+    String custom_type = "1";
     String custom_manger;
-    String update_type = "贷后";
+    String update_type = "1";
 
     @Override
     protected int getContentLayout() {
@@ -90,11 +90,11 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
     public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
         if (view == spinner_type) {
             if (position == 0) {
-                custom_type = "抵押贷款";
+                custom_type = "1";
             } else if (position == 1) {
-                custom_type = "担保贷款";
+                custom_type = "2";
             } else {
-                custom_type = "信用贷款";
+                custom_type = "3";
             }
             //            ToastUtils.showCustomerToast(mContext,position+":"+item);
         } else if (view == spinner_manger) {
@@ -103,11 +103,11 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
         } else if (view == spinner_up_type) {
             //            ToastUtils.showCustomerToast(mContext,position+":"+item);
             if (position == 0) {
-                update_type = "贷后";
+                update_type = "1";
             } else if (position == 1) {
-                update_type = "预警";
+                update_type = "2";
             } else {
-                update_type = "逾期";
+                update_type = "3";
             }
         }
     }
@@ -123,17 +123,17 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
                 if (name!=null && !name.equals("")){
                     if (up_time!=null && !up_time.equals("")){
                         Intent intent = new Intent();
-                        intent.putExtra("name",name);
-                        intent.putExtra("type",custom_type);
-                        intent.putExtra("manger",custom_manger);
-                        intent.putExtra("update_type",update_type);
-                        intent.putExtra("up_time",up_time);
+                        intent.putExtra("customerName",name);
+                        intent.putExtra("loanType",custom_type);
+                        intent.putExtra("managerId",custom_manger);
+                        intent.putExtra("customerState",update_type);
+                        intent.putExtra("yearMonth",up_time.substring(0,7));
                         intent.setFlags(100);
-                        if (update_type.contains("贷后")) {
+                        if (update_type.equals("1")) {
                             intent.setClass(AtallQueryActivity.this, ReportDetailsActivity.class);
-                        } else if (update_type.contains("预警")) {
+                        } else if (update_type.equals("2")) {
                             intent.setClass(AtallQueryActivity.this, WaringDetailsActivity.class);
-                        } else if (update_type.contains("逾期")) {
+                        } else if (update_type.equals("3")) {
                             intent.setClass(AtallQueryActivity.this, OverdueActivity.class);
                         }
                         startActivity(intent);

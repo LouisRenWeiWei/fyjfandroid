@@ -23,12 +23,11 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-
 import com.blankj.utilcode.util.AppUtils;
 import com.fyjf.all.R;
 import com.fyjf.all.update.listener.OnUpdateListener;
-import com.fyjf.dao.entity.AppVersion;
 import com.fyjf.all.utils.ToastUtils;
+import com.fyjf.dao.entity.AppVersion;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.utils.NetworkUtils;
 import com.fyjf.vo.RequestUrl;
@@ -36,13 +35,11 @@ import com.fyjf.vo.RequestUrl;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.util.HashMap;
 
 /**
@@ -71,8 +68,9 @@ public class UpdateHelper {
     private static final int REQUEST_PERMISSION_CODE = 0x1;
     private static final int COMPLETE_DOWNLOAD_APK = 0x2;
     private static final int DOWNLOAD_NOTIFICATION_ID = 0x3;
-    private static final String PATH = Environment
-            .getExternalStorageDirectory().getPath();
+//    private static final String PATH = Environment
+//            .getExternalStorageDirectory().getPath();
+    private static final String PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();//   /storage/emulated/0/Download
     private static final String SUFFIX = ".apk";
     private static final String APK_PATH = "APK_PATH";
     private static final String APP_NAME = "APP_NAME";
@@ -89,8 +87,8 @@ public class UpdateHelper {
             switch (msg.what) {
                 case COMPLETE_DOWNLOAD_APK:
                     if (UpdateHelper.this.isAutoInstall) {
-                        installApk(Uri.parse("file://" + cache.get(APK_PATH)),cache.get(APK_PATH));
                         Log.e("install0:",cache.get(APK_PATH)+"");
+                        installApk(Uri.parse("file://" + PATH+ "/fyjf.apk"), PATH+ "/fyjf.apk");
                     } else {
                         ntfBuilder.setContentTitle(cache.get(APP_NAME))
                                 .setContentText(mContext.getText(R.string.finished_install))
@@ -343,14 +341,10 @@ public class UpdateHelper {
             HttpRequest request = new HttpRequest(RequestUrl.file_apk+apkUrl);
             try {
                 long apkTotalLength = request.getContentLength();
-                String apkName = params[0].getAppName()
-                        + params[0].getVersionName() + SUFFIX;
+                String apkName = "fyjf"+ SUFFIX;
                 cache.put(APP_NAME, params[0].getAppName());
-                cache.put(APK_PATH,
-                        PATH + File.separator + params[0].getAppName()
-                                + File.separator + apkName);
-                File savePath = new File(PATH + File.separator
-                        + params[0].getAppName());
+                cache.put(APK_PATH, PATH);
+                File savePath = new File(PATH);
                 if (!savePath.exists())
                     savePath.mkdirs();
                 File apkFile = new File(savePath, apkName);
@@ -464,7 +458,7 @@ public class UpdateHelper {
     }
 
     private void installApk(Uri parse, String data) {
-        String type = "com.mydomain.fileprovider";
+        String type = "com.fyjf.fileprovider";
         if(Build.VERSION.SDK_INT>=24) { //判断版本是否在7.0以上
             AppUtils.installApp(data, type);
         }else {
