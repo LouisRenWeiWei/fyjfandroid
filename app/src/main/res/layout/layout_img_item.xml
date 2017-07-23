@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="115dp"
-    android:layout_height="100dp"
-    android:orientation="vertical">
+    android:layout_width="95dp"
+    android:layout_height="60dp"
+    android:orientation="vertical"
+    android:paddingLeft="7.5dp"
+    android:paddingRight="7.5dp">
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="7.5dp"
-        android:layout_marginRight="7.5dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:src="@drawable/img_empty"
+        android:scaleType="fitXY"/>
 </LinearLayout>

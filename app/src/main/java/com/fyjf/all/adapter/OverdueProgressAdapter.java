@@ -51,12 +51,14 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        OverdueProgress time = list.get(position);
-        holder.month.setText(time.getCreateDate().substring(5,7)+"月");
-        holder.month_title.setText(time.getTitle());
+        if(position==0)holder.v_top_line.setVisibility(View.INVISIBLE);
+        OverdueProgress item = list.get(position);
+        holder.tv_money.setText(item.getMoney()+"万");
+        holder.month.setText(item.getCreateDate().substring(5,7)+"月");
+        holder.month_title.setText(item.getTitle());
         holder.month_count.setText("0");
-        holder.tips.setText(time.getDescription());
-        String sourceStr = time.getOverdueImgs();
+        holder.tips.setText(item.getDescription());
+        String sourceStr = item.getOverdueImgs();
         holder.ll_imgs.removeAllViews();
         if(!TextUtils.isEmpty(sourceStr)){
             String[] sourceStrArray = sourceStr.split(",");
@@ -111,7 +113,9 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout loan_item;
+        private View v_top_line;
         private TextView month;
+        private TextView tv_money;
         private TextView month_title;
         private TextView month_count;
         private TextView tips;
@@ -120,7 +124,9 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
+                tv_money = (TextView) itemView.findViewById(R.id.tv_money);
                 loan_item = (LinearLayout) itemView.findViewById(R.id.loan_item);
+                v_top_line = itemView.findViewById(R.id.v_top_line);
                 month = (TextView) itemView.findViewById(R.id.month);
                 month_title = (TextView) itemView.findViewById(R.id.month_title);
                 month_count = (TextView) itemView.findViewById(R.id.month_count);

@@ -100,12 +100,11 @@
         </activity>
         <activity android:name=".activity.UpdatePwdActivity">
         </activity>
-        <activity android:name=".activity.overdue.OverdueImgActivity">
-        </activity>
         <activity android:name=".activity.overdue.OverdueProgressDetailsActivity">
         </activity>
         <activity android:name=".activity.AnalysisPDFActivity">
         </activity>
+        <activity android:name=".activity.ImageActivity"/>
     </application>
 
 </manifest>

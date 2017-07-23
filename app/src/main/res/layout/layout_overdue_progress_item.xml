@@ -7,108 +7,114 @@
 
     <TextView
         android:id="@+id/month"
-        android:layout_width="18dp"
-        android:layout_height="11.5dp"
-        android:layout_marginLeft="10.5dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:gravity="right"
         android:text="7月"
         android:textColor="#666666"
         android:textSize="12.5sp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <View
+            android:id="@+id/v_top_line"
+            android:layout_width="1px"
+            android:layout_height="10dp"
+            android:layout_toRightOf="@+id/month"
+            android:background="#c8c8c8" />
+
         <ImageView
             android:id="@+id/iv_dot"
-            android:layout_width="7dp"
-            android:layout_height="7dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/month"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="18dp"
             android:background="@drawable/oval_bg" />
 
         <View
             android:layout_width="1px"
-            android:layout_height="103dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="46dp"
-            android:layout_toRightOf="@+id/month"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="#c8c8c8" />
     </LinearLayout>
 
 
     <RelativeLayout
-        android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="15dp"
-        android:layout_toRightOf="@+id/iv_dot"
-        android:background="#f6f6f6">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7.5dp"
+        android:layout_marginTop="7.5dp"
+        android:background="#f6f6f6"
+        android:minHeight="150dp"
+        android:paddingBottom="7.5dp"
+        >
 
-        <TextView
-            android:id="@+id/month_title"
+        <RelativeLayout
+            android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingRight="5dp"
-            android:text="2017年7月份贷后检查"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            android:layout_toLeftOf="@+id/month_count"/>
+            android:layout_height="49dp"
+            android:paddingLeft="7.5dp"
+            android:paddingRight="7.5dp">
 
-        <TextView
-            android:id="@+id/month_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:drawableLeft="@mipmap/pinglun_msg"
-            android:drawablePadding="10dp"
-            android:text="7"
-            android:textSize="12.5sp" />
+            <TextView
+                android:id="@+id/month_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_money"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingRight="5dp"
+                android:text="3333333333333333333333"
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
-        <View
-            android:id="@+id/line"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/month_title"
-            android:background="#c8c8c8" />
-        <!--<ImageView-->
-        <!--android:id="@+id/image_1"-->
-        <!--android:layout_width="86.5dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginTop="60dp"-->
-        <!--android:background="#e3e2e2"-->
-        <!--android:scaleType="fitXY"/>-->
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/month_count"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="12303万"
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/image_2"-->
-        <!--android:layout_width="86.5dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginTop="60dp"-->
-        <!--android:layout_toRightOf="@id/image_1"-->
-        <!--android:background="#e3e2e2"-->
-        <!--android:scaleType="fitXY"/>-->
 
-        <!--<ImageView-->
-        <!--android:id="@+id/image_3"-->
-        <!--android:layout_width="86.5dp"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_marginLeft="10dp"-->
-        <!--android:layout_marginTop="60dp"-->
-        <!--android:layout_toRightOf="@id/image_2"-->
-        <!--android:background="#e3e2e2"-->
-        <!--android:scaleType="fitXY"/>-->
+            <TextView
+                android:id="@+id/month_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@mipmap/pinglun_msg"
+                android:drawablePadding="10dp"
+                android:text="7"
+                android:textSize="12.5sp" />
+        </RelativeLayout>
+
+
         <HorizontalScrollView
             android:id="@+id/hsv_imgs"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_below="@+id/line">
+            android:layout_below="@+id/rl_title"
+            android:layout_marginBottom="7.5dp"
+            android:layout_marginTop="7.5dp"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
             <LinearLayout
                 android:id="@+id/ll_imgs"
                 android:layout_width="match_parent"
@@ -124,10 +130,12 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/hsv_imgs"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:text="我确定潍坊威风为飞任务我服务服务  为 任务任务"
+            android:maxLines="2"
+            android:text=""
             android:textColor="#000"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:paddingLeft="7.5dp"
+            android:paddingRight="7.5dp"/>
 
     </RelativeLayout>
 
