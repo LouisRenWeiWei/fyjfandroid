@@ -38,5 +38,48 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="40dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center_horizontal"/>
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="电话：0371-58631188"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="邮箱：hnfyjf@163.com"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="网址：www.hnfyjf.com"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="地址：郑州市郑东新区东风南路、\n金水东路北3号楼5层508"/>
+
     </LinearLayout>
 </LinearLayout>

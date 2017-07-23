@@ -61,8 +61,11 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
     protected void preInitData() {
         Intent intent = getIntent();
         if (intent!=null){
-            yearTime = intent.getStringExtra("time");
-            back.setText(yearTime.substring(4,6));
+            if (intent.getFlags()!=100){
+                yearTime = intent.getStringExtra("time");
+                back.setText(yearTime.substring(4,6));
+            }
+
         }
         back.setOnClickListener(new View.OnClickListener() {
             @Override

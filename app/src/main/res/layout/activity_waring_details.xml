@@ -28,10 +28,13 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:background="@drawable/search_bg"
-            android:cursorVisible="false"
+            android:cursorVisible="true"
             android:drawableLeft="@mipmap/search"
             android:drawablePadding="5dp"
-            android:paddingLeft="5dp" />
+            android:hint="客户姓名"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textSize="12sp"/>
 
     </RelativeLayout>
 

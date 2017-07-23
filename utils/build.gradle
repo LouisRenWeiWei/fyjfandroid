@@ -13,4 +13,5 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.blankj:utilcode:1.5.1'
+    compile 'com.umeng.analytics:analytics:6.1.1'
 }

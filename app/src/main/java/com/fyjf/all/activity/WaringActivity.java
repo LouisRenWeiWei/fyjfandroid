@@ -122,10 +122,9 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
 
     private void getData() {
         ReportListVO vo = new ReportListVO();
-        //        vo.addParameter("page", JSONUtil.toJSONObject(page));
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("customerState", 1);//贷后
+        vo.addParameter("customerState", 2);//
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(WaringActivity.this, "resp", "error");
     }
@@ -133,6 +132,8 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
     @ResponseError(name = "error")
     void error(VolleyError error) {
         ToastUtils.showSystemToast(mContext, "请求失败");
+        xRefreshView.stopRefresh();
+        xRefreshView.stopLoadMore();
     }
 
     @ResponseSuccess(name = "resp")

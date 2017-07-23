@@ -1,7 +1,6 @@
 package com.fyjf.all.activity.overdue;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +21,6 @@ import com.fyjf.all.adapter.CustomerOverdueAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.OverdueReport;
-import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.overdue.OverduesVO;
 import com.fyjf.widget.refreshview.XRefreshView;

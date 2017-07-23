@@ -58,8 +58,10 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
     protected void preInitData() {
         Intent intent = getIntent();
         if (intent!=null){
-            yearTime = intent.getStringExtra("time");
-            back.setText(yearTime.substring(4,6));
+            if (intent.getFlags()!=100){
+                yearTime = intent.getStringExtra("time");
+                back.setText(yearTime.substring(4,6));
+            }
         }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +129,7 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
         ReportDetailsVO vo = new ReportDetailsVO();
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("customerState", 1);//贷后
+        vo.addParameter("customerState", 2);
         vo.addParameter("yearMonth",yearTime);
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(WaringDetailsActivity.this, "resp", "error");
@@ -198,7 +200,10 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
     @Override
     public void openReport(int position) {
         CustomerReportInfo info = customers.get(position);
-        startActivity(ReportPDFActivity.class);
+        Intent intent = new Intent();
+        intent.putExtra("reportId",info.getId());
+        intent.setClass(WaringDetailsActivity.this,ReportPDFActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -208,7 +213,10 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
     @Override
     public void openQuantified(int position) {
         CustomerReportInfo info = customers.get(position);
-        startActivity(ReportAnalysisActivity.class);
+        Intent intent = new Intent();
+        intent.putExtra("reportId",info.getId());
+        intent.setClass(WaringDetailsActivity.this,ReportAnalysisActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -218,6 +226,9 @@ public class WaringDetailsActivity extends BaseActivity implements XRefreshView.
     @Override
     public void openCredit(int position) {
         CustomerReportInfo info = customers.get(position);
-        startActivity(CreditReportActivity.class);
+        Intent intent = new Intent();
+        intent.putExtra("report",info);
+        intent.setClass(WaringDetailsActivity.this,CreditReportActivity.class);
+        startActivity(intent);
     }
 }

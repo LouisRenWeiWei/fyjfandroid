@@ -13,6 +13,7 @@ import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
+import com.fyjf.all.activity.ImageActivity;
 import com.fyjf.all.adapter.checkloan.ReportImagAdapter;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.ImageFile;
@@ -155,7 +156,7 @@ public class ReportImagesActivity extends BaseActivity implements ReportImagAdap
         try {
             JSONObject resp = new JSONObject(response);
             if (resp.getInt("code")==0){
-                ReportImageBean reportImage = JSONUtil.toBean(resp.getJSONObject("data").getJSONObject("reportFinance"),ReportImageBean.class);
+                ReportImageBean reportImage = JSONUtil.toBean(resp.getJSONObject("data"),ReportImageBean.class);
                 if(reportImage!=null&&!TextUtils.isEmpty(reportImage.getCustomerFinancialImgs())){
                     String[] imgs = reportImage.getCustomerFinancialImgs().split(",");
                     for(int i =0;i<imgs.length;i++){
@@ -215,7 +216,9 @@ public class ReportImagesActivity extends BaseActivity implements ReportImagAdap
     }
 
     @Override
-    public void open(int position) {
-
+    public void open(ImageFile position) {
+        Intent intent = new Intent(mContext, ImageActivity.class);
+        intent.putExtra("url",position.getUrl());
+        mContext.startActivity(intent);
     }
 }

@@ -16,6 +16,13 @@
             android:layout_centerVertical="true"
             android:padding="15dp"
             android:drawableLeft="@mipmap/back"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="预警信息"
             android:textColor="#ffffff"
             android:textSize="18sp" />
@@ -28,9 +35,11 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:background="@drawable/search_bg"
+            android:maxLines="1"
             android:cursorVisible="false"
             android:drawableLeft="@mipmap/search"
             android:drawablePadding="5dp"
+            android:visibility="gone"
             android:paddingLeft="5dp" />
 
     </RelativeLayout>

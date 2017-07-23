@@ -1,15 +1,32 @@
 package com.fyjf.all.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.ext.ResponseError;
+import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
+import com.fyjf.all.activity.overdue.OverdueActivity;
+import com.fyjf.all.activity.report.ReportDetailsActivity;
+import com.fyjf.all.activity.waring.WaringDetailsActivity;
+import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
+import com.fyjf.dao.entity.MangerModel;
+import com.fyjf.utils.JSONUtil;
+import com.fyjf.vo.query.MangerListVO;
+import com.fyjf.widget.refreshview.utils.LogUtils;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,6 +44,8 @@ import cn.qqtheme.framework.util.ConvertUtils;
 public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.OnItemSelectedListener {
     @BindView(R.id.back)
     ImageView back;
+    @BindView(R.id.coustom_name)
+    EditText coustom_name;
     @BindView(R.id.spinner_type)
     MaterialSpinner spinner_type;
     @BindView(R.id.spinner_manger)
@@ -38,6 +57,12 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
     @BindView(R.id.btn_commit)
     Button btn_commit;
 
+    String up_time;
+    List<MangerModel> list;
+    String custom_type = "抵押贷款";
+    String custom_manger;
+    String update_type = "贷后";
+
     @Override
     protected int getContentLayout() {
         return R.layout.activity_atall_query;
@@ -45,16 +70,17 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
 
     @Override
     protected void preInitData() {
+        list = new ArrayList<>();
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        getManger();
+        spinner_type.setItems("抵押贷款", "担保贷款", "信用贷款");
 
-        spinner_type.setItems("客户类型1", "客户类型2", "客户类型3", "客户类型4", "客户类型5");
-        spinner_manger.setItems("客户经理1", "客户经理2", "客户经理3", "客户经理4", "客户经理5");
-        spinner_up_type.setItems("上报类型1", "上报类型2", "上报类型3", "上报类型4", "上报类型5");
+        spinner_up_type.setItems("贷后", "预警", "逾期");
         spinner_type.setOnItemSelectedListener(this);
         spinner_manger.setOnItemSelectedListener(this);
         spinner_up_type.setOnItemSelectedListener(this);
@@ -62,22 +88,61 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
 
     @Override
     public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-        if (view==spinner_type){
-            ToastUtils.showCustomerToast(mContext,position+":"+item);
-        } else if (view==spinner_manger){
-            ToastUtils.showCustomerToast(mContext,position+":"+item);
-        } else if (view==spinner_up_type){
-            ToastUtils.showCustomerToast(mContext,position+":"+item);
+        if (view == spinner_type) {
+            if (position == 0) {
+                custom_type = "抵押贷款";
+            } else if (position == 1) {
+                custom_type = "担保贷款";
+            } else {
+                custom_type = "信用贷款";
+            }
+            //            ToastUtils.showCustomerToast(mContext,position+":"+item);
+        } else if (view == spinner_manger) {
+            custom_manger = list.get(position).getId();
+            //            ToastUtils.showCustomerToast(mContext,position+":"+item);
+        } else if (view == spinner_up_type) {
+            //            ToastUtils.showCustomerToast(mContext,position+":"+item);
+            if (position == 0) {
+                update_type = "贷后";
+            } else if (position == 1) {
+                update_type = "预警";
+            } else {
+                update_type = "逾期";
+            }
         }
     }
 
-    @OnClick({R.id.time_prick,R.id.btn_commit})
-    void onClick(View v){
-        switch (v.getId()){
+    @OnClick({R.id.time_prick, R.id.btn_commit})
+    void onClick(View v) {
+        switch (v.getId()) {
             case R.id.time_prick:
                 onYearMonthDayPicker(v);
                 break;
             case R.id.btn_commit:
+                String name = coustom_name.getText().toString().trim();
+                if (name!=null && !name.equals("")){
+                    if (up_time!=null && !up_time.equals("")){
+                        Intent intent = new Intent();
+                        intent.putExtra("name",name);
+                        intent.putExtra("type",custom_type);
+                        intent.putExtra("manger",custom_manger);
+                        intent.putExtra("update_type",update_type);
+                        intent.putExtra("up_time",up_time);
+                        intent.setFlags(100);
+                        if (update_type.contains("贷后")) {
+                            intent.setClass(AtallQueryActivity.this, ReportDetailsActivity.class);
+                        } else if (update_type.contains("预警")) {
+                            intent.setClass(AtallQueryActivity.this, WaringDetailsActivity.class);
+                        } else if (update_type.contains("逾期")) {
+                            intent.setClass(AtallQueryActivity.this, OverdueActivity.class);
+                        }
+                        startActivity(intent);
+                    }else {
+                        ToastUtils.showCustomerToast(mContext,"上报日期不能为空");
+                    }
+                }else {
+                    ToastUtils.showCustomerToast(mContext,"客户名称不能为空");
+                }
 
                 break;
         }
@@ -86,7 +151,7 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
     public void onYearMonthDayPicker(View view) {
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH)+1;
+        int month = c.get(Calendar.MONTH) + 1;
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         final DatePicker picker = new DatePicker(this);
@@ -96,11 +161,11 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
         picker.setRangeEnd(2111, 1, 11);
         picker.setRangeStart(1970, 1, 1);
         picker.setSelectedItem(year, month, day);
-//        picker.setResetWhileWheel(false);
+        //        picker.setResetWhileWheel(false);
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
-//                showToast(year + "-" + month + "-" + day);
+                up_time = year + "-" + month + "-" + day;
                 time_prick.setText(year + "-" + month + "-" + day);
             }
         });
@@ -122,4 +187,36 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
         });
         picker.show();
     }
+
+    private void getManger() {
+        MangerListVO vo = new MangerListVO();
+        vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
+        vo.request(AtallQueryActivity.this, "resp", "error");
+    }
+
+    @ResponseError(name = "error")
+    void error(VolleyError error) {
+        ToastUtils.showSystemToast(mContext, "请求失败");
+    }
+
+    @ResponseSuccess(name = "resp")
+    void resp(String response) {
+        try {
+            JSONObject resp = new JSONObject(response);
+            LogUtils.d("resp:" + resp);
+            if (resp.getInt("code") == 0) {
+                LogUtils.e("customers:" + resp.toString());
+                list.clear();
+                list.addAll(JSONUtil.toBeans(resp.getJSONArray("data"), MangerModel.class));
+                custom_manger = list.get(0).getId();
+                spinner_manger.setItems(list);
+            } else {
+                ToastUtils.showSystemToast(mContext, "");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
