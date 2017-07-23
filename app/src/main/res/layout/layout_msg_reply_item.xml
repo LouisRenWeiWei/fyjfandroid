@@ -9,6 +9,7 @@
         android:id="@+id/tv_replier"
         android:layout_width="60dp"
         android:maxLines="1"
+        android:paddingLeft="5dp"
         android:layout_height="40dp"
         android:text="rwww33ww"
         android:gravity="center_vertical"
