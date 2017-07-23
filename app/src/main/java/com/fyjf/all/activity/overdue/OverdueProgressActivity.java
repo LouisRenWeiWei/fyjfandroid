@@ -196,9 +196,9 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
 
     @Override
     public void openMsg(int position) {
-        OverdueProgress item = overdueProgresses.get(position);
-        Bundle bundle = new Bundle();
-        bundle.putString("id",item.getOverdueId());
-        startActivity(ReportMsgActivity.class,bundle);
+//        OverdueProgress item = overdueProgresses.get(position);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("id",item.getOverdueId());
+//        startActivity(ReportMsgActivity.class,bundle);
     }
 }
