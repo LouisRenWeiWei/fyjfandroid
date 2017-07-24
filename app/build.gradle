@@ -10,6 +10,7 @@ android {
         minSdkVersion LIBRARY_MIN_SDK_VERSION
         targetSdkVersion LIBRARY_TARGET_SDK_VERSION
         multiDexEnabled true
+        manifestPlaceholders = [CHANNEL_VALUE: "fyjf"]
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -24,14 +25,17 @@ android {
         ]
     }
 
-//    signingConfigs {
-//        mycofig {
-//            keyAlias 'rental'
-//            keyPassword 'rental'
-//            storeFile file('../key')
-//            storePassword 'rental'
-//        }
-//    }
+
+    signingConfigs {
+        mycofig {
+            storeFile file('../keystore.jks')
+            storePassword "fyjf20170724"
+            keyAlias "fyjf"
+            keyPassword "fyjf20170724"
+            v2SigningEnabled true
+        }
+    }
+
 
     compileOptions {
         sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_7
@@ -52,7 +56,29 @@ android {
             shrinkResources true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.mycofig
+            signingConfig signingConfigs.mycofig
+        }
+    }
+
+    productFlavors {
+        fyjf {
+            manifestPlaceholders = [CHANNEL_VALUE: 'fyjf', CHANNEL_ID: 10000]
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                File outputDirectory = new File(outputFile.parent);
+                def fileName
+                if (variant.buildType.name == "release") {
+                    fileName = "富源金服_${variant.productFlavors[0].name}_v${versionName}_${versionCode}.apk"
+                } else {
+                    fileName = "富源金服_${variant.productFlavors[0].name}_v${versionName}_${versionCode}_beta.apk"
+                }
+                output.outputFile = new File(outputDirectory, fileName)
+            }
         }
     }
 
