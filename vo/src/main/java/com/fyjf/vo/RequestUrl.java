@@ -1,8 +1,8 @@
 package com.fyjf.vo;
 
 public class RequestUrl {
-//    public static String server = "http://47.93.217.20:8081";//线上
-    public static String server = "http://192.168.1.104";//家里
+    public static String server = "http://47.93.217.20:8081";//线上
+//    public static String server = "http://192.168.1.104";//家里
 
     //静态文件
     public static String file_base = server + "/storage";//
