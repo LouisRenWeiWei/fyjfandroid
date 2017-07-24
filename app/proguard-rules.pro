@@ -262,3 +262,10 @@
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
+
+
+-keepclasseswithmembers class * {
+    @com.android.volley.ext.ResponseSuccess <methods>;
+    @com.android.volley.ext.ResponseError <methods>;
+}
+

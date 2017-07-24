@@ -1,13 +1,12 @@
 package com.fyjf.vo;
 
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.android.volley.toolbox.ResponseListener;
 import com.android.volley.toolbox.Volley;
+import com.fyjf.utils.LogHelper;
 
 import org.json.JSONObject;
 
@@ -71,7 +70,7 @@ public abstract class BaseVO {
                 }
             }
         }
-        Log.e("request_url",url+param);
+        LogHelper.logE("request_url:"+url+param);
         Volley.addRequest(method,url,param,new Response(thiz,successMethod,errorMethod));
     }
 

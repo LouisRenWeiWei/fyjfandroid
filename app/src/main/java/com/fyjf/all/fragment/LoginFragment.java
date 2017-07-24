@@ -12,6 +12,7 @@ import com.fyjf.all.R;
 import com.fyjf.all.activity.MainActivity;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
+import com.fyjf.utils.LogHelper;
 import com.fyjf.utils.NetworkUtils;
 import com.fyjf.vo.user.LoginVO;
 
@@ -75,12 +76,14 @@ public class LoginFragment extends BaseFragment {
 
     @ResponseError(name = "error")
     void error(VolleyError error) {
+        LogHelper.logE("request_obj:"+error.getMessage());
         ToastUtils.showSystemToast(mContext, "登录失败");
         tv_login.setEnabled(true);
     }
 
     @ResponseSuccess(name = "resp")
     void resp(String response) {
+        LogHelper.logE("request_obj:"+response);
         try {
             tv_login.setEnabled(true);
             JSONObject resp = new JSONObject(response);

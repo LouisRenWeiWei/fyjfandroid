@@ -9,6 +9,7 @@ import com.fyjf.all.R;
 import com.fyjf.all.activity.overdue.OverdueActivity;
 import com.fyjf.all.update.UpdateHelper;
 import com.fyjf.all.utils.ToastUtils;
+import com.fyjf.utils.LogHelper;
 import com.fyjf.vo.RequestUrl;
 
 import java.io.File;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void preInitData() {
         File file = new File(PATH + "/fyjf.apk");
+        LogHelper.logE("PATH:"+PATH+",state:"+file.exists());
         if (file.exists()) {
             file.delete();
         }

@@ -288,7 +288,7 @@ public class UpdateHelper {
         protected void onPostExecute(AppVersion updateInfo) {
             super.onPostExecute(updateInfo);
             SharedPreferences.Editor editor = preferences_update.edit();
-            if (mContext != null && updateInfo != null) {
+            if (mContext != null && updateInfo != null && updateInfo.getVersionCode()!=null) {
                 if (Integer.parseInt(updateInfo.getVersionCode()) > getPackageInfo().versionCode) {
                     showUpdateUI(updateInfo);
                     editor.putBoolean("hasNewVersion", true);

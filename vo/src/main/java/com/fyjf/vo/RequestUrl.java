@@ -15,7 +15,8 @@ public class RequestUrl {
     public static String html_base = server + "/fyjfadmin";
     public static String customer_report_analysis = html_base + "/fyjf/report/echarts.html?customerId=";
 
-    public static String api_base = server + "/api/api";//家里ip
+//    public static String api_base = server + "/api/api";//家里ip
+    public static String api_base = server + "/fyjf/api";//线上ip
 
     public static String login = api_base + "/bank/user/login";
     public static String changePasswd = api_base + "/bank/user/update/passwd";

@@ -16,4 +16,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //compile 'org.robolectric:robolectric:3.1.2'
     compile 'com.liulishuo.filedownloader:library:1.4.3'
+    compile project(':utils')
 }
