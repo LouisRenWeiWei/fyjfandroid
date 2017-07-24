@@ -16,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@mipmap/back"
-            android:padding="15dp"/>
+            android:padding="15dp"
+            android:src="@mipmap/back"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,61 +34,63 @@
         android:layout_height="1dp"
         android:background="@color/app_bg"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="45dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="客户名称"
-            android:textSize="15sp"
             android:textColor="#000000"
-            android:gravity="center_vertical"/>
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/coustom_name"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15.5dp"
+            android:background="@drawable/edit_bg"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:background="@drawable/edit_bg"/>
+            android:singleLine="true"
+            android:textSize="13.5sp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="45dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="客户类型"
-            android:textSize="15sp"
             android:textColor="#000000"
-            android:gravity="center_vertical"/>
+            android:textSize="15sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15.5dp"
             android:background="@drawable/edit_bg">
+
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/spinner_type"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1px"
-                android:textSize="12sp"
+                android:textSize="13.5sp"
                 app:ms_background_color="#ffffff"
                 />
         </LinearLayout>
@@ -97,31 +99,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="45dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="客户经理"
-            android:textSize="15sp"
             android:textColor="#000000"
-            android:gravity="center_vertical"/>
+            android:textSize="15sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15.5dp"
             android:background="@drawable/edit_bg">
+
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/spinner_manger"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1px"
-                android:textSize="12sp"
+                android:textSize="13.5sp"
                 app:ms_background_color="#ffffff"
                 />
         </LinearLayout>
@@ -130,59 +133,61 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="45dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="上报日期"
-            android:textSize="15sp"
             android:textColor="#000000"
-            android:gravity="center_vertical"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/time_prick"
             android:layout_width="match_parent"
-            android:layout_height="39dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15.5dp"
+            android:background="@drawable/edit_bg"
+            android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_marginLeft="15.5dp"
-            android:gravity="center_vertical"
-            android:background="@drawable/edit_bg"/>
+            android:textSize="13.5sp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="45dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="上报类型"
-            android:textSize="15sp"
             android:textColor="#000000"
-            android:gravity="center_vertical"/>
+            android:textSize="15sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15.5dp"
             android:background="@drawable/edit_bg">
+
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/spinner_up_type"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="1px"
-                android:textSize="12sp"
+                android:textSize="13.5sp"
                 app:ms_background_color="#ffffff"
                 />
         </LinearLayout>
@@ -193,11 +198,11 @@
         android:id="@+id/btn_commit"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_margin="15dp"
         android:background="#254382"
         android:text="搜索"
-        android:textSize="16sp"
         android:textColor="#fff"
-        android:layout_margin="15dp"/>
+        android:textSize="16sp"/>
 
 
 </LinearLayout>

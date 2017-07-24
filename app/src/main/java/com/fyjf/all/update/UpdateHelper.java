@@ -29,6 +29,7 @@ import com.fyjf.all.update.listener.OnUpdateListener;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.AppVersion;
 import com.fyjf.utils.JSONUtil;
+import com.fyjf.utils.LogHelper;
 import com.fyjf.utils.NetworkUtils;
 import com.fyjf.vo.RequestUrl;
 
@@ -299,12 +300,14 @@ public class UpdateHelper {
                 } else {
                     if (isHintVersion) {
                         Toast.makeText(mContext, R.string.was_latest_version, Toast.LENGTH_LONG).show();
+                        removeFile();
                     }
                     editor.putBoolean("hasNewVersion", false);
                 }
             } else {
                 if (isHintVersion) {
                     Toast.makeText(mContext, R.string.was_latest_version, Toast.LENGTH_LONG).show();
+                    removeFile();
                 }
             }
             editor.putString("currentVersionCode", getPackageInfo().versionCode + "");
@@ -479,5 +482,13 @@ public class UpdateHelper {
     }
 
 
+    public void removeFile(){
+        String PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();//   /storage/emulated/0/Download
+        File file = new File(PATH + "/fyjf.apk");
+        LogHelper.logE("PATH:"+PATH+",state:"+file.exists());
+        if (file.exists()) {
+            file.delete();
+        }
+    }
 
 }

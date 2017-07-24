@@ -1,6 +1,5 @@
 package com.fyjf.all.activity;
 
-import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,10 +8,7 @@ import com.fyjf.all.R;
 import com.fyjf.all.activity.overdue.OverdueActivity;
 import com.fyjf.all.update.UpdateHelper;
 import com.fyjf.all.utils.ToastUtils;
-import com.fyjf.utils.LogHelper;
 import com.fyjf.vo.RequestUrl;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,8 +29,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.setting)
     ImageView setting;
 
-    private static final String PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();//   /storage/emulated/0/Download
-
     @Override
     protected int getContentLayout() {
         return R.layout.activity_main;
@@ -42,12 +36,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void preInitData() {
-        File file = new File(PATH + "/fyjf.apk");
-        LogHelper.logE("PATH:"+PATH+",state:"+file.exists());
-        if (file.exists()) {
-            file.delete();
-        }
-
         UpdateHelper updateHelper = new UpdateHelper.Builder(this)
                 .checkUrl(RequestUrl.version_check)
                 .isHintNewVersion(false)    //没有新版本时不提示
