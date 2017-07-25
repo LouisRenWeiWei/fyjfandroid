@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -142,13 +143,13 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
                 if(itemOperationListener!=null)itemOperationListener.openProgress(position);
             }
         });
-        holder.overdue_quantified.setOnClickListener(new View.OnClickListener() {
+        holder.ll_progress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openProgress(position);
             }
         });
-        holder.overdue_report.setOnClickListener(new View.OnClickListener() {
+        holder.ll_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openReport(position);
@@ -173,8 +174,8 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         public TextView overdue_price;
         public TextView overdue_manger;
         public TextView overdue_date;
-        public TextView overdue_report;
-        public TextView overdue_quantified;
+        public LinearLayout ll_report;
+        public LinearLayout ll_progress;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
@@ -190,8 +191,8 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
                 overdue_price = (TextView) itemView.findViewById(R.id.overdue_price);
                 overdue_manger = (TextView) itemView.findViewById(R.id.overdue_manger);
                 overdue_date = (TextView) itemView.findViewById(R.id.overdue_date);
-                overdue_report = (TextView) itemView.findViewById(R.id.overdue_report);
-                overdue_quantified = (TextView) itemView.findViewById(R.id.overdue_quantified);
+                ll_report = (LinearLayout) itemView.findViewById(R.id.ll_report);
+                ll_progress = (LinearLayout) itemView.findViewById(R.id.ll_progress);
             }
 
         }
