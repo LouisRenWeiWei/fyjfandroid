@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.ImageActivity;
 import com.fyjf.dao.entity.OverdueProgress;
+import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
 
@@ -44,23 +45,25 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     @Override
     public SimpleAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType, boolean isItem) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_overdue_progress_item, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_overdue_progress_item_copy, parent, false);
         SimpleAdapterViewHolder vh = new SimpleAdapterViewHolder(v, true);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        if(position==0)holder.v_top_line.setVisibility(View.INVISIBLE);
         OverdueProgress item = list.get(position);
-        holder.tv_money.setText(item.getMoney()+"万");
-        holder.month.setText(item.getCreateDate().substring(5,7)+"月"+item.getCreateDate().substring(7,9)+"日催收进度");
-        holder.month_title.setText(item.getTitle());
-        holder.month_count.setText("0");
-        holder.tips.setText(item.getDescription());
+        holder.tv_money.setText(item.getMoney() + "万");
+        String month = TimeUtils.formateDate(item.getCreateDate(), "yyyy-MM-dd", "MM月dd日");
+        holder.tv_date.setText(month);
+        holder.tv_title.setText(month + "催收进度");
+        holder.tv_msg_count.setText(item.getMsgCount() + "");
+
+        holder.tv_desc.setText(item.getDescription());
+
         String sourceStr = item.getOverdueImgs();
         holder.ll_imgs.removeAllViews();
-        if(!TextUtils.isEmpty(sourceStr)){
+        if (!TextUtils.isEmpty(sourceStr)) {
             String[] sourceStrArray = sourceStr.split(",");
             int addSize = 0;
             for (int i = 0; i < sourceStrArray.length; i++) {
@@ -72,17 +75,17 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(mContext, ImageActivity.class);
-                        intent.putExtra("url",v.getTag().toString());
+                        intent.putExtra("url", v.getTag().toString());
                         mContext.startActivity(intent);
                     }
                 });
                 addSize++;
             }
-            while (addSize<2){
+            while (addSize < 2) {
                 holder.ll_imgs.addView(addImageDefault());
                 addSize++;
             }
-        }else {
+        } else {
             //添加三个默认的
             holder.ll_imgs.addView(addImageDefault());
             holder.ll_imgs.addView(addImageDefault());
@@ -90,17 +93,10 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         }
 
 
-        holder.loan_item.setTag(position);
-//        holder.loan_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(itemOperationListener!=null)itemOperationListener.openPDF(position);
-//            }
-//        });
-        holder.month_count.setOnClickListener(new View.OnClickListener() {
+        holder.tv_msg_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openMsg(position);
+                if (itemOperationListener != null) itemOperationListener.openMsg(position);
             }
         });
 
@@ -108,34 +104,32 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     @Override
     public int getAdapterItemCount() {
-        return list!=null?list.size():0;
+        return list != null ? list.size() : 0;
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout loan_item;
-        private View v_top_line;
-        private TextView month;
+
+        private TextView tv_date;
         private TextView tv_money;
-        private TextView month_title;
-        private TextView month_count;
-        private TextView tips;
+        private TextView tv_title;
+        private TextView tv_msg_count;
+        private TextView tv_desc;
         private LinearLayout ll_imgs;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
                 tv_money = (TextView) itemView.findViewById(R.id.tv_money);
-                loan_item = (LinearLayout) itemView.findViewById(R.id.loan_item);
-                v_top_line = itemView.findViewById(R.id.v_top_line);
-                month = (TextView) itemView.findViewById(R.id.month);
-                month_title = (TextView) itemView.findViewById(R.id.month_title);
-                month_count = (TextView) itemView.findViewById(R.id.month_count);
-                tips = (TextView) itemView.findViewById(R.id.tips);
+                tv_date = (TextView) itemView.findViewById(R.id.tv_date);
+                tv_title = (TextView) itemView.findViewById(R.id.tv_title);
+                tv_msg_count = (TextView) itemView.findViewById(R.id.tv_msg_count);
+                tv_desc = (TextView) itemView.findViewById(R.id.tv_desc);
                 ll_imgs = (LinearLayout) itemView.findViewById(R.id.ll_imgs);
             }
 
         }
     }
+
     ItemOperationListener itemOperationListener;
 
     public ItemOperationListener getItemOperationListener() {
@@ -146,19 +140,20 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         this.itemOperationListener = itemOperationListener;
     }
 
-    public interface ItemOperationListener{
-//        void openPDF(int position);
+    public interface ItemOperationListener {
+        //        void openPDF(int position);
         void openMsg(int position);
     }
 
-    private View addImage(String url){
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item,null);
+    private View addImage(String url) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.iv);
         Glide.with(mContext).load(url).into(imageView);
         return view;
     }
-    private View addImageDefault(){
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item,null);
+
+    private View addImageDefault() {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.iv);
         Glide.with(mContext).load(R.drawable.img_empty).into(imageView);
         return view;

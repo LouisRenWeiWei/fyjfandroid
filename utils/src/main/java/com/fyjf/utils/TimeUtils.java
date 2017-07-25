@@ -29,7 +29,17 @@ public class TimeUtils {
     public static String getTime(long timeInMillis, SimpleDateFormat dateFormat) {
         return dateFormat.format(new Date(timeInMillis));
     }
-
+    public static String formateDate(String date,String fromFormate,String toFormate) {
+        try {
+            SimpleDateFormat from = new SimpleDateFormat(fromFormate);
+            Date fromDate = from.parse(date);
+            SimpleDateFormat to = new SimpleDateFormat(toFormate);
+            return to.format(fromDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
     public static String formateDate(Date date, SimpleDateFormat dateFormat) {
         return dateFormat.format(date);
     }

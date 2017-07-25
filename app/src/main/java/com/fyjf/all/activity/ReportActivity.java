@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -19,6 +21,7 @@ import com.fyjf.all.activity.report.ReportDetailsActivity;
 import com.fyjf.all.activity.report.ReportImagesActivity;
 import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.all.adapter.ReportDetailsAdapter;
+import com.fyjf.all.adapter.ReportFirstPageDetailsAdapter;
 import com.fyjf.all.adapter.checkloan.ReportFirstPageAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
@@ -31,6 +34,7 @@ import com.fyjf.vo.report.ReportDetailsVO;
 import com.fyjf.vo.report.ReportListVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
+import com.fyjf.widget.refreshview.XScrollView;
 import com.fyjf.widget.refreshview.utils.LogUtils;
 
 import org.json.JSONObject;
@@ -49,16 +53,20 @@ import butterknife.BindView;
 * author: renweiwei
 * datetime: 
 */
-public class ReportActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportFirstPageAdapter.ItemOperationListener,ReportDetailsAdapter.ItemOperationListener{
+public class ReportActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportFirstPageAdapter.ItemOperationListener,ReportFirstPageDetailsAdapter.ItemOperationListener{
     @BindView(R.id.back)
     ImageView back;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.xScrollView)
+    XScrollView xScrollView;
     @BindView(R.id.xRefreshView)
     XRefreshView xRefreshView;
 
     @BindView(R.id.recyclerViewLatest)
     RecyclerView recyclerViewLatest;
     List<CustomerReportInfo> customerReportInfosLatest;
-    ReportDetailsAdapter customerReportInfosLatestAdapter;
+    ReportFirstPageDetailsAdapter customerReportInfosLatestAdapter;
     @BindView(R.id.tv_load_more_latest)
     TextView tv_load_more_latest;
 
@@ -77,6 +85,8 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     private boolean canRequstNext = true;
     private int tryCount = 0;
 
+    private int customerState =1;
+
     @Override
     protected int getContentLayout() {
         return R.layout.activity_loan_check;
@@ -84,6 +94,12 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     protected void preInitData() {
+        customerState = getIntent().getIntExtra("customerState",1);
+        if(1==customerState){
+            tv_title.setText("贷后检查");
+        }else {
+            tv_title.setText("预警信息");
+        }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +112,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportFirstPageAdapter(mContext,customers);
+        customerAdapter = new ReportFirstPageAdapter(mContext,customers,customerState);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(customerAdapter);
@@ -105,7 +121,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         customerReportInfosLatest = new ArrayList<>();
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
         recyclerViewLatest.setLayoutManager(layoutManager2);
-        customerReportInfosLatestAdapter = new ReportDetailsAdapter(mContext,customerReportInfosLatest);
+        customerReportInfosLatestAdapter = new ReportFirstPageDetailsAdapter(mContext,customerReportInfosLatest,customerState);
         customerReportInfosLatestAdapter.setItemOperationListener(this);
         recyclerViewLatest.setAdapter(customerReportInfosLatestAdapter);
 
@@ -117,7 +133,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         xRefreshView.setPullLoadEnable(true);
         xRefreshView.setAutoLoadMore(false);
         customerAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
-        xRefreshView.enableReleaseToLoadMore(true);
+        xRefreshView.enableReleaseToLoadMore(false);
         xRefreshView.enableRecyclerViewPullUp(true);
         xRefreshView.enablePullUpWhenLoadCompleted(true);
         //设置静默加载时提前加载的item个数
@@ -138,7 +154,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void onRefresh() {
-
+        Log.d("","");
     }
 
     @Override
@@ -158,12 +174,12 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void onRelease(float direction) {
-
+        Log.d("","");
     }
 
     @Override
     public void onHeaderMove(double headerMovePercent, int offsetY) {
-
+        Log.d("","");
     }
 
     private void getLatestData() {
@@ -175,7 +191,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         ReportDetailsVO vo = new ReportDetailsVO();
         vo.addParameter("pageNo",pageLatestNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("customerState", 1);//贷后
+        vo.addParameter("customerState", customerState);//贷后
         vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(),"yyyyMM"));
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(ReportActivity.this, "respLatest", "errorLatest");
@@ -234,7 +250,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 //        vo.addParameter("page", JSONUtil.toJSONObject(page));
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("customerState", 1);//贷后
+        vo.addParameter("customerState", customerState);//贷后
         vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(),"yyyyMM"));//
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(ReportActivity.this, "resp", "error");
@@ -249,6 +265,8 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @ResponseSuccess(name = "resp")
     void resp(String response) {
+        xRefreshView.stopRefresh();
+        xRefreshView.stopLoadMore();
         try {
             JSONObject resp = new JSONObject(response);
             LogUtils.d("resp:"+resp);
@@ -264,6 +282,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
                     pageNo++;
                 }else {
                     xRefreshView.setPullLoadEnable(false);
+
                 }
 
             } else {
@@ -272,8 +291,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         } catch (Exception e) {
             e.printStackTrace();
         }
-        xRefreshView.stopRefresh();
-        xRefreshView.stopLoadMore();
+
     }
 
     //
@@ -282,6 +300,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         LoanTime time = customers.get(position);
         Intent intent = new Intent();
         intent.putExtra("time",time.getYearMonth());
+        intent.putExtra("customerState",customerState);
         intent.setClass(ReportActivity.this, ReportDetailsActivity.class);
         startActivity(intent);
     }

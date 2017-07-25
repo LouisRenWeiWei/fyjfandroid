@@ -25,6 +25,15 @@ public class OverdueProgress implements Serializable{
     private String description;
     private String overdueImgs;
     private String money;
+    private int msgCount;
+
+    public int getMsgCount() {
+        return msgCount;
+    }
+
+    public void setMsgCount(int msgCount) {
+        this.msgCount = msgCount;
+    }
 
     public String getId() {
         return id;

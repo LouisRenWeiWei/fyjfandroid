@@ -1,5 +1,6 @@
 package com.fyjf.all.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,10 +51,12 @@ public class MainActivity extends BaseActivity {
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_loan_check:
-                startActivity(ReportActivity.class);
+                startActivity(ReportActivity.class);//默认是1
                 break;
             case R.id.btn_waring:
-                startActivity(WaringActivity.class);
+                Intent intent = new Intent(MainActivity.this,ReportActivity.class);
+                intent.putExtra("customerState",2);
+                startActivity(intent);
                 break;
             case R.id.btn_overdue:
                 startActivity(OverdueActivity.class);

@@ -18,6 +18,7 @@
             android:padding="15dp"/>
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -50,11 +51,6 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/app_bg"/>
-
     <com.fyjf.widget.refreshview.XRefreshView
         android:id="@+id/xRefreshView"
         android:layout_width="match_parent"
@@ -63,6 +59,7 @@
         android:background="#fff"
         android:orientation="vertical">
         <com.fyjf.widget.refreshview.XScrollView
+            android:id="@+id/xScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true">
@@ -74,7 +71,6 @@
                     android:id="@+id/recyclerViewLatest"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
                     android:scrollbars="vertical"/>
                 <TextView
                     android:id="@+id/tv_load_more_latest"
@@ -88,8 +84,8 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:scrollbars="vertical"/>
+                    android:scrollbars="vertical"
+                    />
             </LinearLayout>
         </com.fyjf.widget.refreshview.XScrollView>
     </com.fyjf.widget.refreshview.XRefreshView>

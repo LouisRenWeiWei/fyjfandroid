@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,10 +27,12 @@ public class ReportFirstPageAdapter extends BaseRecyclerAdapter<ReportFirstPageA
 
     private List<LoanTime> list;
     private Context mContext;
+    private int customerState =1;
 
-    public ReportFirstPageAdapter(Context context, List<LoanTime> list) {
+    public ReportFirstPageAdapter(Context context, List<LoanTime> list,int customerState) {
         this.list = list;
         this.mContext = context;
+        this.customerState = customerState;
     }
     @Override
     public SimpleAdapterViewHolder getViewHolder(View view) {
@@ -38,17 +41,18 @@ public class ReportFirstPageAdapter extends BaseRecyclerAdapter<ReportFirstPageA
 
     @Override
     public SimpleAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType, boolean isItem) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_loan_check_item, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_loan_check_item_copy, parent, false);
         SimpleAdapterViewHolder vh = new SimpleAdapterViewHolder(v, true);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        LoanTime time = list.get(position);
-        holder.month.setText(time.getYearMonth().substring(4,6)+"月");
-        holder.month_title.setText(time.getYearMonth().substring(0,4)+"年"+time.getYearMonth().substring(4,6)+"月份贷后检查");
-        holder.month_count.setText(time.getCount());
+        LoanTime item = list.get(position);
+        holder.tv_date.setText(item.getYearMonth().substring(4,6)+"月");
+        holder.tv_title.setText(item.getYearMonth().substring(0,4)+"年"+item.getYearMonth().substring(4,6)+"月份贷后检查");
+
+        holder.month_count.setText(item.getCount());
         holder.loan_item.setTag(position);
         holder.loan_item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +69,9 @@ public class ReportFirstPageAdapter extends BaseRecyclerAdapter<ReportFirstPageA
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-        private RelativeLayout loan_item;
-        private TextView month;
-        private TextView month_title;
+        private LinearLayout loan_item;
+        private TextView tv_date;
+        private TextView tv_title;
         private TextView month_count;
         private ImageView image_1;
         private ImageView image_2;
@@ -76,9 +80,9 @@ public class ReportFirstPageAdapter extends BaseRecyclerAdapter<ReportFirstPageA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                loan_item = (RelativeLayout) itemView.findViewById(R.id.loan_item);
-                month = (TextView) itemView.findViewById(R.id.month);
-                month_title = (TextView) itemView.findViewById(R.id.month_title);
+                loan_item = (LinearLayout) itemView.findViewById(R.id.loan_item);
+                tv_date = (TextView) itemView.findViewById(R.id.tv_date);
+                tv_title = (TextView) itemView.findViewById(R.id.tv_title);
                 month_count = (TextView) itemView.findViewById(R.id.month_count);
                 image_1 = (ImageView) itemView.findViewById(R.id.image_1);
                 image_2 = (ImageView) itemView.findViewById(R.id.image_2);

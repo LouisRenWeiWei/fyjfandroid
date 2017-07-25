@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,35 +19,30 @@
             android:padding="15dp"
             android:text="7"
             android:textColor="#ffffff"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/search_et"
             android:layout_width="match_parent"
-            android:layout_toRightOf="@+id/back"
             android:layout_height="28dp"
-            android:singleLine="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@+id/back"
             android:background="@drawable/search_bg"
             android:drawableLeft="@mipmap/search"
-            android:hint="客户名称"
-            android:textSize="15sp"
-            android:textCursorDrawable="@drawable/cursor"
-            android:textColorHint="@color/app_bg"
             android:drawablePadding="5dp"
-            android:paddingLeft="5dp"
+            android:hint="客户名称"
             android:imeOptions="actionSearch"
-            />
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textColorHint="@color/app_bg"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/app_bg"/>
 
     <com.fyjf.widget.refreshview.XRefreshView
         android:id="@+id/xRefreshView"
@@ -59,6 +54,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical"
+            android:background="@color/app_bg"/>
     </com.fyjf.widget.refreshview.XRefreshView>
 </LinearLayout>

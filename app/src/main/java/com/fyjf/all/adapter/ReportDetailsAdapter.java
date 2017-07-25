@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
 import com.fyjf.dao.entity.CustomerReportInfo;
+import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
 
@@ -27,10 +29,12 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
 
     private List<CustomerReportInfo> list;
     private Context mContext;
+    private int customerState =1;
 
-    public ReportDetailsAdapter(Context context, List<CustomerReportInfo> list) {
+    public ReportDetailsAdapter(Context context, List<CustomerReportInfo> list, int customerState) {
         this.list = list;
         this.mContext = context;
+        this.customerState = customerState;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
 
     @Override
     public SimpleAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType, boolean isItem) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.report_details_item, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.report_first_page_detail_item, parent, false);
         SimpleAdapterViewHolder vh = new SimpleAdapterViewHolder(v, true);
         return vh;
     }
@@ -48,6 +52,12 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
         CustomerReportInfo item = list.get(position);
+        if(1==customerState){
+            holder.tv_state.setVisibility(View.GONE);
+        }else {
+            holder.tv_state.setVisibility(View.VISIBLE);
+        }
+        holder.tv_date.setText(TimeUtils.formateDate(item.getExaminTime(),"yyyy-MM-dd","MM月dd日"));
         holder.customer_name.setText(item.getCustomerName());
         holder.customer_msg.setText(item.getMsgCount());
         holder.customer_manager.setText(item.getCustomerManager());
@@ -115,19 +125,19 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
                 if(itemOperationListener!=null)itemOperationListener.openImg(position);
             }
         });
-        holder.customer_report.setOnClickListener(new View.OnClickListener() {
+        holder.ll_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openPDF(position);
             }
         });
-        holder.customer_quantified.setOnClickListener(new View.OnClickListener() {
+        holder.ll_analysic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openQuantified(position);
             }
         });
-        holder.customer_credit.setOnClickListener(new View.OnClickListener() {
+        holder.ll_credit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openCredit(position);
@@ -142,6 +152,8 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
         private RelativeLayout customer_item;
+        private TextView tv_state;
+        private TextView tv_date;
         private TextView customer_name;
         private TextView customer_msg;
         private ImageView customer_img_1;
@@ -150,13 +162,15 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
         private TextView customer_type;
         private TextView customer_manager;
         private TextView customer_time;
-        private TextView customer_report;
-        private TextView customer_quantified;
-        private TextView customer_credit;
+        private LinearLayout ll_report;
+        private LinearLayout ll_analysic;
+        private LinearLayout ll_credit;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
+                tv_state = (TextView) itemView.findViewById(R.id.tv_state);
+                tv_date = (TextView) itemView.findViewById(R.id.tv_date);
                 customer_type = (TextView) itemView.findViewById(R.id.customer_type);
                 customer_item = (RelativeLayout) itemView.findViewById(R.id.customer_item);
                 customer_name = (TextView) itemView.findViewById(R.id.customer_name);
@@ -166,9 +180,9 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
                 customer_img_3 = (ImageView) itemView.findViewById(R.id.customer_img_3);
                 customer_manager = (TextView) itemView.findViewById(R.id.customer_manager);
                 customer_time = (TextView) itemView.findViewById(R.id.customer_time);
-                customer_report = (TextView) itemView.findViewById(R.id.customer_report);
-                customer_quantified = (TextView) itemView.findViewById(R.id.customer_quantified);
-                customer_credit = (TextView) itemView.findViewById(R.id.customer_credit);
+                ll_report = (LinearLayout) itemView.findViewById(R.id.ll_report);
+                ll_analysic = (LinearLayout) itemView.findViewById(R.id.ll_analysic);
+                ll_credit = (LinearLayout) itemView.findViewById(R.id.ll_credit);
             }
         }
     }

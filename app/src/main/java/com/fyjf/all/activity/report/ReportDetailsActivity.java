@@ -46,14 +46,14 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     List<CustomerReportInfo> customers;
-    List<CustomerReportInfo> customerCopy;
-    List<CustomerReportInfo> searchList;
     LinearLayoutManager layoutManager;
     ReportDetailsAdapter customerAdapter;
     String yearTime;
 
     private int pageSize = 10;
     private int pageNo = 1;
+
+    private int customerState =1;
 
     @Override
     protected int getContentLayout() {
@@ -62,23 +62,20 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
 
     @Override
     protected void preInitData() {
-
+        customerState = getIntent().getIntExtra("customerState",1);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
 
         recyclerView.setHasFixedSize(true);
         customers = new ArrayList<>();
-        customerCopy = new ArrayList<>();
-        searchList = new ArrayList<>();
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportDetailsAdapter(mContext,customers);
+        customerAdapter = new ReportDetailsAdapter(mContext,customers,customerState);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(customerAdapter);
@@ -159,7 +156,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         ReportDetailsVO vo = new ReportDetailsVO();
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("customerState", 1);//贷后
+        vo.addParameter("customerState", customerState);//贷后
         vo.addParameter("yearMonth",yearTime);
         String customerName = search_et.getText().toString().trim();
         if(!TextUtils.isEmpty(customerName))vo.addParameter("customerName",customerName);
@@ -195,15 +192,11 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
     @ResponseSuccess(name = "resp")
     void resp(String response) {
         try {
-            customerCopy.clear();
             JSONObject resp = new JSONObject(response);
-            LogUtils.d("resp:"+resp);
             if (resp.getInt("code") == 0) {
                 if(pageNo==1)customers.clear();
                 int size = customers.size();
                 customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerReportInfo.class));
-                customerCopy.addAll(customers);
-                LogUtils.e("customers:"+customers.size());
                 customerAdapter.notifyDataSetChanged();
                 int addSize = customers.size()-size;
                 if(addSize>0&&addSize==pageSize){
@@ -287,40 +280,4 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         startActivity(intent);
     }
 
-    /**
-     * 搜索
-     */
-    private void setEvent() {
-        search_et.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searchMethod(charSequence.toString().trim());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) { }
-        });
-    }
-
-    private void searchMethod(String trim) {
-        searchList.clear();
-        if (trim.length()>0){
-            for (int i = 0; i < customers.size(); i++) {
-                CustomerReportInfo info = customers.get(i);
-                if (info.getCustomerName().contains(trim)){
-                    searchList.add(info);
-                }
-            }
-            customers.clear();
-            customers.addAll(searchList);
-            customerAdapter.notifyDataSetChanged();
-        }else {
-            customers.clear();
-            customers.addAll(customerCopy);
-            customerAdapter.notifyDataSetChanged();
-        }
-    }
 }
