@@ -19,7 +19,7 @@ public class OverdueProgress implements Serializable{
      */
 
     private String id;
-    private String createDate;
+    private long createDate;
     private String overdueId;
     private String title;
     private String description;
@@ -43,11 +43,11 @@ public class OverdueProgress implements Serializable{
         this.id = id;
     }
 
-    public String getCreateDate() {
+    public long getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(long createDate) {
         this.createDate = createDate;
     }
 

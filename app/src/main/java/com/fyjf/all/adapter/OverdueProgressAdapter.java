@@ -19,6 +19,7 @@ import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.RequestUrl;
 import com.fyjf.widget.refreshview.recyclerview.BaseRecyclerAdapter;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,9 +55,13 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
         OverdueProgress item = list.get(position);
         holder.tv_money.setText(item.getMoney() + "万");
-        String month = TimeUtils.formateDate(item.getCreateDate(), "yyyy-MM-dd", "MM月dd日");
-        holder.tv_date.setText(month);
-        holder.tv_title.setText(month + "催收进度");
+        try {
+            String month = TimeUtils.formateDate(new Date(item.getCreateDate()), "MM月dd日");
+            holder.tv_date.setText(month);
+            holder.tv_title.setText(month + "催收进度");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         holder.tv_msg_count.setText(item.getMsgCount() + "");
 
         holder.tv_desc.setText(item.getDescription());
