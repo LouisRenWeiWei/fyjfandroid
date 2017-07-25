@@ -54,6 +54,7 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
 
     @Override
     protected void preInitData() {
+        pdfView.setEnabled(false);
         reportId = getIntent().getStringExtra("reportId");
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +96,7 @@ public class ReportPDFActivity extends BaseActivity implements OnPageChangeListe
                                 }
                             })
                             .load();
+                    pdfView.setEnabled(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

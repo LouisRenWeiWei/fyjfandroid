@@ -54,7 +54,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         if(position==0)holder.v_top_line.setVisibility(View.INVISIBLE);
         OverdueProgress item = list.get(position);
         holder.tv_money.setText(item.getMoney()+"万");
-        holder.month.setText(item.getCreateDate().substring(5,7)+"月");
+        holder.month.setText(item.getCreateDate().substring(5,7)+"月"+item.getCreateDate().substring(7,9)+"日催收进度");
         holder.month_title.setText(item.getTitle());
         holder.month_count.setText("0");
         holder.tips.setText(item.getDescription());

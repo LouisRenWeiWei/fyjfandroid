@@ -24,9 +24,8 @@
         <TextView
             android:id="@+id/customer_name"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="50.5dp"
-            android:layout_marginTop="12.5dp"
             android:gravity="center"
             android:textColor="#010101"
             android:textSize="16sp" />
@@ -34,10 +33,9 @@
         <TextView
             android:id="@+id/customer_msg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="13dp"
             android:drawableLeft="@mipmap/pinglun_msg"
             android:drawablePadding="10.5dp"
             android:gravity="center"

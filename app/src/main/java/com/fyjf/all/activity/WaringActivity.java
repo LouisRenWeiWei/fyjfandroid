@@ -36,8 +36,7 @@ import butterknife.BindView;
 * datetime:
 * 同贷后检查
 */
-public class WaringActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener
-{
+public class WaringActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener{
     @BindView(R.id.back)
     TextView back;
     @BindView(R.id.xRefreshView)
