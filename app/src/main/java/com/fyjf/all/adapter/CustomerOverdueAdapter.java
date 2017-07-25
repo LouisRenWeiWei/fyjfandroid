@@ -163,7 +163,6 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-        public RelativeLayout customer_item;
         public TextView overdue_state;
         public TextView overdue_name;
         public TextView overdue_msg;
@@ -180,7 +179,6 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                customer_item = (RelativeLayout) itemView.findViewById(R.id.customer_item);
                 overdue_state = (TextView) itemView.findViewById(R.id.overdue_state);
                 overdue_name = (TextView) itemView.findViewById(R.id.overdue_name);
                 overdue_msg = (TextView) itemView.findViewById(R.id.overdue_msg);
