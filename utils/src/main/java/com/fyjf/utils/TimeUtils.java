@@ -30,6 +30,14 @@ public class TimeUtils {
         return dateFormat.format(new Date(timeInMillis));
     }
 
+    public static String formateDate(Date date, SimpleDateFormat dateFormat) {
+        return dateFormat.format(date);
+    }
+    public static String formateDate(Date date, String dateFormat) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
+        return simpleDateFormat.format(date);
+    }
+
     /**
      * long time to string, format is {@link #DEFAULT_DATE_FORMAT}
      * 

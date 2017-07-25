@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
             android:padding="15dp"
             android:drawableLeft="@mipmap/back"
-            android:text="催收逾期"
+            android:text="逾期催收"
             android:textColor="#ffffff"
             android:textSize="18sp" />
 

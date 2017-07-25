@@ -23,12 +23,12 @@ import java.util.List;
  * Created by czf on 2017/7/13.
  */
 
-public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapter.SimpleAdapterViewHolder> {
+public class ReportFirstPageDetailsAdapter extends BaseRecyclerAdapter<ReportFirstPageDetailsAdapter.SimpleAdapterViewHolder> {
 
     private List<CustomerReportInfo> list;
     private Context mContext;
 
-    public ReportDetailsAdapter(Context context, List<CustomerReportInfo> list) {
+    public ReportFirstPageDetailsAdapter(Context context, List<CustomerReportInfo> list) {
         this.list = list;
         this.mContext = context;
     }

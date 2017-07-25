@@ -180,7 +180,7 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
     }
 
 //    @Override
-//    public void openReport(int position) {
+//    public void openPDF(int position) {
 //        OverdueProgress item = overdueProgresses.get(position);
 //        Bundle bundle = new Bundle();
 //        bundle.putString("id",item.getOverdueId());

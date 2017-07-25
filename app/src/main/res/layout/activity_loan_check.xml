@@ -52,13 +52,38 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#fff">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        android:background="#fff"
+        android:orientation="vertical">
+        <com.fyjf.widget.refreshview.XScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="15dp"
-            android:scrollbars="vertical"/>
+            android:layout_height="0dp"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewLatest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:scrollbars="vertical"/>
+                <TextView
+                    android:id="@+id/tv_load_more_latest"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="加载更多"
+                    android:gravity="center"
+                    android:textColor="@color/colorAccent"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:scrollbars="vertical"/>
+            </LinearLayout>
+        </com.fyjf.widget.refreshview.XScrollView>
     </com.fyjf.widget.refreshview.XRefreshView>
+
 </LinearLayout>

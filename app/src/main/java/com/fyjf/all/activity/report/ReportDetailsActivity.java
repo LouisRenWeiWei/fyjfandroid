@@ -252,7 +252,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
      * @param position
      */
     @Override
-    public void openReport(int position) {
+    public void openPDF(int position) {
         CustomerReportInfo info = customers.get(position);
         Intent intent = new Intent();
         intent.putExtra("reportId",info.getId());

@@ -11,7 +11,7 @@ import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.waring.WaringDetailsActivity;
-import com.fyjf.all.adapter.checkloan.ReportAdapter;
+import com.fyjf.all.adapter.checkloan.ReportFirstPageAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.LoanTime;
@@ -36,7 +36,7 @@ import butterknife.BindView;
 * datetime:
 * 同贷后检查
 */
-public class WaringActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportAdapter.ItemOperationListener
+public class WaringActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportFirstPageAdapter.ItemOperationListener
 {
     @BindView(R.id.back)
     TextView back;
@@ -46,7 +46,7 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
     RecyclerView recyclerView;
     List<LoanTime> customers;
     LinearLayoutManager layoutManager;
-    ReportAdapter customerAdapter;
+    ReportFirstPageAdapter customerAdapter;
 
     private int pageSize = 10;
     private int pageNo = 1;
@@ -71,7 +71,7 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         //        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportAdapter(mContext,customers);
+        customerAdapter = new ReportFirstPageAdapter(mContext,customers);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(customerAdapter);
@@ -165,8 +165,9 @@ public class WaringActivity extends BaseActivity implements XRefreshView.XRefres
         xRefreshView.stopLoadMore();
     }
 
+
     @Override
-    public void openReport(int position) {
+    public void openMonthReport(int position) {
         LoanTime time = customers.get(position);
         Intent intent = new Intent();
         intent.putExtra("time",time.getYearMonth());

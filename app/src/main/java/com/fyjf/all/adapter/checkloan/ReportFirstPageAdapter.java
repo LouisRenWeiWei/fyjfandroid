@@ -22,12 +22,12 @@ import java.util.List;
 * author: renweiwei
 * datetime: 
 */
-public class ReportAdapter extends BaseRecyclerAdapter<ReportAdapter.SimpleAdapterViewHolder> {
+public class ReportFirstPageAdapter extends BaseRecyclerAdapter<ReportFirstPageAdapter.SimpleAdapterViewHolder> {
 
     private List<LoanTime> list;
     private Context mContext;
 
-    public ReportAdapter(Context context, List<LoanTime> list) {
+    public ReportFirstPageAdapter(Context context, List<LoanTime> list) {
         this.list = list;
         this.mContext = context;
     }
@@ -53,7 +53,7 @@ public class ReportAdapter extends BaseRecyclerAdapter<ReportAdapter.SimpleAdapt
         holder.loan_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(itemOperationListener!=null)itemOperationListener.openReport(position);
+                if(itemOperationListener!=null)itemOperationListener.openMonthReport(position);
             }
         });
 
@@ -98,6 +98,6 @@ public class ReportAdapter extends BaseRecyclerAdapter<ReportAdapter.SimpleAdapt
     }
 
     public interface ItemOperationListener{
-        void openReport(int position);
+        void openMonthReport(int position);
     }
 }
