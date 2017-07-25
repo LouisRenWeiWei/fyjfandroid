@@ -19,26 +19,34 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:gravity="center"
             android:text="贷后检查"
             android:textColor="#ffffff"
             android:textSize="18sp"/>
 
         <EditText
             android:id="@+id/search_et"
-            android:layout_width="233dp"
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/back"
             android:layout_height="28dp"
+            android:singleLine="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:cursorVisible="false"
-            android:maxLines="1"
+            android:layout_marginLeft="15dp"
             android:background="@drawable/search_bg"
             android:drawableLeft="@mipmap/search"
-            android:visibility="gone"
+            android:hint="客户名称"
+            android:textSize="15sp"
+            android:textCursorDrawable="@drawable/cursor"
+            android:textColorHint="@color/app_bg"
             android:drawablePadding="5dp"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp"
+            android:visibility="gone"
+            android:imeOptions="actionSearch"
+            />
 
     </RelativeLayout>
 

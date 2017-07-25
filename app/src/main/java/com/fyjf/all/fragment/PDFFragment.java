@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.fyjf.all.R;
-import com.fyjf.all.activity.AnalysisPDFActivity;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -48,6 +47,7 @@ public class PDFFragment extends BaseFragment implements OnPageChangeListener,On
 
     @Override
     protected void preInitData() {
+        pdfView.setEnabled(false);
         fileDownloadListener = new FileDownloadListener() {
             private int preBytes = 0;
             @Override
@@ -74,6 +74,7 @@ public class PDFFragment extends BaseFragment implements OnPageChangeListener,On
                                 }
                             })
                             .load();
+                    pdfView.setEnabled(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
