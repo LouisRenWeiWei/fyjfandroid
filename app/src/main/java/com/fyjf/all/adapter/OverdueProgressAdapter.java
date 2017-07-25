@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -51,11 +52,11 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        if(position==0)holder.v_top_line.setVisibility(View.INVISIBLE);
+//        if(position==0)holder.v_top_line.setVisibility(View.INVISIBLE);
         OverdueProgress item = list.get(position);
-        holder.tv_money.setText(item.getMoney()+"万");
-        holder.month.setText(item.getCreateDate().substring(5,7)+"月"+item.getCreateDate().substring(7,9)+"日催收进度");
-        holder.month_title.setText(item.getTitle());
+//        holder.tv_money.setText(item.getMoney()+"万");
+        holder.month.setText(item.getCreateDate().substring(5,7));
+        holder.month_title.setText(item.getCreateDate().substring(5,7)+"月"+item.getCreateDate().substring(7,9)+"日催收进度");
         holder.month_count.setText("0");
         holder.tips.setText(item.getDescription());
         String sourceStr = item.getOverdueImgs();
@@ -112,10 +113,12 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout loan_item;
-        private View v_top_line;
-        private TextView month;
+        private RelativeLayout loan_item;
         private TextView tv_money;
+
+        private ImageView fenge_view;
+        private LinearLayout fenge;
+        private TextView month;
         private TextView month_title;
         private TextView month_count;
         private TextView tips;
@@ -124,14 +127,17 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                tv_money = (TextView) itemView.findViewById(R.id.tv_money);
-                loan_item = (LinearLayout) itemView.findViewById(R.id.loan_item);
-                v_top_line = itemView.findViewById(R.id.v_top_line);
+//                fenge_view = (ImageView) itemView.findViewById(R.id.fenge_view);
+                fenge = (LinearLayout) itemView.findViewById(R.id.fenge);
                 month = (TextView) itemView.findViewById(R.id.month);
                 month_title = (TextView) itemView.findViewById(R.id.month_title);
                 month_count = (TextView) itemView.findViewById(R.id.month_count);
                 tips = (TextView) itemView.findViewById(R.id.tips);
                 ll_imgs = (LinearLayout) itemView.findViewById(R.id.ll_imgs);
+
+                //                tv_money = (TextView) itemView.findViewById(R.id.tv_money);
+                loan_item = (RelativeLayout) itemView.findViewById(R.id.loan_item);
+
             }
 
         }

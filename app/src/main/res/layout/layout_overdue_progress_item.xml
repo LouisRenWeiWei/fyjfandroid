@@ -1,144 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/loan_item"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+<RelativeLayout android:id="@+id/loan_item"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+    android:background="#e3e2e2">
 
     <TextView
         android:id="@+id/month"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="33dp"
         android:gravity="right"
         android:text="7月"
         android:textColor="#666666"
-        android:textSize="12.5sp" />
+        android:textSize="12.5sp"/>
 
     <LinearLayout
+        android:id="@+id/fenge"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <View
-            android:id="@+id/v_top_line"
-            android:layout_width="1px"
-            android:layout_height="10dp"
-            android:layout_toRightOf="@+id/month"
-            android:background="#c8c8c8" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/month"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/iv_dot"
             android:layout_width="8dp"
             android:layout_height="8dp"
             android:layout_marginBottom="15dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/oval_bg" />
+            android:layout_marginTop="20dp"
+            android:background="@drawable/oval_bg"/>
 
         <View
             android:layout_width="1px"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="#c8c8c8" />
+            android:layout_marginLeft="4dp"
+            android:background="@mipmap/shijianzhou2"/>
+        
     </LinearLayout>
 
-
     <RelativeLayout
+        android:id="@+id/title_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7.5dp"
-        android:layout_marginTop="7.5dp"
-        android:background="#f6f6f6"
-        android:minHeight="150dp"
-        android:paddingBottom="7.5dp"
-        >
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/fenge"
+        android:background="#f6f6f6">
 
         <RelativeLayout
             android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:paddingLeft="7.5dp"
-            android:paddingRight="7.5dp">
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
 
             <TextView
                 android:id="@+id/month_title"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:gravity="center"
-                android:layout_toLeftOf="@+id/tv_money"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:paddingRight="5dp"
-                android:text="3333333333333333333333"
+                android:text="7月1日催收进度"
                 android:textColor="#000000"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tv_money"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/month_count"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="12303万"
-                android:textColor="#000000"
-                android:textSize="15sp" />
-
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/month_count"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:drawableLeft="@mipmap/pinglun_msg"
                 android:drawablePadding="10dp"
-                android:text="7"
-                android:textSize="12.5sp" />
+                android:gravity="center"
+                android:text="50"
+                android:textColor="#666666"
+                android:textSize="12.5dp"/>
+
         </RelativeLayout>
 
-
-        <HorizontalScrollView
-            android:id="@+id/hsv_imgs"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_below="@+id/rl_title"
-            android:layout_marginBottom="7.5dp"
-            android:layout_marginTop="7.5dp"
-            android:overScrollMode="never"
-            android:scrollbars="none">
+            android:layout_height="1px"
+            android:layout_below="@id/rl_title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#c8c8c8"/>
 
-            <LinearLayout
-                android:id="@+id/ll_imgs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/tips"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/hsv_imgs"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text=""
-            android:textColor="#000"
-            android:textSize="12sp"
-            android:paddingLeft="7.5dp"
-            android:paddingRight="7.5dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/rl_title"
+            android:layout_marginTop="1px">
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_imgs"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/ll_imgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hsv_imgs"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:paddingLeft="7.5dp"
+                android:paddingRight="7.5dp"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
