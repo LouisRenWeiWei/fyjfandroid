@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -20,14 +18,12 @@ import com.fyjf.all.activity.report.ReportAnalysisActivity;
 import com.fyjf.all.activity.report.ReportDetailsActivity;
 import com.fyjf.all.activity.report.ReportImagesActivity;
 import com.fyjf.all.activity.report.ReportMsgActivity;
-import com.fyjf.all.adapter.ReportDetailsAdapter;
 import com.fyjf.all.adapter.ReportFirstPageDetailsAdapter;
 import com.fyjf.all.adapter.checkloan.ReportFirstPageAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.dao.entity.LoanTime;
-import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.report.ReportDetailsVO;
@@ -148,7 +144,6 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
                 getLatestData();//加载最近更多
             }
         });
-
         getLatestData();
     }
 
