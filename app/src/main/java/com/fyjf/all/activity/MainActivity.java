@@ -1,6 +1,7 @@
 package com.fyjf.all.activity;
 
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,5 +75,41 @@ public class MainActivity extends BaseActivity {
                 startActivity(SettingActivity.class);
                 break;
         }
+    }
+
+    private long exitTime = 0;
+    /**
+     * 拦截返回按键
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitOnSecondTime();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /**
+     * 三秒内两次点击 以退出(回桌面)
+     */
+    private void exitOnSecondTime() {
+        if (System.currentTimeMillis() - exitTime <= 3000) {
+            goHome();
+            exitTime = 0;
+        } else {
+            ToastUtils.showSystemToast(mContext,"再次点击返回退出");
+            exitTime = System.currentTimeMillis();
+        }
+    }
+
+    /**
+     * 模拟返回桌面
+     */
+    public void goHome() {
+        moveTaskToBack(true);
     }
 }
