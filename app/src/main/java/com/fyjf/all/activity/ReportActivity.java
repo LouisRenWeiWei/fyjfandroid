@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -67,8 +68,8 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     RecyclerView recyclerViewLatest;
     List<CustomerReportInfo> customerReportInfosLatest;
     ReportFirstPageDetailsAdapter customerReportInfosLatestAdapter;
-    @BindView(R.id.tv_load_more_latest)
-    TextView tv_load_more_latest;
+    @BindView(R.id.ll_load_more_latest)
+    LinearLayout ll_load_more_latest;
 
 
     @BindView(R.id.recyclerView)
@@ -107,15 +108,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
             }
         });
 
-        recyclerView.setHasFixedSize(true);
-        customers = new ArrayList<>();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportFirstPageAdapter(mContext,customers,customerState);
-        customerAdapter.setItemOperationListener(this);
-        // 静默加载模式不能设置footerview
-        recyclerView.setAdapter(customerAdapter);
+
 
         recyclerViewLatest.setHasFixedSize(true);
         customerReportInfosLatest = new ArrayList<>();
@@ -126,13 +119,22 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         recyclerViewLatest.setAdapter(customerReportInfosLatestAdapter);
 
 
+        recyclerView.setHasFixedSize(true);
+        customers = new ArrayList<>();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
+        customerAdapter = new ReportFirstPageAdapter(mContext,customers,customerState);
+        customerAdapter.setItemOperationListener(this);
+        // 静默加载模式不能设置footerview
+        recyclerView.setAdapter(customerAdapter);
+//        customerAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
 
         //设置刷新完成以后，headerview固定的时间
         xRefreshView.setPinnedTime(1000);
         xRefreshView.setMoveForHorizontal(true);
         xRefreshView.setPullLoadEnable(true);
         xRefreshView.setAutoLoadMore(false);
-        customerAdapter.setCustomLoadMoreView(new XRefreshViewFooter(this));
         xRefreshView.enableReleaseToLoadMore(false);
         xRefreshView.enableRecyclerViewPullUp(true);
         xRefreshView.enablePullUpWhenLoadCompleted(true);
@@ -142,7 +144,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
         xRefreshView.setXRefreshViewListener(this);
 
-        tv_load_more_latest.setOnClickListener(new View.OnClickListener() {
+        ll_load_more_latest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getLatestData();//加载最近更多
@@ -219,9 +221,9 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
                         canRequstNext = false;
                     }
                     if(addSize<pageSize){
-                        tv_load_more_latest.setVisibility(View.GONE);
+                        ll_load_more_latest.setVisibility(View.GONE);
                     }else {
-                        tv_load_more_latest.setVisibility(View.VISIBLE);
+                        ll_load_more_latest.setVisibility(View.VISIBLE);
                         pageLatestNo++;
                     }
 
