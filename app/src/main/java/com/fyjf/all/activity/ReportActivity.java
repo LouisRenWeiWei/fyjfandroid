@@ -6,7 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -54,11 +57,12 @@ import butterknife.BindView;
 * author: renweiwei
 * datetime: 
 */
-public class ReportActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,ReportFirstPageAdapter.ItemOperationListener,ReportFirstPageDetailsAdapter.ItemOperationListener{
+public class ReportActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportFirstPageAdapter.ItemOperationListener, ReportFirstPageDetailsAdapter.ItemOperationListener {
     @BindView(R.id.back)
-    ImageView back;
-    @BindView(R.id.tv_title)
-    TextView tv_title;
+    TextView back;
+    @BindView(R.id.search_et)
+    EditText search_et;
+
     @BindView(R.id.xScrollView)
     XScrollView xScrollView;
     @BindView(R.id.xRefreshView)
@@ -78,7 +82,6 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     ReportFirstPageAdapter customerAdapter;
 
 
-
     private int pageSize = 10;
     private int pageNo = 1;
     private int pageLatestNo = 1;
@@ -86,7 +89,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     private boolean canRequstNext = true;
     private int tryCount = 0;
 
-    private int customerState =1;
+    private int customerState = 1;
 
     @Override
     protected int getContentLayout() {
@@ -95,11 +98,11 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     protected void preInitData() {
-        customerState = getIntent().getIntExtra("customerState",1);
-        if(1==customerState){
-            tv_title.setText("贷后检查");
-        }else {
-            tv_title.setText("预警信息");
+        customerState = getIntent().getIntExtra("customerState", 1);
+        if (1 == customerState) {
+            back.setText("贷后检查");
+        } else {
+            back.setText("预警信息");
         }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,14 +110,31 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
                 finish();
             }
         });
-
+        search_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
+                    String name = search_et.getText().toString().trim();
+                    if(!TextUtils.isEmpty(name)){
+                        Intent intent = new Intent(mContext, ReportDetailsActivity.class);
+                        intent.setFlags(100);
+                        intent.putExtra("customerName", name);
+                        intent.putExtra("fromSearch",true);
+                        intent.putExtra("customerState",1);
+                        startActivity(intent);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
 
         recyclerViewLatest.setHasFixedSize(true);
         customerReportInfosLatest = new ArrayList<>();
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(this);
         recyclerViewLatest.setLayoutManager(layoutManager2);
-        customerReportInfosLatestAdapter = new ReportFirstPageDetailsAdapter(mContext,customerReportInfosLatest,customerState);
+        customerReportInfosLatestAdapter = new ReportFirstPageDetailsAdapter(mContext, customerReportInfosLatest, customerState);
         customerReportInfosLatestAdapter.setItemOperationListener(this);
         recyclerViewLatest.setAdapter(customerReportInfosLatestAdapter);
 
@@ -124,7 +144,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.addItemDecoration(new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL));
-        customerAdapter = new ReportFirstPageAdapter(mContext,customers,customerState);
+        customerAdapter = new ReportFirstPageAdapter(mContext, customers, customerState);
         customerAdapter.setItemOperationListener(this);
         // 静默加载模式不能设置footerview
         recyclerView.setAdapter(customerAdapter);
@@ -156,7 +176,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void onRefresh() {
-        Log.d("","");
+        Log.d("", "");
     }
 
     @Override
@@ -176,25 +196,25 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
 
     @Override
     public void onRelease(float direction) {
-        Log.d("","");
+        Log.d("", "");
     }
 
     @Override
     public void onHeaderMove(double headerMovePercent, int offsetY) {
-        Log.d("","");
+        Log.d("", "");
     }
 
     private void getLatestData() {
-        if(currentYearMonth==null){
+        if (currentYearMonth == null) {
             currentYearMonth = Calendar.getInstance();
             Date date = new Date();
             currentYearMonth.setTime(date);
         }
         ReportDetailsVO vo = new ReportDetailsVO();
-        vo.addParameter("pageNo",pageLatestNo);
-        vo.addParameter("pageSize",pageSize);
+        vo.addParameter("pageNo", pageLatestNo);
+        vo.addParameter("pageSize", pageSize);
         vo.addParameter("customerState", customerState);//贷后
-        vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(),"yyyyMM"));
+        vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(), "yyyyMM"));
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(ReportActivity.this, "respLatest", "errorLatest");
     }
@@ -210,29 +230,29 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         try {
             JSONObject resp = new JSONObject(response);
             if (resp.getInt("code") == 0) {
-                if(pageLatestNo==1)customerReportInfosLatest.clear();
+                if (pageLatestNo == 1) customerReportInfosLatest.clear();
                 int size = customerReportInfosLatest.size();
-                customerReportInfosLatest.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),CustomerReportInfo.class));
+                customerReportInfosLatest.addAll(JSONUtil.toBeans(resp.getJSONArray("data"), CustomerReportInfo.class));
                 customerReportInfosLatestAdapter.notifyDataSetChanged();
-                int addSize = customerReportInfosLatest.size()-size;
-                if(addSize>0){
-                    if(canRequstNext){
+                int addSize = customerReportInfosLatest.size() - size;
+                if (addSize > 0) {
+                    if (canRequstNext) {
                         getData();
                         canRequstNext = false;
                     }
-                    if(addSize<pageSize){
+                    if (addSize < pageSize) {
                         ll_load_more_latest.setVisibility(View.GONE);
-                    }else {
+                    } else {
                         ll_load_more_latest.setVisibility(View.VISIBLE);
                         pageLatestNo++;
                     }
 
-                }else {
+                } else {
                     currentYearMonth.add(Calendar.MONTH, -1);
-                    if(tryCount<5){
+                    if (tryCount < 5) {
                         getLatestData();//继续请求
                         tryCount++;
-                    }else {
+                    } else {
                         getData();
                     }
                 }
@@ -250,10 +270,10 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     private void getData() {
         ReportListVO vo = new ReportListVO();
 //        vo.addParameter("page", JSONUtil.toJSONObject(page));
-        vo.addParameter("pageNo",pageNo);
-        vo.addParameter("pageSize",pageSize);
+        vo.addParameter("pageNo", pageNo);
+        vo.addParameter("pageSize", pageSize);
         vo.addParameter("customerState", customerState);//贷后
-        vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(),"yyyyMM"));//
+        vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(), "yyyyMM"));//
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         vo.request(ReportActivity.this, "resp", "error");
     }
@@ -271,18 +291,18 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         xRefreshView.stopLoadMore();
         try {
             JSONObject resp = new JSONObject(response);
-            LogUtils.d("resp:"+resp);
+            LogUtils.d("resp:" + resp);
             if (resp.getInt("code") == 0) {
-                if(pageNo==1)customers.clear();
+                if (pageNo == 1) customers.clear();
                 int size = customers.size();
-                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"),LoanTime.class));
-                LogUtils.e("customers:"+customers.size());
+                customers.addAll(JSONUtil.toBeans(resp.getJSONArray("data"), LoanTime.class));
+                LogUtils.e("customers:" + customers.size());
                 customerAdapter.notifyDataSetChanged();
-                int addSize = customers.size()-size;
-                if(addSize>0&&addSize==pageSize){
+                int addSize = customers.size() - size;
+                if (addSize > 0 && addSize == pageSize) {
                     xRefreshView.setPullLoadEnable(true);
                     pageNo++;
-                }else {
+                } else {
                     xRefreshView.setPullLoadEnable(false);
 
                 }
@@ -301,8 +321,8 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     public void openMonthReport(int position) {
         LoanTime time = customers.get(position);
         Intent intent = new Intent();
-        intent.putExtra("time",time.getYearMonth());
-        intent.putExtra("customerState",customerState);
+        intent.putExtra("time", time.getYearMonth());
+        intent.putExtra("customerState", customerState);
         intent.setClass(ReportActivity.this, ReportDetailsActivity.class);
         startActivity(intent);
     }
@@ -311,24 +331,24 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     public void openMsg(int position) {
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString("id",info.getId());
-        startActivity(ReportMsgActivity.class,bundle);
+        bundle.putString("id", info.getId());
+        startActivity(ReportMsgActivity.class, bundle);
     }
 
     @Override
     public void openImg(int position) {
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Bundle bundle = new Bundle();
-        bundle.putString("id",info.getId());
-        startActivity(ReportImagesActivity.class,bundle);
+        bundle.putString("id", info.getId());
+        startActivity(ReportImagesActivity.class, bundle);
     }
 
     @Override
     public void openPDF(int position) {
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Intent intent = new Intent();
-        intent.putExtra("reportId",info.getId());
-        intent.setClass(ReportActivity.this,ReportPDFActivity.class);
+        intent.putExtra("reportId", info.getId());
+        intent.setClass(ReportActivity.this, ReportPDFActivity.class);
         startActivity(intent);
     }
 
@@ -336,8 +356,8 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     public void openQuantified(int position) {
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Intent intent = new Intent();
-        intent.putExtra("reportId",info.getId());
-        intent.setClass(ReportActivity.this,ReportAnalysisActivity.class);
+        intent.putExtra("reportId", info.getId());
+        intent.setClass(ReportActivity.this, ReportAnalysisActivity.class);
         startActivity(intent);
     }
 
@@ -345,8 +365,8 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
     public void openCredit(int position) {
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Intent intent = new Intent();
-        intent.putExtra("report",info);
-        intent.setClass(ReportActivity.this,CreditReportActivity.class);
+        intent.putExtra("report", info);
+        intent.setClass(ReportActivity.this, CreditReportActivity.class);
         startActivity(intent);
     }
 }

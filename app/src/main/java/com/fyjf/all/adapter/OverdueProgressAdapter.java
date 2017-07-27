@@ -51,13 +51,11 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     }
 
     @Override
-    public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
-        OverdueProgress item = list.get(position);
-        holder.tv_money.setText(item.getMoney() + "万");
+    public void onBindViewHolder(final SimpleAdapterViewHolder holder, final int position, boolean isItem) {
+        final OverdueProgress item = list.get(position);
         try {
             String month = TimeUtils.formateDate(new Date(item.getCreateDate()), "MM月dd日");
             holder.tv_date.setText(month);
-            holder.tv_title.setText(month + "催收进度");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,6 +101,13 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
                 if (itemOperationListener != null) itemOperationListener.openImgs(position);
             }
         });
+        holder.tv_desc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.tv_desc.setMaxLines(100);
+                holder.tv_desc.setText(item.getDescription());
+            }
+        });
 
     }
 
@@ -114,8 +119,6 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tv_date;
-        private TextView tv_money;
-        private TextView tv_title;
         private TextView tv_msg_count;
         private TextView tv_desc;
         private LinearLayout ll_imgs;
@@ -126,9 +129,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
-                tv_money = (TextView) itemView.findViewById(R.id.tv_money);
                 tv_date = (TextView) itemView.findViewById(R.id.tv_date);
-                tv_title = (TextView) itemView.findViewById(R.id.tv_title);
                 tv_msg_count = (TextView) itemView.findViewById(R.id.tv_msg_count);
                 tv_desc = (TextView) itemView.findViewById(R.id.tv_desc);
                 ll_imgs = (LinearLayout) itemView.findViewById(R.id.ll_imgs);

@@ -9,44 +9,47 @@
         android:layout_height="54dp"
         android:background="@color/app_color">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:padding="15dp"
-            android:src="@mipmap/back" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="贷后检查"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/search_et"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="28dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_toRightOf="@+id/back"
-            android:background="@drawable/search_bg"
-            android:drawableLeft="@mipmap/search"
-            android:drawablePadding="5dp"
-            android:hint="客户名称"
-            android:imeOptions="actionSearch"
-            android:paddingLeft="5dp"
-            android:singleLine="true"
-            android:textColorHint="@color/app_bg"
-            android:textCursorDrawable="@drawable/cursor"
-            android:textSize="15sp"
-            android:visibility="gone" />
+            android:layout_height="54dp"
+            android:background="@color/app_color">
+
+            <TextView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:drawableLeft="@mipmap/back"
+                android:text="贷后检查"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/search_et"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@+id/back"
+                android:layout_height="28dp"
+                android:singleLine="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/search_bg"
+                android:drawableLeft="@mipmap/search"
+                android:maxLines="1"
+                android:maxLength="10"
+                android:hint="客户名称"
+                android:textSize="15sp"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textColorHint="@color/app_bg"
+                android:drawablePadding="5dp"
+                android:paddingLeft="5dp"
+                android:imeOptions="actionSearch"
+                />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -63,6 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
+            android:background="@color/app_bg"
             >
 
             <LinearLayout

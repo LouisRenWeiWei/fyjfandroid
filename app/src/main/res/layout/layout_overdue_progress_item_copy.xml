@@ -54,38 +54,26 @@
         <RelativeLayout
             android:id="@+id/rl_top_infos"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
             android:layout_below="@+id/tv_date"
             android:background="#ffffff"
             android:gravity="center_vertical"
             >
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/tv_money"
+                android:layout_toLeftOf="@+id/tv_msg_count"
                 android:paddingLeft="15dp"
                 android:maxLines="2"
-                android:text="2017年7月份贷后检查"
+                android:ellipsize="end"
+                android:text="2017年7444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444月份贷后检查"
                 android:textColor="#010101"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_money"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/tv_msg_count"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:text="12303万"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_msg_count"
@@ -94,6 +82,7 @@
                 android:layout_alignParentRight="true"
                 android:drawableLeft="@mipmap/pinglun_msg"
                 android:drawablePadding="10dp"
+                android:layout_centerVertical="true"
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="15dp"
@@ -105,9 +94,10 @@
         <LinearLayout
             android:id="@+id/ll_imgs"
             android:layout_width="match_parent"
-            android:layout_height="76dp"
+            android:layout_height="86dp"
             android:layout_below="@+id/rl_top_infos"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:paddingBottom="10dp">
 
             <ImageView
                 android:id="@+id/image_1"
@@ -141,22 +131,7 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_imgs"
-            android:background="#ffffff"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:minLines="2"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:text="342432434234333333333333333333333333333333333333333333334234234234"
-            android:textColor="#000"
-            android:textSize="12sp" />
+
 
     </RelativeLayout>
 

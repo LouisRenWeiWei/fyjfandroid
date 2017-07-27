@@ -26,7 +26,7 @@
             android:layout_toRightOf="@+id/back"
             android:text="催收进度"
             android:textColor="#ffffff"
-            android:textSize="16dp"/>
+            android:textSize="14dp"/>
 
     </RelativeLayout>
 
@@ -39,7 +39,8 @@
         android:id="@+id/xRefreshView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/app_bg">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

@@ -171,7 +171,9 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
         //下面这个参数是贷后和逾期的参数
         if (!TextUtils.isEmpty(intent.getStringExtra("customerName"))){
-            vo.addParameter("customerName",intent.getStringExtra("customerName"));
+            String name = intent.getStringExtra("customerName");
+            vo.addParameter("customerName",name);
+            search_et.setText(name);
         }
         if (!TextUtils.isEmpty(intent.getStringExtra("yearMonth"))){
             vo.addParameter("yearMonth",intent.getStringExtra("yearMonth"));
