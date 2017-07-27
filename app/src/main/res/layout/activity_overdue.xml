@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:padding="15dp"
+            android:paddingLeft="15dp"
             android:drawableLeft="@mipmap/back"
             android:text="逾期催收"
             android:textColor="#ffffff"
