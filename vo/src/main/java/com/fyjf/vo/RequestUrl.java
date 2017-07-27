@@ -3,6 +3,7 @@ package com.fyjf.vo;
 public class RequestUrl {
     public static String server = "http://47.93.217.20:8081";//线上
 //    public static String server = "http://192.168.1.104";//家里
+//public static String server = "http://192.168.31.34";//公司
 
     //静态文件
     public static String file_base = server + "/storage";//
@@ -34,6 +35,6 @@ public class RequestUrl {
     public static String report_analysis = api_base + "/bank/analysis/list/app";
     public static String overdue_msgs = api_base + "/overdue/msg/list/app";
     public static String overdue_msgs_send = api_base + "/overdue/msg/save";
-    public static String managers_list = api_base +  "/user/list/bank/managers";
+    public static String managers_list = api_base +  "/bank/user/list/managers";
     public static String report_msg_save = api_base +  "/report/msg/save";
 }

@@ -221,15 +221,16 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         Bundle bundle = new Bundle();
         bundle.putString("pdfPath",item.getOverduePDF());
         bundle.putString("overdueId",item.getOverdueId());
-        startActivity(OverdueReportActivity.class,bundle);
+        startActivity(OverduePDFActivity.class,bundle);
     }
 
     @Override
     public void openProgress(int position) {
         OverdueReport item = overdueReports.get(position);
         Intent intent = new Intent(OverdueActivity.this,OverdueProgressActivity.class);
-        intent.putExtra("id",item.getOverdueId());
-        intent.putExtra("day",item.getOverdueDays());
+//        intent.putExtra("id",item.getOverdueId());
+//        intent.putExtra("day",item.getOverdueDays());
+        intent.putExtra("overdue",item);
         startActivity(intent);
     }
 

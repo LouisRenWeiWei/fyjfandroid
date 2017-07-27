@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class LoanTime implements Serializable{
     private String yearMonth;
     private String count;
+    private String reportImages;
 
     public String getYearMonth() {
         return yearMonth;
@@ -24,6 +25,14 @@ public class LoanTime implements Serializable{
 
     public void setCount(String count) {
         this.count = count;
+    }
+
+    public String getReportImages() {
+        return reportImages;
+    }
+
+    public void setReportImages(String reportImages) {
+        this.reportImages = reportImages;
     }
 
     @Override

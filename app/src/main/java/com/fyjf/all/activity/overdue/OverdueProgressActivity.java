@@ -13,11 +13,10 @@ import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
-import com.fyjf.all.activity.ImageActivity;
-import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.all.adapter.OverdueProgressAdapter;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.OverdueProgress;
+import com.fyjf.dao.entity.OverdueReport;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.report.ReportProgressVO;
 import com.fyjf.widget.refreshview.XRefreshView;
@@ -27,6 +26,7 @@ import com.fyjf.widget.refreshview.utils.LogUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,9 +55,10 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
 
     private int pageSize = 100;
     private int pageNo = 1;
-    private String reportId;
-    private int day;
+//    private String reportId;
+//    private int day;
     private double money;
+    private OverdueReport overdue;
 
     @Override
     protected int getContentLayout() {
@@ -68,9 +69,10 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
     protected void preInitData() {
         Intent intent = getIntent();
         if(intent!=null){
-            reportId = intent.getStringExtra("id");
-            day = intent.getIntExtra("day",0);
+//            reportId = intent.getStringExtra("id");
+//            day = intent.getIntExtra("day",0);
             //collection_title.setText("进入催收第"+day+"天，累计收回"+money+"万元");
+            overdue = (OverdueReport) intent.getSerializableExtra("overdue");
         }
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +141,7 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         ReportProgressVO vo = new ReportProgressVO();
         vo.addParameter("pageNo",pageNo);
         vo.addParameter("pageSize",pageSize);
-        vo.addParameter("overdueId",reportId);
+        vo.addParameter("overdueId",overdue.getOverdueId());
         vo.request(OverdueProgressActivity.this, "resp", "error");
     }
 
@@ -168,7 +170,7 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
                         e.printStackTrace();
                     }
                 }
-                collection_title.setText("进入催收第"+day+"天，累计收回"+money+"万元");
+                collection_title.setText("进入催收第"+overdue.getOverdueDays()+"天，累计收回"+money+"万元");
             } else {
                 ToastUtils.showSystemToast(mContext, "");
             }
@@ -193,6 +195,14 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         OverdueProgress item = overdueProgresses.get(position);
         Intent intent = new Intent(mContext,OverdueMsgActivity.class);
         intent.putExtra("overdueId",item.getOverdueId());
+        startActivity(intent);
+    }
+
+    @Override
+    public void openImgs(int position) {
+        OverdueProgress item = overdueProgresses.get(position);
+        Intent intent = new Intent(mContext,ProgressImgsActivity.class);
+        intent.putExtra("overdueProgress",item);
         startActivity(intent);
     }
 }

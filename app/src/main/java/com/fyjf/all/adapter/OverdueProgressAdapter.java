@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
-import com.fyjf.all.activity.ImageActivity;
 import com.fyjf.dao.entity.OverdueProgress;
 import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.RequestUrl;
@@ -66,35 +65,29 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
 
         holder.tv_desc.setText(item.getDescription());
 
-        String sourceStr = item.getOverdueImgs();
-        holder.ll_imgs.removeAllViews();
-        if (!TextUtils.isEmpty(sourceStr)) {
+        if(!TextUtils.isEmpty(item.getOverdueImgs())){
+            String sourceStr = item.getOverdueImgs();
             String[] sourceStrArray = sourceStr.split(",");
-            int addSize = 0;
+            int imgs = 1;
             for (int i = 0; i < sourceStrArray.length; i++) {
-                String url = RequestUrl.file_image + sourceStrArray[i];
-                View view = addImage(url);
-                view.setTag(url);
-                holder.ll_imgs.addView(view);
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext, ImageActivity.class);
-                        intent.putExtra("url", v.getTag().toString());
-                        mContext.startActivity(intent);
+                if(!TextUtils.isEmpty(sourceStrArray[i])){
+                    if(imgs>3){
+                        break;
                     }
-                });
-                addSize++;
+                    if(imgs==1){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_1);
+                    }else if(imgs==2){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_2);
+                    }else if(imgs==3){
+                        Glide.with(mContext).load(RequestUrl.file_image + sourceStrArray[i]).into(holder.image_3);
+                    }
+                    imgs++;
+                }
             }
-            while (addSize < 2) {
-                holder.ll_imgs.addView(addImageDefault());
-                addSize++;
-            }
-        } else {
-            //添加三个默认的
-            holder.ll_imgs.addView(addImageDefault());
-            holder.ll_imgs.addView(addImageDefault());
-            holder.ll_imgs.addView(addImageDefault());
+        }else {
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_1);
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_2);
+            Glide.with(mContext).load(R.drawable.img_empty).into(holder.image_3);
         }
 
 
@@ -102,6 +95,12 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
             @Override
             public void onClick(View v) {
                 if (itemOperationListener != null) itemOperationListener.openMsg(position);
+            }
+        });
+        holder.ll_imgs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemOperationListener != null) itemOperationListener.openImgs(position);
             }
         });
 
@@ -120,6 +119,9 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         private TextView tv_msg_count;
         private TextView tv_desc;
         private LinearLayout ll_imgs;
+        private ImageView image_1;
+        private ImageView image_2;
+        private ImageView image_3;
 
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
@@ -130,6 +132,9 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
                 tv_msg_count = (TextView) itemView.findViewById(R.id.tv_msg_count);
                 tv_desc = (TextView) itemView.findViewById(R.id.tv_desc);
                 ll_imgs = (LinearLayout) itemView.findViewById(R.id.ll_imgs);
+                image_1 = (ImageView) itemView.findViewById(R.id.image_1);
+                image_2 = (ImageView) itemView.findViewById(R.id.image_2);
+                image_3 = (ImageView) itemView.findViewById(R.id.image_3);
             }
 
         }
@@ -148,19 +153,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     public interface ItemOperationListener {
         //        void openPDF(int position);
         void openMsg(int position);
+        void openImgs(int postion);
     }
 
-    private View addImage(String url) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.iv);
-        Glide.with(mContext).load(url).into(imageView);
-        return view;
-    }
-
-    private View addImageDefault() {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_img_item, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.iv);
-        Glide.with(mContext).load(R.drawable.img_empty).into(imageView);
-        return view;
-    }
 }

@@ -45,6 +45,14 @@ public class TimeUtil {
         return sdf.format(new Date(Long.valueOf(seconds)));
     }
 
+    public static String timeHao2Date(long seconds, String format) {
+        if (format == null || format.isEmpty()) {
+            format = "yyyy-MM-dd HH:mm:ss";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(new Date(seconds));
+    }
+
     /**
      * 日期格式字符串转换成时间戳
      *

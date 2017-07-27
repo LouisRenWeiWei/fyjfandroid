@@ -1,0 +1,78 @@
+package com.fyjf.all.activity.overdue;
+
+import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.fyjf.all.R;
+import com.fyjf.all.activity.BaseActivity;
+import com.fyjf.all.activity.ImageActivity;
+import com.fyjf.all.adapter.OverdueProgressAdapter;
+import com.fyjf.all.adapter.ProgressImagesAdapter;
+import com.fyjf.dao.entity.OverdueProgress;
+import com.fyjf.utils.ScreenUtils;
+import com.fyjf.vo.RequestUrl;
+import com.fyjf.widget.refreshview.recyclerview.GridVerticalHorizonSpace;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import butterknife.BindView;
+
+/**
+ * Created by ASUS on 2017/7/26.
+ */
+
+public class ProgressImgsActivity extends BaseActivity implements ProgressImagesAdapter.ItemOperationListener{
+    @BindView(R.id.back)
+    ImageView back;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    OverdueProgress overdueProgress;
+    private ProgressImagesAdapter adapter;
+    private List<String> data;
+
+    @Override
+    protected int getContentLayout() {
+        return R.layout.activity_progress_imgs;
+    }
+
+    @Override
+    protected void preInitData() {
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        overdueProgress = (OverdueProgress) getIntent().getSerializableExtra("overdueProgress");
+        if(overdueProgress!=null&&!TextUtils.isEmpty(overdueProgress.getOverdueImgs())){
+            data = Arrays.asList(overdueProgress.getOverdueImgs().split(","));
+        }
+        if(data==null)data = new ArrayList<>();
+        recyclerView.setHasFixedSize(true);
+        GridVerticalHorizonSpace gridVerticalHorizonSpace = new GridVerticalHorizonSpace((int)ScreenUtils.pxToDp(mContext,10),(int)ScreenUtils.pxToDp(mContext,10));
+        GridLayoutManager layoutManager = new GridLayoutManager(mContext,2);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(gridVerticalHorizonSpace);
+        adapter = new ProgressImagesAdapter(mContext,data);
+        adapter.setItemOperationListener(this);
+        // 静默加载模式不能设置footerview
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void openImgs(int position) {
+        Intent intent = new Intent(mContext, ImageActivity.class);
+        intent.putExtra("url", RequestUrl.file_image+data.get(position));
+        mContext.startActivity(intent);
+    }
+}

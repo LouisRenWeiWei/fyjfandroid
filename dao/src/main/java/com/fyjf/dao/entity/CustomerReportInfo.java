@@ -31,6 +31,15 @@ public class CustomerReportInfo implements Serializable {
     private String bankCreditReport;
     private String socialCreditReport;
     private String customerLoanType;
+    private String bankWorkerName;
+
+    public String getBankWorkerName() {
+        return bankWorkerName;
+    }
+
+    public void setBankWorkerName(String bankWorkerName) {
+        this.bankWorkerName = bankWorkerName;
+    }
 
     public String getCustomerLoanType() {
         return customerLoanType;

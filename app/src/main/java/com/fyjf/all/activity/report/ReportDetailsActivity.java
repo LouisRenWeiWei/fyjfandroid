@@ -176,7 +176,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         if (!TextUtils.isEmpty(intent.getStringExtra("yearMonth"))){
             vo.addParameter("yearMonth",intent.getStringExtra("yearMonth"));
         }
-        vo.addParameter("customerState",intent.getStringExtra("customerState"));//上报类型　　 1：贷后  2：预警 3： 逾期
+        vo.addParameter("customerState",intent.getIntExtra("customerState",1));//上报类型　　 1：贷后  2：预警 3： 逾期
         vo.addParameter("loanType",intent.getStringExtra("loanType"));//客户类型：　1:抵押贷款 2:担保贷款 3:信用贷款
         vo.addParameter("managerId",intent.getStringExtra("managerId"));//客户经理id
         vo.request(ReportDetailsActivity.this, "resp", "error");

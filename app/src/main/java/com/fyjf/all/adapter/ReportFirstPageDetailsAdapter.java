@@ -61,7 +61,7 @@ public class ReportFirstPageDetailsAdapter extends BaseRecyclerAdapter<ReportFir
         holder.tv_date.setText(TimeUtils.formateDate(item.getExaminTime(),"yyyy-MM-dd","MM月dd日"));
         holder.customer_name.setText(item.getCustomerName());
         holder.customer_msg.setText(item.getMsgCount());
-        holder.customer_manager.setText(item.getCustomerManager());
+        holder.customer_manager.setText(item.getBankWorkerName());
         holder.customer_time.setText(item.getExaminTime());
         if("1".equals(item.getCustomerLoanType())){
             holder.customer_type.setText("抵押贷款");

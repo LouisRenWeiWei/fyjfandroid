@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.fyjf.all"
-    android:versionCode="100"
-    android:versionName="1.0.0">
+    android:versionCode="101"
+    android:versionName="1.0.1">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -69,7 +69,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name=".activity.overdue.OverdueReportActivity"
+            android:name=".activity.overdue.OverduePDFActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.overdue.OverdueActivity"
@@ -78,10 +78,6 @@
         <activity
             android:name=".activity.overdue.OverdueProgressActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activity.WaringActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".activity.ReportPDFActivity"
             android:screenOrientation="portrait"/>
@@ -102,10 +98,6 @@
             android:name=".activity.report.ReportMsgActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.waring.WaringDetailsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity
             android:name=".activity.BankAnalysisActivity"
             android:screenOrientation="portrait"/>
         <activity
@@ -115,14 +107,13 @@
             android:name=".activity.UpdatePwdActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.overdue.OverdueProgressDetailsActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".activity.AnalysisPDFActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.ImageActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".activity.overdue.OverdueMsgActivity"/>
+
+        <activity android:name=".activity.overdue.ProgressImgsActivity"/>
     </application>
 
 </manifest>

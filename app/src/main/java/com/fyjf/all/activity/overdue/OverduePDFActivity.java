@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
-import com.fyjf.all.adapter.OverdueProgressAdapter;
 import com.fyjf.utils.SDUtils;
 import com.fyjf.vo.RequestUrl;
 import com.github.barteksc.pdfviewer.PDFView;
@@ -30,7 +29,7 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class OverdueReportActivity extends BaseActivity implements OnPageChangeListener,OnLoadCompleteListener{
+public class OverduePDFActivity extends BaseActivity implements OnPageChangeListener,OnLoadCompleteListener{
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.pdfView)
@@ -91,8 +90,8 @@ public class OverdueReportActivity extends BaseActivity implements OnPageChangeL
                // String tag = (String) task.getTag();
                 try {
                     pdfView.fromFile(new File(task.getPath())) .defaultPage(0)
-                            .onPageChange(OverdueReportActivity.this)
-                            .onLoad(OverdueReportActivity.this)
+                            .onPageChange(OverduePDFActivity.this)
+                            .onLoad(OverduePDFActivity.this)
                             .load();
                 } catch (Exception e) {
                     e.printStackTrace();
