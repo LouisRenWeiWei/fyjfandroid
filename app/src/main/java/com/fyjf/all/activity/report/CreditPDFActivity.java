@@ -5,31 +5,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.fyjf.all.R;
-import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.activity.BaseFragmentActivity;
-import com.fyjf.all.activity.LoginActivity;
 import com.fyjf.all.fragment.PDFFragment;
 import com.fyjf.dao.entity.CustomerReportInfo;
-import com.fyjf.utils.SDUtils;
-import com.fyjf.vo.RequestUrl;
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnErrorListener;
-import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
-import com.liulishuo.filedownloader.BaseDownloadTask;
-import com.liulishuo.filedownloader.FileDownloadListener;
-import com.liulishuo.filedownloader.FileDownloader;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -46,7 +31,7 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class CreditReportActivity extends BaseFragmentActivity {
+public class CreditPDFActivity extends BaseFragmentActivity {
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.rg_reports)
@@ -97,8 +82,8 @@ public class CreditReportActivity extends BaseFragmentActivity {
             Fragment social = PDFFragment.getInstance(report.getSocialCreditReport());
             fragments.add(social);
 
-            viewpager.setOnPageChangeListener(new CreditReportActivity.MyOnPageChangeListener());
-            viewpager.setAdapter(new CreditReportActivity.PagerAdapter(getSupportFragmentManager(), fragments));
+            viewpager.setOnPageChangeListener(new CreditPDFActivity.MyOnPageChangeListener());
+            viewpager.setAdapter(new CreditPDFActivity.PagerAdapter(getSupportFragmentManager(), fragments));
         }
 
 

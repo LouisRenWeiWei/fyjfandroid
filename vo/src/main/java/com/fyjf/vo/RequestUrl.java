@@ -1,8 +1,8 @@
 package com.fyjf.vo;
 
 public class RequestUrl {
-    public static String server = "http://47.93.217.20:8081";//线上
-//    public static String server = "http://192.168.1.104";//家里
+//    public static String server = "http://47.93.217.20:8081";//线上
+    public static String server = "http://192.168.1.104";//家里
 //public static String server = "http://192.168.31.34";//公司
 
     //静态文件
@@ -16,8 +16,8 @@ public class RequestUrl {
     public static String html_base = server + "/fyjfadmin";
     public static String customer_report_analysis = html_base + "/fyjf/report/echarts.html?customerId=";
 
-//    public static String api_base = server + "/api/api";//家里ip
-    public static String api_base = server + "/fyjf/api";//线上
+    public static String api_base = server + "/api/api";//家里ip
+//    public static String api_base = server + "/fyjf/api";//线上
 
     public static String login = api_base + "/bank/user/login";
     public static String changePasswd = api_base + "/bank/user/update/passwd";

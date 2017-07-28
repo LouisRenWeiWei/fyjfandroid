@@ -46,6 +46,7 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
     </com.fyjf.widget.refreshview.XRefreshView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -54,34 +55,36 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <EditText
             android:id="@+id/et_send_msg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
             android:layout_gravity="bottom"
-            android:background="#ffffff"
-            android:imeOptions="actionDone"
             android:layout_toLeftOf="@+id/tv_send"
-            android:padding="5dp"
+            android:background="#ffffff"
+            android:hint="留言"
+            android:imeOptions="actionDone"
             android:maxLength="100"
+            android:minHeight="48dp"
+            android:padding="5dp"
             android:text=""
-            android:textSize="14sp"
             android:textColorHint="@color/color_a3"
-            android:hint="留言"/>
+            android:textCursorDrawable="@drawable/cursor"
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/tv_send"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:background="#254382"
-            android:layout_centerVertical="true"
-            android:text="发送"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="14sp"
             android:layout_alignParentRight="true"
-            />
+            android:layout_centerVertical="true"
+            android:background="#254382"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="发送"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
     </RelativeLayout>
 </LinearLayout>

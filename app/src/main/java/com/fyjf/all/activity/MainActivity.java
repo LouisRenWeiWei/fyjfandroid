@@ -7,7 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fyjf.all.R;
+import com.fyjf.all.activity.bank.BankAnalysisActivity;
 import com.fyjf.all.activity.overdue.OverdueActivity;
+import com.fyjf.all.activity.report.ReportMainActivity;
 import com.fyjf.all.update.UpdateHelper;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.vo.RequestUrl;
@@ -52,10 +54,10 @@ public class MainActivity extends BaseActivity {
     void onClick(View view){
         switch (view.getId()){
             case R.id.btn_loan_check:
-                startActivity(ReportActivity.class);//默认是1
+                startActivity(ReportMainActivity.class);//默认是1
                 break;
             case R.id.btn_waring:
-                Intent intent = new Intent(MainActivity.this,ReportActivity.class);
+                Intent intent = new Intent(MainActivity.this,ReportMainActivity.class);
                 intent.putExtra("customerState",2);
                 startActivity(intent);
                 break;

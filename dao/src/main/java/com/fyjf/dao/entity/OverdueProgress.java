@@ -26,6 +26,15 @@ public class OverdueProgress implements Serializable{
     private String overdueImgs;
     private String money;
     private int msgCount;
+    private String overdueProgressDay;//催收进度日期
+
+    public String getOverdueProgressDay() {
+        return overdueProgressDay;
+    }
+
+    public void setOverdueProgressDay(String overdueProgressDay) {
+        this.overdueProgressDay = overdueProgressDay;
+    }
 
     public int getMsgCount() {
         return msgCount;

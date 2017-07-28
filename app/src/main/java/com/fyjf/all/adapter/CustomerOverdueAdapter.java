@@ -57,7 +57,7 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         holder.overdue_time.setText("逾期"+overdueReport.getOverdueDaysTotal()+"天 | ");
         holder.overdue_price.setText("¥"+overdueReport.getOverdueMoney()+"万");
         holder.overdue_manger.setText(overdueReport.getBankWorkerName());
-        holder.overdue_date.setText(TimeUtil.timeHao2Date(overdueReport.getOverdueStart(),"yyyy-MM-dd"));
+        holder.overdue_date.setText(TimeUtil.timeHao2Date(overdueReport.getCreateDate(),"yyyy-MM-dd"));
 
         //配置
         int overdueDay = overdueReport.getOverdueDays();

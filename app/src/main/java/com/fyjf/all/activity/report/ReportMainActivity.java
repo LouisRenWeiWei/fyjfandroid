@@ -1,4 +1,4 @@
-package com.fyjf.all.activity;
+package com.fyjf.all.activity.report;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,34 +10,26 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
-import com.fyjf.all.activity.report.CreditReportActivity;
-import com.fyjf.all.activity.report.ReportAnalysisActivity;
-import com.fyjf.all.activity.report.ReportDetailsActivity;
-import com.fyjf.all.activity.report.ReportImagesActivity;
-import com.fyjf.all.activity.report.ReportMsgActivity;
-import com.fyjf.all.adapter.ReportDetailsAdapter;
+import com.fyjf.all.activity.BaseActivity;
+import com.fyjf.all.activity.ReportPDFActivity;
 import com.fyjf.all.adapter.ReportFirstPageDetailsAdapter;
 import com.fyjf.all.adapter.checkloan.ReportFirstPageAdapter;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.dao.entity.LoanTime;
-import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.utils.JSONUtil;
 import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.report.ReportDetailsVO;
 import com.fyjf.vo.report.ReportListVO;
 import com.fyjf.widget.refreshview.XRefreshView;
-import com.fyjf.widget.refreshview.XRefreshViewFooter;
 import com.fyjf.widget.refreshview.XScrollView;
 import com.fyjf.widget.refreshview.utils.LogUtils;
 
@@ -57,7 +49,7 @@ import butterknife.BindView;
 * author: renweiwei
 * datetime: 
 */
-public class ReportActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportFirstPageAdapter.ItemOperationListener, ReportFirstPageDetailsAdapter.ItemOperationListener {
+public class ReportMainActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportFirstPageAdapter.ItemOperationListener, ReportFirstPageDetailsAdapter.ItemOperationListener {
     @BindView(R.id.back)
     TextView back;
     @BindView(R.id.search_et)
@@ -116,10 +108,10 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
                 if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                     String name = search_et.getText().toString().trim();
                     if(!TextUtils.isEmpty(name)){
-                        Intent intent = new Intent(mContext, ReportDetailsActivity.class);
+                        Intent intent = new Intent(mContext, ReportListActivity.class);
                         intent.setFlags(100);
                         intent.putExtra("customerName", name);
-                        intent.putExtra("fromSearch",true);
+                        //intent.putExtra("fromSearch",true);
                         intent.putExtra("customerState",1);
                         startActivity(intent);
                         return true;
@@ -216,7 +208,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         vo.addParameter("customerState", customerState);//贷后
         vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(), "yyyyMM"));
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
-        vo.request(ReportActivity.this, "respLatest", "errorLatest");
+        vo.request(ReportMainActivity.this, "respLatest", "errorLatest");
     }
 
     @ResponseError(name = "errorLatest")
@@ -275,7 +267,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         vo.addParameter("customerState", customerState);//贷后
         vo.addParameter("yearMonth", TimeUtils.formateDate(currentYearMonth.getTime(), "yyyyMM"));//
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
-        vo.request(ReportActivity.this, "resp", "error");
+        vo.request(ReportMainActivity.this, "resp", "error");
     }
 
     @ResponseError(name = "error")
@@ -323,7 +315,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         Intent intent = new Intent();
         intent.putExtra("time", time.getYearMonth());
         intent.putExtra("customerState", customerState);
-        intent.setClass(ReportActivity.this, ReportDetailsActivity.class);
+        intent.setClass(ReportMainActivity.this, ReportListActivity.class);
         startActivity(intent);
     }
 
@@ -348,7 +340,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Intent intent = new Intent();
         intent.putExtra("reportId", info.getId());
-        intent.setClass(ReportActivity.this, ReportPDFActivity.class);
+        intent.setClass(ReportMainActivity.this, ReportPDFActivity.class);
         startActivity(intent);
     }
 
@@ -357,7 +349,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Intent intent = new Intent();
         intent.putExtra("reportId", info.getId());
-        intent.setClass(ReportActivity.this, ReportAnalysisActivity.class);
+        intent.setClass(ReportMainActivity.this, ReportEchartsActivity.class);
         startActivity(intent);
     }
 
@@ -366,7 +358,7 @@ public class ReportActivity extends BaseActivity implements XRefreshView.XRefres
         CustomerReportInfo info = customerReportInfosLatest.get(position);
         Intent intent = new Intent();
         intent.putExtra("report", info);
-        intent.setClass(ReportActivity.this, CreditReportActivity.class);
+        intent.setClass(ReportMainActivity.this, CreditPDFActivity.class);
         startActivity(intent);
     }
 }

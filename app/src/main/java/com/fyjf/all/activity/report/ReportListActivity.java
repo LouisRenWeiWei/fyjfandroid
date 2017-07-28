@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -27,7 +25,6 @@ import com.fyjf.utils.JSONUtil;
 import com.fyjf.vo.report.ReportDetailsVO;
 import com.fyjf.widget.refreshview.XRefreshView;
 import com.fyjf.widget.refreshview.XRefreshViewFooter;
-import com.fyjf.widget.refreshview.utils.LogUtils;
 
 import org.json.JSONObject;
 
@@ -36,7 +33,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class ReportDetailsActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportDetailsAdapter.ItemOperationListener {
+public class ReportListActivity extends BaseActivity implements XRefreshView.XRefreshViewListener, ReportDetailsAdapter.ItemOperationListener {
     @BindView(R.id.back)
     TextView back;
     @BindView(R.id.search_et)
@@ -113,6 +110,11 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
                 back.setText(yearTime.substring(4,6));
                 getData();
             }else {
+                if(customerState==1){
+                    back.setText("贷后检查");
+                }else {
+                    back.setText("预警信息");
+                }
                 getQuery(intent);
             }
 
@@ -161,7 +163,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         String customerName = search_et.getText().toString().trim();
         if(!TextUtils.isEmpty(customerName))vo.addParameter("customerName",customerName);
         vo.addParameter("account", AppData.getString(AppData.ACCOUNT));
-        vo.request(ReportDetailsActivity.this, "resp", "error");
+        vo.request(ReportListActivity.this, "resp", "error");
     }
 
     private void getQuery(Intent intent){
@@ -181,7 +183,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         vo.addParameter("customerState",intent.getIntExtra("customerState",1));//上报类型　　 1：贷后  2：预警 3： 逾期
         vo.addParameter("loanType",intent.getStringExtra("loanType"));//客户类型：　1:抵押贷款 2:担保贷款 3:信用贷款
         vo.addParameter("managerId",intent.getStringExtra("managerId"));//客户经理id
-        vo.request(ReportDetailsActivity.this, "resp", "error");
+        vo.request(ReportListActivity.this, "resp", "error");
     }
 
     @ResponseError(name = "error")
@@ -251,7 +253,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         CustomerReportInfo info = customers.get(position);
         Intent intent = new Intent();
         intent.putExtra("reportId",info.getId());
-        intent.setClass(ReportDetailsActivity.this,ReportPDFActivity.class);
+        intent.setClass(ReportListActivity.this,ReportPDFActivity.class);
         startActivity(intent);
     }
 
@@ -264,7 +266,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         CustomerReportInfo info = customers.get(position);
         Intent intent = new Intent();
         intent.putExtra("reportId",info.getId());
-        intent.setClass(ReportDetailsActivity.this,ReportAnalysisActivity.class);
+        intent.setClass(ReportListActivity.this,ReportEchartsActivity.class);
         startActivity(intent);
 
     }
@@ -278,7 +280,7 @@ public class ReportDetailsActivity extends BaseActivity implements XRefreshView.
         CustomerReportInfo info = customers.get(position);
         Intent intent = new Intent();
         intent.putExtra("report",info);
-        intent.setClass(ReportDetailsActivity.this,CreditReportActivity.class);
+        intent.setClass(ReportListActivity.this,CreditPDFActivity.class);
         startActivity(intent);
     }
 

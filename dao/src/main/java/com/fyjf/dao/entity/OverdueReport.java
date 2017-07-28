@@ -27,7 +27,7 @@ public class OverdueReport implements Serializable{
 
     private String overdueImgs;
     private String overdueMoney;
-    private long overdueStart;
+    private long createDate;
     private String overduePDF;
     private String overdueId;
     private String customerId;
@@ -38,6 +38,23 @@ public class OverdueReport implements Serializable{
     private String managerName;
     private String customerName;
     private String bankWorkerName;
+    private String overdueStartDay;
+
+    public long getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(long createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getOverdueStartDay() {
+        return overdueStartDay;
+    }
+
+    public void setOverdueStartDay(String overdueStartDay) {
+        this.overdueStartDay = overdueStartDay;
+    }
 
     public int getOverdueDaysTotal() {
         return overdueDaysTotal;
@@ -71,13 +88,6 @@ public class OverdueReport implements Serializable{
         this.overdueMoney = overdueMoney;
     }
 
-    public long getOverdueStart() {
-        return overdueStart;
-    }
-
-    public void setOverdueStart(long overdueStart) {
-        this.overdueStart = overdueStart;
-    }
 
     public String getOverduePDF() {
         return overduePDF;

@@ -54,8 +54,22 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     public void onBindViewHolder(final SimpleAdapterViewHolder holder, final int position, boolean isItem) {
         final OverdueProgress item = list.get(position);
         try {
-            String month = TimeUtils.formateDate(new Date(item.getCreateDate()), "MM月dd日");
-            holder.tv_date.setText(month);
+            if(position!=0){
+                String lastMonthYear = TimeUtils.formateDate(list.get(position-1).getOverdueProgressDay(),"yyyy-MM-dd","yyyy年MM月");
+                String itemMonthYear = TimeUtils.formateDate(item.getOverdueProgressDay(),"yyyy-MM-dd","yyyy年MM月");
+                if(lastMonthYear.equals(itemMonthYear)){
+//                    holder.tv_date.setText(TimeUtils.formateDate(item.getOverdueProgressDay(),"yyyy-MM-dd","dd日"));
+                    holder.tv_date.setText(TimeUtils.formateDate(item.getOverdueProgressDay(),"yyyy-MM-dd","MM月dd日"));
+                }else {
+                    if(lastMonthYear.substring(0,4).equals(itemMonthYear.substring(0,4))){
+                        holder.tv_date.setText(TimeUtils.formateDate(item.getOverdueProgressDay(),"yyyy-MM-dd","MM月dd日"));
+                    }else {
+                        holder.tv_date.setText(TimeUtils.formateDate(item.getOverdueProgressDay(),"yyyy-MM-dd","yyyy年MM月dd日"));
+                    }
+                }
+            }else {
+                holder.tv_date.setText(TimeUtils.formateDate(item.getOverdueProgressDay(),"yyyy-MM-dd","MM月dd日"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,10 +116,19 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
             }
         });
         holder.tv_desc.setOnClickListener(new View.OnClickListener() {
+            Boolean flag = true;
             @Override
             public void onClick(View v) {
-                holder.tv_desc.setMaxLines(100);
-                holder.tv_desc.setText(item.getDescription());
+                if(flag){
+                    flag = false;
+                    holder.tv_desc.setEllipsize(null);
+                    holder.tv_desc.setMaxLines(100);
+                }else {
+                    flag = true;
+                    holder.tv_desc.setEllipsize(TextUtils.TruncateAt.END);
+                    holder.tv_desc.setMaxLines(2);
+                }
+
             }
         });
 

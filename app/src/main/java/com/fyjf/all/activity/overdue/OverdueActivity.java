@@ -108,13 +108,14 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
             }
         });
         Intent intent = getIntent();
-        boolean fromSearch = intent.getBooleanExtra("fromSearch",false);
-        if(fromSearch){
-            getDataFromSearch(intent);
-        }else {
-            getData();
-        }
+        if (intent!=null){
+            if (intent.getFlags()!=100){
+                getData();
+            }else {
+                getDataFromSearch(intent);
+            }
 
+        }
     }
 
     @Override
@@ -162,7 +163,9 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         //vo.addParameter("customerState",intent.getStringExtra("customerState"));//上报类型　　 1：贷后  2：预警 3： 逾期
         //下面这个参数是贷后和逾期的参数
         if (!TextUtils.isEmpty(intent.getStringExtra("customerName"))){
-            vo.addParameter("customerName",intent.getStringExtra("customerName"));
+            String name = intent.getStringExtra("customerName");
+            vo.addParameter("customerName",name);
+            search_et.setText(name);
         }
         if (!TextUtils.isEmpty(intent.getStringExtra("yearMonth"))){
             vo.addParameter("yearMonth",intent.getStringExtra("yearMonth"));

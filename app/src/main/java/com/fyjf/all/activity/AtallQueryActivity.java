@@ -13,7 +13,7 @@ import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.overdue.OverdueActivity;
-import com.fyjf.all.activity.report.ReportDetailsActivity;
+import com.fyjf.all.activity.report.ReportListActivity;
 import com.fyjf.all.app.AppData;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.MangerModel;
@@ -135,10 +135,10 @@ public class AtallQueryActivity extends BaseActivity implements MaterialSpinner.
                 intent.setFlags(100);
                 if (update_type.equals("1")) {
                     intent.putExtra("customerState",1);
-                    intent.setClass(AtallQueryActivity.this, ReportDetailsActivity.class);
+                    intent.setClass(AtallQueryActivity.this, ReportListActivity.class);
                 } else if (update_type.equals("2")) {
                     intent.putExtra("customerState",2);
-                    intent.setClass(AtallQueryActivity.this, ReportDetailsActivity.class);
+                    intent.setClass(AtallQueryActivity.this, ReportListActivity.class);
                 } else if (update_type.equals("3")) {
                     intent.setClass(AtallQueryActivity.this, OverdueActivity.class);
                 }

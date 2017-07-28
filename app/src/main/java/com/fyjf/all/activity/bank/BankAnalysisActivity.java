@@ -1,4 +1,4 @@
-package com.fyjf.all.activity;
+package com.fyjf.all.activity.bank;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
+import com.fyjf.all.activity.AnalysisPDFActivity;
+import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.activity.report.ReportMsgActivity;
 import com.fyjf.all.adapter.bank.BankAnalysisAdapter;
 import com.fyjf.all.app.AppData;

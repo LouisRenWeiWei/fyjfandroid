@@ -48,7 +48,7 @@ public class SettingActivity extends BaseActivity implements CompoundButton.OnCh
                 startActivity(ContactUsActivity.class);
                 break;
             case R.id.tv_logout:
-                AppData.saveString(AppData.ACCOUNT,"");
+//                AppData.saveString(AppData.ACCOUNT,"");
                 AppData.saveString(AppData.PASSWORD,"");
                 startActivity(LoginActivity.class);
                 break;

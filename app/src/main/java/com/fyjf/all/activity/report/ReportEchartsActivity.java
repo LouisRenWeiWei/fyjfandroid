@@ -20,7 +20,7 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class ReportAnalysisActivity extends BaseActivity{
+public class ReportEchartsActivity extends BaseActivity{
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.simpleWebView)

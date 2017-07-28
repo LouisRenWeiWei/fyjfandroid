@@ -58,6 +58,7 @@
             android:layout_marginLeft="15.5dp"
             android:background="@drawable/edit_bg"
             android:paddingLeft="10dp"
+            android:textCursorDrawable="@drawable/cursor"
             android:paddingRight="10dp"
             android:singleLine="true"
             android:textSize="13.5sp"/>
