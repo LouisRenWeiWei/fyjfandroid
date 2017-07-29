@@ -1,2 +1,2 @@
-include ':app', ':network', ':utils', ':vo', ':widget', ':blservice', ':dao'
+include ':app', ':network', ':utils', ':vo', ':widget', ':blservice', ':dao', ':dialog'
 //include ':dao'

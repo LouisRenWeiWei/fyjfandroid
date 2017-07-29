@@ -40,7 +40,7 @@ public abstract class BaseFragment extends Fragment {
 	protected void showDialog(String msg){
 		if(dialog==null){
 			dialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
-			dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+			dialog.getProgressHelper().setBarColor(Color.parseColor("#3A558E"));
 			dialog.setCancelable(false);
 		}
 		dialog.setTitleText(msg);
