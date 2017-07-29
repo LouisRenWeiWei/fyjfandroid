@@ -10,6 +10,7 @@ import com.fyjf.all.R;
 import com.fyjf.all.activity.bank.BankAnalysisActivity;
 import com.fyjf.all.activity.overdue.OverdueActivity;
 import com.fyjf.all.activity.report.ReportMainActivity;
+import com.fyjf.all.activity.user.SettingActivity;
 import com.fyjf.all.update.UpdateHelper;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.vo.RequestUrl;

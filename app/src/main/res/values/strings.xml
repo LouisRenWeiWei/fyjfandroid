@@ -17,4 +17,6 @@
     <string name="next_time">下次再说</string>
     <string name="download">下载</string>
     <string name="permission_storage">请允许应用添加存储权限</string>
+
+
 </resources>

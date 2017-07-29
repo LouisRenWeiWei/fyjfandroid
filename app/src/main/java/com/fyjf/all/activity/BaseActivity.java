@@ -3,12 +3,15 @@ package com.fyjf.all.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 
 import com.fyjf.utils.StatisticsUtils;
+import com.wwren.dialog.SweetAlert.SweetAlertDialog;
 
 import butterknife.ButterKnife;
+
 
 /**
  * Created by 任伟伟
@@ -18,6 +21,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends Activity {
     protected Context mContext;
+    protected SweetAlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,21 @@ public abstract class BaseActivity extends Activity {
         mContext = BaseActivity.this;
         ButterKnife.bind(this);
         preInitData();
+    }
+    protected void showDialog(String msg){
+        if(dialog==null){
+            dialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+            dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+            dialog.setCancelable(false);
+        }
+        dialog.setTitleText(msg);
+        dialog.show();
+    }
+
+    protected void dismisDialog(){
+        if(dialog!=null&&dialog.isShowing()){
+            dialog.dismissWithAnimation();
+        }
     }
 
     protected abstract int getContentLayout();

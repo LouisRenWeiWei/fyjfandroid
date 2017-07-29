@@ -160,6 +160,7 @@ public class SimpleWebView extends FrameLayout implements LoadErrorView.OnReload
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             super.onReceivedError(view, request, error);
             if(GONE==load_error.getVisibility())load_error.setVisibility(VISIBLE);
+            if(webViewListener!=null)webViewListener.onError();
         }
 
         @Override
@@ -168,6 +169,7 @@ public class SimpleWebView extends FrameLayout implements LoadErrorView.OnReload
             if(GONE==load_error.getVisibility()) {
                 load_error.setVisibility(VISIBLE);
             }
+            if(webViewListener!=null)webViewListener.onError();
         }
 
         @Override
@@ -179,6 +181,7 @@ public class SimpleWebView extends FrameLayout implements LoadErrorView.OnReload
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            if(webViewListener!=null)webViewListener.onStartLoad();
         }
 
         //在页面加载结束时调用。同样道理，我们知道一个页面载入完成，于是我们可以关闭loading 条，切换程序动作。
@@ -192,6 +195,7 @@ public class SimpleWebView extends FrameLayout implements LoadErrorView.OnReload
                 if(GONE==load_error.getVisibility())load_error.setVisibility(VISIBLE);
                 if(VISIBLE==webView.getVisibility())webView.setVisibility(GONE);
             }
+            if(webViewListener!=null)webViewListener.onFinish();
         }
 
         // 在加载页面资源时会调用，每一个资源（比如图片）的加载都会调用一次
@@ -287,5 +291,20 @@ public class SimpleWebView extends FrameLayout implements LoadErrorView.OnReload
         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
             return super.onShowFileChooser(webView, filePathCallback, fileChooserParams);
         }
+    }
+
+    public interface WebViewListener{
+        void onStartLoad();
+        void onError();
+        void onFinish();
+    }
+    private WebViewListener webViewListener;
+
+    public WebViewListener getWebViewListener() {
+        return webViewListener;
+    }
+
+    public void setWebViewListener(WebViewListener webViewListener) {
+        this.webViewListener = webViewListener;
     }
 }

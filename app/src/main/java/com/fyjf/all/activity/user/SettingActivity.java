@@ -1,4 +1,4 @@
-package com.fyjf.all.activity;
+package com.fyjf.all.activity.user;
 
 import android.view.View;
 import android.widget.CheckBox;
@@ -7,6 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fyjf.all.R;
+import com.fyjf.all.activity.BaseActivity;
+import com.fyjf.all.activity.LoginActivity;
+import com.fyjf.all.activity.common.ContactUsActivity;
+import com.fyjf.all.activity.user.UpdatePwdActivity;
 import com.fyjf.all.app.AppData;
 
 import butterknife.BindView;

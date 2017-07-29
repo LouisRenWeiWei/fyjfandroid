@@ -105,6 +105,7 @@ public class OverduePDFActivity extends BaseActivity implements OnPageChangeList
 
             @Override
             protected void error(BaseDownloadTask task, Throwable e) {
+                dismisDialog();
             }
 
             @Override
@@ -113,6 +114,7 @@ public class OverduePDFActivity extends BaseActivity implements OnPageChangeList
         };
 
         if (!TextUtils.isEmpty(pdfPath)) {
+            showDialog("正在加载，请稍后...");
             String sdPath = SDUtils.getPDFPath() + pdfPath;
             FileDownloader.getImpl().create(RequestUrl.file_pdf + pdfPath).setPath(sdPath)
                     .setTag(pdfPath)
@@ -130,7 +132,7 @@ public class OverduePDFActivity extends BaseActivity implements OnPageChangeList
 
     @Override
     public void loadComplete(int nbPages) {
-
+        dismisDialog();
     }
 
 //    @Override

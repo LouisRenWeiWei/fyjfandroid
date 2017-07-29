@@ -20,7 +20,7 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class ReportEchartsActivity extends BaseActivity{
+public class ReportEchartsActivity extends BaseActivity implements SimpleWebView.WebViewListener{
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.simpleWebView)
@@ -41,11 +41,28 @@ public class ReportEchartsActivity extends BaseActivity{
                 finish();
             }
         });
+        simpleWebView.setWebViewListener(this);
         customerId = getIntent().getStringExtra("reportId");
         if(!TextUtils.isEmpty(customerId)){
+            showDialog("正在加载，请稍后");
             simpleWebView.loadUrl(RequestUrl.customer_report_analysis+customerId);
             LogUtils.e("url:"+RequestUrl.customer_report_analysis+customerId);
         }
 
+    }
+
+    @Override
+    public void onStartLoad() {
+
+    }
+
+    @Override
+    public void onError() {
+        dismisDialog();
+    }
+
+    @Override
+    public void onFinish() {
+        dismisDialog();
     }
 }

@@ -13,4 +13,5 @@
         <item name="android:windowIsTranslucent">true</item><!--解决页面切换短暂黑屏-->
     </style>
 
+
 </resources>

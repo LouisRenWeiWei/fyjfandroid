@@ -125,4 +125,5 @@ dependencies {
     releaseCompile 'com.antfortune.freeline:runtime-no-op:0.8.7'
     compile 'com.jaredrummler:material-spinner:1.1.0'
 
+    compile project(path: ':dialog')
 }

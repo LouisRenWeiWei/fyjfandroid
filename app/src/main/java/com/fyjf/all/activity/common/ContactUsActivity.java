@@ -1,9 +1,10 @@
-package com.fyjf.all.activity;
+package com.fyjf.all.activity.common;
 
 import android.view.View;
 import android.widget.ImageView;
 
 import com.fyjf.all.R;
+import com.fyjf.all.activity.BaseActivity;
 
 import butterknife.BindView;
 
@@ -15,7 +16,7 @@ import butterknife.BindView;
 * datetime:
 *
 */
-public class ContactUsActivity extends BaseActivity{
+public class ContactUsActivity extends BaseActivity {
     @BindView(R.id.back)
     ImageView back;
 

@@ -3,24 +3,18 @@ package com.fyjf.all.activity.overdue;
 import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
-import com.fyjf.all.activity.ImageActivity;
+import com.fyjf.all.activity.common.ImageActivity;
 import com.fyjf.all.adapter.AdvGridVerticalHorizonSpace;
-import com.fyjf.all.adapter.OverdueProgressAdapter;
 import com.fyjf.all.adapter.ProgressImagesAdapter;
 import com.fyjf.dao.entity.OverdueProgress;
-import com.fyjf.utils.ScreenUtils;
 import com.fyjf.vo.RequestUrl;
-import com.fyjf.widget.refreshview.recyclerview.GridVerticalHorizonSpace;
 
 import java.util.ArrayList;
 import java.util.Arrays;

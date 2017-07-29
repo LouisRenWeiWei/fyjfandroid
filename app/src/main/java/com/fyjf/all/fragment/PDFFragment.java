@@ -71,6 +71,7 @@ public class PDFFragment extends BaseFragment implements OnPageChangeListener,On
                                 @Override
                                 public void onError(Throwable t) {
                                     Log.e("tag---pdf error----",t.getMessage());
+                                    dismisDialog();
                                 }
                             })
                             .load();
@@ -87,6 +88,7 @@ public class PDFFragment extends BaseFragment implements OnPageChangeListener,On
 
             @Override
             protected void error(BaseDownloadTask task, Throwable e) {
+                dismisDialog();
             }
 
             @Override
@@ -97,6 +99,7 @@ public class PDFFragment extends BaseFragment implements OnPageChangeListener,On
         if(bundle!=null){
             pdf = bundle.getString("pdf","");
             if(!TextUtils.isEmpty(pdf)){
+                showDialog("正在加载，请稍后...");
                 String sdPath = SDUtils.getPDFPath()+pdf;
                 FileDownloader.getImpl().create(RequestUrl.file_pdf+pdf).setPath(sdPath)
                         .setTag(pdf)
@@ -109,7 +112,7 @@ public class PDFFragment extends BaseFragment implements OnPageChangeListener,On
 
     @Override
     public void loadComplete(int nbPages) {
-
+        dismisDialog();
     }
 
     @Override

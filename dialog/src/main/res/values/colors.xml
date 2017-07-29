@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#3F51B5</color>
-    <color name="color_47">#474747</color>
-    <color name="color_1">#0BA422</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="divider">#e5e5e5</color>
-    <color name="transparent">#00000000</color>
-    <color name="app_bg">#e5e5e5</color>
-    <color name="app_color">#3A558E</color>
-    <color name="app_color_light">#3A558E</color>
-    <color name="app_text_color">#474747</color>
-    <color name="color_a3">#a3a3a3</color>
-
-    <!--dilaog-->
-    <color name="slider_tab">#d70c18</color>
     <color name="float_transparent">#00000000</color>
     <color name="sweet_dialog_bg_color">#FFFFFF</color>
     <color name="button_text_color">#FFFFFF</color>
@@ -36,5 +19,4 @@
     <color name="material_blue_grey_95">#ff21272b</color>
     <color name="material_deep_teal_20">#ff80cbc4</color>
     <color name="material_deep_teal_50">#ff009688</color>
-
 </resources>

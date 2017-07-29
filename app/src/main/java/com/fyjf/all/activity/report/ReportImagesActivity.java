@@ -13,7 +13,7 @@ import com.android.volley.ext.ResponseError;
 import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
-import com.fyjf.all.activity.ImageActivity;
+import com.fyjf.all.activity.common.ImageActivity;
 import com.fyjf.all.adapter.checkloan.ReportImagAdapter;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.ImageFile;

@@ -1,4 +1,4 @@
-package com.fyjf.all.activity;
+package com.fyjf.all.activity.common;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 
+import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.utils.BitmapUtil;
 import com.fyjf.all.widget.SelectOrTakePhotoView;
 import com.fyjf.utils.SDUtils;

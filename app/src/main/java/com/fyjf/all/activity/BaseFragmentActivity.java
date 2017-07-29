@@ -1,6 +1,7 @@
 package com.fyjf.all.activity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,8 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 
-import com.fyjf.all.R;
 import com.fyjf.utils.StatisticsUtils;
+import com.wwren.dialog.SweetAlert.SweetAlertDialog;
 
 import butterknife.ButterKnife;
 
@@ -22,6 +23,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
     protected Context mContext;
+    protected SweetAlertDialog dialog;
     private FragmentManager fragmentManager;
     private Fragment mContent;
     @Override
@@ -36,6 +38,23 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         fragmentManager = getSupportFragmentManager();
         preInitData();
     }
+
+    protected void showDialog(String msg){
+        if(dialog==null){
+            dialog = new SweetAlertDialog(mContext, SweetAlertDialog.PROGRESS_TYPE);
+            dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+            dialog.setCancelable(false);
+        }
+        dialog.setTitleText(msg);
+        dialog.show();
+    }
+
+    protected void dismisDialog(){
+        if(dialog!=null&&dialog.isShowing()){
+            dialog.dismissWithAnimation();
+        }
+    }
+
 
     protected abstract int getContentLayout();
 

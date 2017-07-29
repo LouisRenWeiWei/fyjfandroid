@@ -1,4 +1,4 @@
-package com.fyjf.all.activity;
+package com.fyjf.all.activity.common;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
+import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.widget.photoview.PhotoView;
 
 import butterknife.BindView;
