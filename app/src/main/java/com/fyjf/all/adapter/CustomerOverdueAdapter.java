@@ -61,27 +61,28 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
 
         //配置
         int overdueDay = overdueReport.getOverdueDays();
-        if(overdueDay<90){
-            holder.overdue_state.setText("正常");
-            holder.overdue_state.setBackgroundColor(Color.parseColor("#0BA422"));//绿色
-            holder.overdue_time.setTextColor(Color.parseColor("#0BA422"));
-            holder.overdue_price.setTextColor(Color.parseColor("#0BA422"));
-        }else if(overdueDay>=90&overdueDay<180){
+//        if(overdueDay<90){
+//            holder.overdue_state.setText("正常");
+//            holder.overdue_state.setBackgroundColor(Color.parseColor("#0BA422"));//绿色
+//            holder.overdue_time.setTextColor(Color.parseColor("#0BA422"));
+//            holder.overdue_price.setTextColor(Color.parseColor("#0BA422"));
+//        }else
+        if(overdueDay<=90){
             holder.overdue_state.setText("关注");
             holder.overdue_state.setBackgroundColor(Color.parseColor("#009cff"));//蓝色
             holder.overdue_time.setTextColor(Color.parseColor("#009cff"));
             holder.overdue_price.setTextColor(Color.parseColor("#009cff"));
-        }else if(overdueDay>=180&overdueDay<360){
+        }else if(overdueDay>90&overdueDay<=180){
             holder.overdue_state.setText("次级");
             holder.overdue_state.setBackgroundColor(Color.parseColor("#ffba00"));//黄色
             holder.overdue_time.setTextColor(Color.parseColor("#ffba00"));
             holder.overdue_price.setTextColor(Color.parseColor("#ffba00"));
-        }else if(overdueDay>=360&overdueDay<720){
+        }else if(overdueDay>180&overdueDay<=720){
             holder.overdue_state.setText("可疑");
             holder.overdue_state.setBackgroundColor(Color.parseColor("#ff8003"));//cheng色
             holder.overdue_time.setTextColor(Color.parseColor("#ff8003"));
             holder.overdue_price.setTextColor(Color.parseColor("#ff8003"));
-        }else if(overdueDay>=720){
+        }else if(overdueDay>720){
             holder.overdue_state.setText("损失");
             holder.overdue_state.setBackgroundColor(Color.parseColor("#ff1c1c"));//红色
             holder.overdue_time.setTextColor(Color.parseColor("#ff1c1c"));

@@ -2,7 +2,9 @@ package com.fyjf.all.activity.common;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 
@@ -19,6 +21,8 @@ import butterknife.BindView;
 public class ContactUsActivity extends BaseActivity {
     @BindView(R.id.back)
     ImageView back;
+    @BindView(R.id.tv_app_version)
+    TextView tv_app_version;
 
     @Override
     protected int getContentLayout() {
@@ -33,5 +37,6 @@ public class ContactUsActivity extends BaseActivity {
                 finish();
             }
         });
+        tv_app_version.setText("app版本：v"+AppUtils.getAppVersionName());
     }
 }

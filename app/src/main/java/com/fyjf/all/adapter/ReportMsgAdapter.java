@@ -38,7 +38,7 @@ public class ReportMsgAdapter extends BaseRecyclerAdapter<ReportMsgAdapter.Simpl
 
     @Override
     public SimpleAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType, boolean isItem) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.report_msg_item, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_msg_item, parent, false);
         SimpleAdapterViewHolder vh = new SimpleAdapterViewHolder(v, true);
         return vh;
     }

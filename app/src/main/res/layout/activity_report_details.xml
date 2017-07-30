@@ -16,7 +16,8 @@
             android:layout_centerVertical="true"
             android:drawableLeft="@mipmap/back"
             android:gravity="center"
-            android:padding="15dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
             android:text="7"
             android:textColor="#ffffff"
             android:textSize="18sp" />

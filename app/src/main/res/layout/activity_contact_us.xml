@@ -36,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
         <ImageView
             android:layout_width="match_parent"
@@ -81,5 +82,14 @@
             android:gravity="center"
             android:text="地址：郑州市郑东新区东风南路、\n金水东路北3号楼5层508"/>
 
+        <TextView
+            android:id="@+id/tv_app_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="app版本：v1.1.1"/>
     </LinearLayout>
 </LinearLayout>

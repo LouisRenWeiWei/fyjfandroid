@@ -42,8 +42,10 @@ import butterknife.BindView;
 public class OverdueProgressActivity extends BaseActivity implements XRefreshView.XRefreshViewListener ,OverdueProgressAdapter.ItemOperationListener{
     @BindView(R.id.back)
     ImageView back;
-    @BindView(R.id.collection_title)
-    TextView collection_title;
+    @BindView(R.id.tv_days)
+    TextView tv_days;
+    @BindView(R.id.tv_total_money)
+    TextView tv_total_money;
     @BindView(R.id.xRefreshView)
     XRefreshView xRefreshView;
     @BindView(R.id.recyclerView)
@@ -170,7 +172,8 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
                         e.printStackTrace();
                     }
                 }
-                collection_title.setText("进入催收第"+overdue.getOverdueDays()+"天，累计收回"+money+"万元");
+                tv_days.setText(overdue.getOverdueDays());
+                tv_total_money.setText(money+"");
             } else {
                 ToastUtils.showSystemToast(mContext, "");
             }
