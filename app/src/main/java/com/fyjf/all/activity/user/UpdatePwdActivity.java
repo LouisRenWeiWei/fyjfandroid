@@ -125,7 +125,7 @@ public class UpdatePwdActivity extends BaseActivity {
             JSONObject resp = new JSONObject(response);
             if (resp.getInt("code") == 0) {
                 ToastUtils.showSystemToast(mContext, "修改密码成功");
-                AppData.saveString(AppData.ACCOUNT,"");
+//                AppData.saveString(AppData.ACCOUNT,"");
                 AppData.saveString(AppData.PASSWORD,"");
                 startActivity(LoginActivity.class);
             } else {
