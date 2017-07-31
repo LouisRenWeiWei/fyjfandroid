@@ -180,8 +180,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_below="@+id/rl_infos"
-            android:background="#ffffff"
             android:layout_marginTop="1dp"
+            android:background="#ffffff"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp"
@@ -267,7 +267,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:text="信征报告"
+                    android:text="征信报告"
                     android:textColor="#666666"
                     android:textSize="14sp" />
             </LinearLayout>
