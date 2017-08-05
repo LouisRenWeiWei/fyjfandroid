@@ -60,7 +60,7 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         holder.overdue_date.setText(TimeUtil.timeHao2Date(overdueReport.getCreateDate(),"yyyy-MM-dd"));
 
         //配置
-        int overdueDay = overdueReport.getOverdueDays();
+        int overdueDay = overdueReport.getOverdueDaysTotal(); //overdueReport.getOverdueDays();
 //        if(overdueDay<90){
 //            holder.overdue_state.setText("正常");
 //            holder.overdue_state.setBackgroundColor(Color.parseColor("#0BA422"));//绿色

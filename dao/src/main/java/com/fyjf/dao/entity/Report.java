@@ -21,8 +21,8 @@ public class Report {
     private String supervisor;		// 贷后监管员签名
     private String businessDirectorAdvice;		// 业务主管意见
     private String businessDirector;		// 业务主管签名
-    private String bankCreditReport;		// 银行信证pdf
-    private String socialCreditReport;		// 社会信证pdf
+    private String bankCreditReport;		// 银行征信pdf
+    private String socialCreditReport;		// 社会征信pdf
 
     public String getId() {
         return id;

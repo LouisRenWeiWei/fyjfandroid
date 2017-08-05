@@ -172,7 +172,7 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
                         e.printStackTrace();
                     }
                 }
-                tv_days.setText(overdue.getOverdueDays());
+                tv_days.setText(overdue.getOverdueDays()+"");
                 tv_total_money.setText(money+"");
             } else {
                 ToastUtils.showSystemToast(mContext, "");

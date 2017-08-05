@@ -182,7 +182,8 @@
                 android:layout_height="20dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:background="#c8c8c8" />
+                android:background="#c8c8c8"
+                android:layout_gravity="center_vertical"/>
 
             <LinearLayout
                 android:id="@+id/ll_progress"
