@@ -201,7 +201,6 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         Intent intent = new Intent(mContext,OverdueMsgActivity.class);
         intent.putExtra("overdueId",item.getOverdueId());
         startActivity(intent);
-        dismisBagde(item.getId());
     }
 
     @Override
@@ -210,10 +209,7 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         Intent intent = new Intent(mContext,ProgressImgsActivity.class);
         intent.putExtra("overdueProgress",item);
         startActivity(intent);
-        dismisBagde(item.getId());
     }
 
-    private void dismisBagde(String reportId){
-        AppData.saveString(PushConstants.OVERDUEPROGRESS+reportId,"");
-    }
+
 }

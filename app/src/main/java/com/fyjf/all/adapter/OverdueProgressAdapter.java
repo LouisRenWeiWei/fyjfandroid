@@ -117,12 +117,16 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
             @Override
             public void onClick(View v) {
                 if (itemOperationListener != null) itemOperationListener.openMsg(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.ll_imgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (itemOperationListener != null) itemOperationListener.openImgs(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.tv_desc.setOnClickListener(new View.OnClickListener() {
@@ -189,6 +193,9 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         //        void openPDF(int position);
         void openMsg(int position);
         void openImgs(int postion);
+    }
+    private void dismisBagde(String reportId){
+        AppData.saveString(PushConstants.OVERDUEPROGRESS+reportId,"");
     }
 
 }

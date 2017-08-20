@@ -133,41 +133,61 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
 
     }
 
-    private void onClick(SimpleAdapterViewHolder holder, final int position) {
+    private void onClick(final SimpleAdapterViewHolder holder, final int position) {
         holder.overdue_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openMsg(position);
+                OverdueReport item =  list.get(position);
+                dismisBagde(item.getOverdueId());
+                holder.rl_title.hiddenBadge();
             }
         });
         holder.overdue_img_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openProgress(position);
+                OverdueReport item =  list.get(position);
+                dismisBagde(item.getOverdueId());
+                holder.rl_title.hiddenBadge();
             }
         });
         holder.overdue_img_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openProgress(position);
+                OverdueReport item =  list.get(position);
+                dismisBagde(item.getOverdueId());
+                holder.rl_title.hiddenBadge();
             }
         });
         holder.overdue_img_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openProgress(position);
+                OverdueReport item =  list.get(position);
+                dismisBagde(item.getOverdueId());
+                holder.rl_title.hiddenBadge();
             }
         });
         holder.ll_progress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openProgress(position);
+                OverdueReport item =  list.get(position);
+                dismisBagde(item.getOverdueId());
+                holder.rl_title.hiddenBadge();
             }
         });
         holder.ll_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openReport(position);
+                OverdueReport item =  list.get(position);
+                dismisBagde(item.getOverdueId());
+                holder.rl_title.hiddenBadge();
+                AppData.saveString(PushConstants.OVERDUEPDF+item.getOverdueId(),"");
+                holder.tv_pdf.hiddenBadge();
             }
         });
     }
@@ -228,5 +248,9 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         void openMsg(int position);
         void openReport(int position);
         void openProgress(int position);
+    }
+
+    private void dismisBagde(String reportId){
+        AppData.saveString(PushConstants.OVERDUE+reportId,"");
     }
 }
