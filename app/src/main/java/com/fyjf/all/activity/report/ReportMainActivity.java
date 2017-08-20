@@ -21,6 +21,7 @@ import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.adapter.ReportFirstPageDetailsAdapter;
 import com.fyjf.all.adapter.checkloan.ReportFirstPageAdapter;
 import com.fyjf.all.app.AppData;
+import com.fyjf.all.push.PushConstants;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.dao.entity.LoanTime;
@@ -360,4 +361,6 @@ public class ReportMainActivity extends BaseActivity implements XRefreshView.XRe
         intent.setClass(ReportMainActivity.this, CreditPDFActivity.class);
         startActivity(intent);
     }
+
+
 }

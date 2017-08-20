@@ -58,7 +58,7 @@ public class ProgressImgsActivity extends BaseActivity implements ProgressImages
         recyclerView.setLayoutManager(gridLayoutManager);// 布局管理器。
         recyclerView.setHasFixedSize(true);// 如果Item够简单，高度是确定的，打开FixSize将提高性能。
         recyclerView.setItemAnimator(new DefaultItemAnimator());// 设置Item默认动画，加也行，不加也行。
-        recyclerView.addItemDecoration(new AdvGridVerticalHorizonSpace(10, 10));
+        recyclerView.addItemDecoration(new AdvGridVerticalHorizonSpace(0, 0));
 
 
 

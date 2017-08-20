@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
+import com.fyjf.all.app.AppData;
+import com.fyjf.all.push.PushConstants;
+import com.fyjf.all.widget.badgeview.BGABadgeRelativeLayout;
 import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.RequestUrl;
@@ -54,11 +57,22 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
         CustomerReportInfo item = list.get(position);
         if(1==customerState){
             holder.tv_state.setVisibility(View.GONE);
+            if(!TextUtils.isEmpty(AppData.getString(PushConstants.REPORT+item.getId()))){
+                holder.rl_top_infos.showCirclePointBadge();
+            }else {
+                holder.rl_top_infos.hiddenBadge();
+            }
         }else {
             holder.tv_state.setVisibility(View.VISIBLE);
+            if(!TextUtils.isEmpty(AppData.getString(PushConstants.REPORTWARING+item.getId()))){
+                holder.rl_top_infos.showCirclePointBadge();
+            }else {
+                holder.rl_top_infos.hiddenBadge();
+            }
         }
         holder.tv_date.setText(TimeUtils.formateDate(item.getExaminTime(),"yyyy-MM-dd","dd日"));
         holder.customer_name.setText(item.getCustomerName());
+
         holder.customer_msg.setText(item.getMsgCount());
         holder.customer_manager.setText(item.getBankWorkerName());
         holder.customer_time.setText(item.getExaminTime());
@@ -100,47 +114,68 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
 
     }
 
-    private void onClick(SimpleAdapterViewHolder holder, final int position) {
+    private void onClick(final SimpleAdapterViewHolder holder, final int position) {
         holder.customer_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openMsg(position);
+                CustomerReportInfo item = list.get(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.customer_img_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openImg(position);
+                CustomerReportInfo item = list.get(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.customer_img_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openImg(position);
+                CustomerReportInfo item = list.get(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.customer_img_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openImg(position);
+                CustomerReportInfo item = list.get(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.ll_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openPDF(position);
+                CustomerReportInfo item = list.get(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.ll_analysic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openQuantified(position);
+                CustomerReportInfo item = list.get(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
         holder.ll_credit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(itemOperationListener!=null)itemOperationListener.openCredit(position);
+                CustomerReportInfo item = list.get(position);
+                dismisBagde(item.getId());
+                holder.rl_top_infos.hiddenBadge();
             }
         });
     }
@@ -151,6 +186,7 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
+        private BGABadgeRelativeLayout rl_top_infos;
         private RelativeLayout customer_item;
         private TextView tv_state;
         private TextView tv_date;
@@ -169,6 +205,7 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
+                rl_top_infos = (BGABadgeRelativeLayout) itemView.findViewById(R.id.rl_top_infos);
                 tv_state = (TextView) itemView.findViewById(R.id.tv_state);
                 tv_date = (TextView) itemView.findViewById(R.id.tv_date);
                 customer_type = (TextView) itemView.findViewById(R.id.customer_type);
@@ -203,5 +240,9 @@ public class ReportDetailsAdapter extends BaseRecyclerAdapter<ReportDetailsAdapt
         void openPDF(int position);
         void openQuantified(int position);
         void openCredit(int position);
+    }
+
+    private void dismisBagde(String reportId){
+        AppData.saveString(PushConstants.REPORT+reportId,"");
     }
 }

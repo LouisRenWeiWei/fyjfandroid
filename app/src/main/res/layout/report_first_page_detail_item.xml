@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_bg"
     android:orientation="horizontal">
 
@@ -51,13 +52,20 @@
             android:paddingRight="5dp"
             android:text="34343333" />
 
-        <RelativeLayout
+        <com.fyjf.all.widget.badgeview.BGABadgeRelativeLayout
             android:id="@+id/rl_top_infos"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_below="@+id/tv_date"
             android:background="#ffffff"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            app:badge_bgColor="@color/red"
+            app:badge_gravity="rightTop"
+            app:badge_horizontalMargin="3dp"
+            app:badge_padding="4dp"
+            app:badge_textColor="@color/white"
+            app:badge_textSize="9sp"
+            app:badge_verticalMargin="3dp">
 
             <TextView
                 android:id="@+id/tv_state"
@@ -81,7 +89,8 @@
                 android:maxLines="2"
                 android:text="333333"
                 android:textColor="#010101"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                />
 
             <TextView
                 android:id="@+id/customer_msg"
@@ -95,7 +104,7 @@
                 android:paddingLeft="10dp"
                 android:textColor="#666666"
                 android:textSize="12.5sp" />
-        </RelativeLayout>
+        </com.fyjf.all.widget.badgeview.BGABadgeRelativeLayout>
 
         <LinearLayout
             android:id="@+id/ll_imgs"

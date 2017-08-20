@@ -18,6 +18,7 @@ import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.adapter.CustomerOverdueAdapter;
 import com.fyjf.all.app.AppData;
+import com.fyjf.all.push.PushConstants;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.OverdueReport;
 import com.fyjf.utils.JSONUtil;
@@ -216,6 +217,7 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         Intent intent = new Intent(mContext,OverdueMsgActivity.class);
         intent.putExtra("overdueId",item.getOverdueId());
         startActivity(intent);
+        dismisBagde(item.getOverdueId());
     }
 
     @Override
@@ -225,6 +227,8 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
         bundle.putString("pdfPath",item.getOverduePDF());
         bundle.putString("overdueId",item.getOverdueId());
         startActivity(OverduePDFActivity.class,bundle);
+        dismisBagde(item.getOverdueId());
+        AppData.saveString(PushConstants.OVERDUEPDF+item.getOverdueId(),"");
     }
 
     @Override
@@ -235,6 +239,11 @@ public class OverdueActivity extends BaseActivity implements XRefreshView.XRefre
 //        intent.putExtra("day",item.getOverdueDays());
         intent.putExtra("overdue",item);
         startActivity(intent);
+        dismisBagde(item.getOverdueId());
+    }
+
+    private void dismisBagde(String reportId){
+        AppData.saveString(PushConstants.OVERDUE+reportId,"");
     }
 
 

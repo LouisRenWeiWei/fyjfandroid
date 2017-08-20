@@ -66,11 +66,12 @@
                 android:layout_alignWithParentIfMissing="true"
                 android:layout_marginLeft="15dp"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/customer_msg"
+                android:layout_toLeftOf="@+id/month_count"
                 android:maxLines="2"
                 android:text="2017年7月份贷后检查"
                 android:textColor="#010101"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                />
 
             <TextView
                 android:id="@+id/month_count"

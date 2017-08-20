@@ -14,6 +14,8 @@ import com.android.volley.ext.ResponseSuccess;
 import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.adapter.OverdueProgressAdapter;
+import com.fyjf.all.app.AppData;
+import com.fyjf.all.push.PushConstants;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.OverdueProgress;
 import com.fyjf.dao.entity.OverdueReport;
@@ -199,6 +201,7 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         Intent intent = new Intent(mContext,OverdueMsgActivity.class);
         intent.putExtra("overdueId",item.getOverdueId());
         startActivity(intent);
+        dismisBagde(item.getId());
     }
 
     @Override
@@ -207,5 +210,10 @@ public class OverdueProgressActivity extends BaseActivity implements XRefreshVie
         Intent intent = new Intent(mContext,ProgressImgsActivity.class);
         intent.putExtra("overdueProgress",item);
         startActivity(intent);
+        dismisBagde(item.getId());
+    }
+
+    private void dismisBagde(String reportId){
+        AppData.saveString(PushConstants.OVERDUEPROGRESS+reportId,"");
     }
 }

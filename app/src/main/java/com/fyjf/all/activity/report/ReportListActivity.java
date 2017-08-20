@@ -18,6 +18,7 @@ import com.fyjf.all.R;
 import com.fyjf.all.activity.BaseActivity;
 import com.fyjf.all.adapter.ReportDetailsAdapter;
 import com.fyjf.all.app.AppData;
+import com.fyjf.all.push.PushConstants;
 import com.fyjf.all.utils.ToastUtils;
 import com.fyjf.dao.entity.CustomerReportInfo;
 import com.fyjf.utils.JSONUtil;
@@ -282,5 +283,7 @@ public class ReportListActivity extends BaseActivity implements XRefreshView.XRe
         intent.setClass(ReportListActivity.this,CreditPDFActivity.class);
         startActivity(intent);
     }
+
+
 
 }

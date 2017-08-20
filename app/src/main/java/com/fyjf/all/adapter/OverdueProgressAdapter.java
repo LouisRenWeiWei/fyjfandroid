@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
+import com.fyjf.all.app.AppData;
+import com.fyjf.all.push.PushConstants;
+import com.fyjf.all.widget.badgeview.BGABadgeRelativeLayout;
 import com.fyjf.dao.entity.OverdueProgress;
 import com.fyjf.utils.TimeUtils;
 import com.fyjf.vo.RequestUrl;
@@ -73,6 +76,13 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if(!TextUtils.isEmpty(AppData.getString(PushConstants.OVERDUEPROGRESS+item.getId()))){
+            holder.rl_top_infos.showCirclePointBadge();
+        }else {
+            holder.rl_top_infos.hiddenBadge();
+        }
+
         holder.tv_msg_count.setText(item.getMsgCount() + "");
 
         holder.tv_desc.setText(item.getDescription());
@@ -140,7 +150,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
-
+        private BGABadgeRelativeLayout rl_top_infos;
         private TextView tv_date;
         private TextView tv_msg_count;
         private TextView tv_desc;
@@ -152,6 +162,7 @@ public class OverdueProgressAdapter extends BaseRecyclerAdapter<OverdueProgressA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
+                rl_top_infos = (BGABadgeRelativeLayout) itemView.findViewById(R.id.rl_top_infos);
                 tv_date = (TextView) itemView.findViewById(R.id.tv_date);
                 tv_msg_count = (TextView) itemView.findViewById(R.id.tv_msg_count);
                 tv_desc = (TextView) itemView.findViewById(R.id.tv_desc);

@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fyjf.all.R;
+import com.fyjf.all.app.AppData;
+import com.fyjf.all.push.PushConstants;
+import com.fyjf.all.widget.badgeview.BGABadgeRelativeLayout;
+import com.fyjf.all.widget.badgeview.BGABadgeTextView;
 import com.fyjf.dao.entity.OverdueReport;
 import com.fyjf.dao.utils.TimeUtil;
 import com.fyjf.vo.RequestUrl;
@@ -52,6 +56,16 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
     @Override
     public void onBindViewHolder(SimpleAdapterViewHolder holder, final int position, boolean isItem) {
         OverdueReport overdueReport = list.get(position);
+        if(!TextUtils.isEmpty(AppData.getString(PushConstants.OVERDUE+overdueReport.getOverdueId()))){
+            holder.rl_title.showCirclePointBadge();
+        }else {
+            holder.rl_title.hiddenBadge();
+        }
+        if(!TextUtils.isEmpty(AppData.getString(PushConstants.OVERDUEPDF+overdueReport.getOverdueId()))){
+            holder.tv_pdf.showCirclePointBadge();
+        }else {
+            holder.tv_pdf.hiddenBadge();
+        }
         holder.overdue_name.setText(overdueReport.getCustomerName());
         holder.overdue_msg.setText(overdueReport.getMsgCount()+"");
         holder.overdue_time.setText("逾期"+overdueReport.getOverdueDaysTotal()+"天 | ");
@@ -164,9 +178,11 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
     }
 
     public static class SimpleAdapterViewHolder extends RecyclerView.ViewHolder {
+        public BGABadgeRelativeLayout rl_title;
         public TextView overdue_state;
         public TextView overdue_name;
         public TextView overdue_msg;
+        public BGABadgeTextView tv_pdf;
         public ImageView overdue_img_1;
         public ImageView overdue_img_2;
         public ImageView overdue_img_3;
@@ -180,6 +196,8 @@ public class CustomerOverdueAdapter extends BaseRecyclerAdapter<CustomerOverdueA
         public SimpleAdapterViewHolder(View itemView, boolean isItem) {
             super(itemView);
             if (isItem) {
+                tv_pdf = (BGABadgeTextView) itemView.findViewById(R.id.tv_pdf);
+                rl_title = (BGABadgeRelativeLayout) itemView.findViewById(R.id.rl_title);
                 overdue_state = (TextView) itemView.findViewById(R.id.overdue_state);
                 overdue_name = (TextView) itemView.findViewById(R.id.overdue_name);
                 overdue_msg = (TextView) itemView.findViewById(R.id.overdue_msg);
